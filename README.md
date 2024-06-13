@@ -11,7 +11,7 @@ This repository contains the source code of Android test case migration tool Aut
    - Python 3.8+
 
 2. Usage
-   - Install the required packages using the command: `pip install -r requirements.txt`.
+   - Install the required packages using the command: `pip3 install -r requirements.txt`.
 
    - Populate the `main.py` file with the information mentioned in the Prerequisites section, and then initiate the program.
 
