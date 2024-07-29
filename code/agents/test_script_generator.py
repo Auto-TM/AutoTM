@@ -18,6 +18,11 @@ Give you a list of test semantic descriptions. Please assist in converting the t
 
 We've already initiated the app and connected to it using `u2.connect('ip')`. The code should be encapsulated using '···' . When transforming the description, use coordinates if they are precise. If not, and if the ID is unique and non-empty, prefer using the ID. Avoid using the text attribute due to its inaccuracy.
 
+### Some common operations:
+
+1. To press enter in uiautomator code, it should be device.press('enter').
+2. To press back in uiautomator code, it should be device.press('back').
+
 ### Input Format:
 
 The first parameter is mandatory, while the subsequent three parameters are optional and can be combined freely:
@@ -38,6 +43,8 @@ assert device(resourceId="id3", className="[android.widget.xxx](http://android.w
 ···
 
 ### Example:
+
+Certainly, a single line of input(action) can correspond to multiple outputs. For example: "Input the URL into the search field and press enter." You should first generate device.send_keys(URL), followed by device.press('enter').
 
 #### Input:
 
@@ -67,6 +74,6 @@ Actions:
 """
              },
         ],
-        temperature=1
+        temperature=0
     )
     return list(response.choices)[0].to_dict()["message"]['content']

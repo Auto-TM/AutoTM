@@ -6,7 +6,7 @@ def select(gpt, test_semantics, actions, page_intentions):
     openai.api_base = gpt.api_base
 
     response = openai.ChatCompletion.create(
-        model=gpt.model,
+        model='gpt-4-32k',
         messages=[
             {"role": "system",
              "content": "You are a project manager. You understand Android software and its operating logic. You are conducting test case migration between applications of the same type. You can examine past behaviors, judge whether they are correct based on the current environment, and make the next decision correctly. You are not an indecisive person, but you are still willing to make multiple attempts for a better success rate. You can take a different path to achieve your goals, but the methods must be effective rather than unrealistic fantasies. You are a person who respects the facts and will not confuse black and white. You will carefully examine every detail given, especially the Executed action sequence, and if it does not align with logic, you will think about the reasons behind it. You understand  natural language and can judge its structure, meaning, and correlation well"},
@@ -14,13 +14,13 @@ def select(gpt, test_semantics, actions, page_intentions):
                 """
 Give you the following three parameters, please help me achieve this test code migration:
 
-- The source program's test case code which has been transformed into an intention description.
+- The source application's test case which has been transformed into an semantic description.
 - A list of intentions where each item represents the intended function of a component on the current page.
 - A sequence of actions which has already been performed. At the end of each action of the actions, there is an identifier indicating whether the action was successfully executed: “Exec_Success” indicates successful execution, and “Exec_Fail” indicates an error in execution.These two execution states were passed in by me, so your response doesn't have to carry this.
 
 ## Requirements:
 
-### **Process Guidance**
+### Process Guidance
 
 - **Identify the current step from the already executed actions, then decide the next step based on the available UI elements.** The relationship between the original test case and the current UI may not align perfectly, so the focus should be on meeting the functional requirements rather than finding an exact match.
 - **Use the function description to understand the context and objectives of the test case, and strive to fulfill these through the UI interactions.**
@@ -52,10 +52,9 @@ Begin with the executed action and combine the following options as needed:
 - 'ASSERT (element, id, coordinates, oracle):purpose': Provide an assertion if an action has been confirmed.
 - 'ACTION (element, id, coordinates, action, value):purpose': Describe the interaction with an element (click, long click, input). Use 'Input' for input actions (NULL to clear input; "" for a random string). For others, the value should be NULL.
 - 'RETURN:purpose': Describe the purpose of going back.
-- 'DONE': Indicate that the path has been successfully matched.
+- 'DONE': Indicate that the path(The source test case) has been successfully matched(migrated).
 - 'NOT FOUND': State when a feature doesn't exist. Explore other options before concluding this.
 Enclose all responses within, wrapping them all together with a pair of '~~~' like(Please make sure to comply with this format, don't miss ~~~):
-:
 
 ~~~
 ACTION (element1, id1, coordinates1, action1, value1):purpose1
@@ -74,6 +73,6 @@ DONE
 ## Executed Action Sequence: """ + actions
              },
         ],
-        temperature=1
+        temperature=0
     )
     return list(response.choices)[0].to_dict()["message"]['content']

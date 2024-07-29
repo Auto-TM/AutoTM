@@ -1,16 +1,16 @@
 import os
 import json as j
 
-
-from jsonExtract import _AndroidDevice, simplify_json
+from json_extractor import  simplify_json
 import time
 import constants
 import logging
 import glob
-import agents.test_semantic_analyzer
-import agents.event_contextual_semantic_analyzer
-import agents.event_selector
-import agents.test_script_generator
+import traceback
+import text_processor
+import task_dispatcher
+import page_reproducer
+import device_operator
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -27,12 +27,6 @@ file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 
 
-class Gpt:
-    def __init__(self, key, model):
-        self.key = key
-        self.model = model
-
-
 def get_json():
     """
     Retrieves and simplifies the JSON hierarchy of the Android device.
@@ -42,7 +36,7 @@ def get_json():
 
     for i in range(0, 10):
         time.sleep(1)
-        json_page = device.dump_hierarchy()
+        json_page = device_operator.device.dump_hierarchy()
         if len(json_page['children']) > 0:
             break
 
@@ -83,15 +77,14 @@ def request_agent(request_str, local_contest):
     return local_contest['response']
 
 
-def get_json_intent(previous_page, rollbacker):
+def get_page_intent(previous_page):
     json = ''
     for index in range(5):
         json = get_json()
         if json != '[]':
             break
         logger.info("dump hierarchy empty, retrying...")
-        device = _AndroidDevice("")
-        d = device.d
+        device_operator.activate_device()
         time.sleep(1)
 
     if json == '[]':
@@ -135,7 +128,8 @@ def get_json_intent(previous_page, rollbacker):
         return results
 
     results = extract_fields(current_page_data)
-
+    logger.info("-----------")
+    logger.info("begin to extract context information for all widgets in the GUI interface: {}".format(results))
     json_intent = ""
     for item in results:
         id = item['id']
@@ -150,63 +144,38 @@ def get_json_intent(previous_page, rollbacker):
         if widget_info == "":
             continue
 
-        device = _AndroidDevice("")
-        d = device.d
+        device_operator.activate_device()
+        global d
+        d = device_operator.d
 
         if item['id'] != '':
-            d(resourceId=id).click()
+            try:
+                d(resourceId=id).click()
+            except Exception as e:
+                d.click(item['x'], item['y'])
         else:
             d.click(item['x'], item['y'])
 
-        time.sleep(2)
+        time.sleep(3)
 
         nex_page_json = get_json()
-        time.sleep(1)
+        time.sleep(3)
 
         d.press("back")
-        time.sleep(2)
+        time.sleep(3)
 
         logger.info("-----------")
-        logger.info("event_contextual_semantic_analyzer processing...")
-        local_contest = {'agents': agents, 'gpt_4': gpt_4, 'previous_page': previous_page,
-                         'widget_info': widget_info, 'json': json, 'nex_page_json': nex_page_json}
-        widget_intent = request_agent(
-            'response = agents.event_contextual_semantic_analyzer.analyze(gpt_4, previous_page, widget_info, json, nex_page_json)',
-            local_contest)
-        logger.info("widget_info:{}, intention: {}".format(widget_info, widget_intent))
-        logger.info("-----------")
+        widget_intent = task_dispatcher.analyze_widget_contextual_info(json, nex_page_json, previous_page, widget_info)
 
         json_intent = json_intent + widget_intent + "\n"
 
         # judge whether press back fail
         return_current_page = get_json()
         if return_current_page != json:
-            executed_codes = rollbacker.splitlines()
-            for code in executed_codes:
-                try:
-                    exec(code)
-                except Exception as ex:
-                    pass
+            page_reproducer.reproduce()
 
     logger.info("current page's intentions: " + json_intent)
     return json_intent, json
-
-
-def select_event(test_semantics, actions, pages_intentions):
-    """
-    Uses the GPT-4 model to match the test semantics with the Page JSON intention.
-    """
-    logger.info("-----------")
-    logger.info("event_selector processing...")
-    if actions == "":
-        actions = "The first operation has no executed actions"
-    local_contest = {'agents': agents, 'gpt_4': gpt_4, 'test_semantics': test_semantics, 'actions': actions, 'pages_intentions': pages_intentions}
-    select_result = request_agent('response = agents.event_selector.select(gpt_4, test_semantics, actions, pages_intentions)',
-                                   local_contest)
-    logger.info("select_result: {}".format(select_result))
-    logger.info("-----------")
-
-    return select_result
 
 
 def get_cur_action(markdown_text):
@@ -219,6 +188,7 @@ def get_cur_action(markdown_text):
 
 
 def get_cur_code(markdown_text):
+    markdown_text = markdown_text.replace("python", "")
     code_ind1 = markdown_text.find("···\n")
     code_ind2 = -1
     code = ""
@@ -226,37 +196,29 @@ def get_cur_code(markdown_text):
         code_ind2 = markdown_text[code_ind1 + 4:].find("\n···")
         code = markdown_text[code_ind1 + 4: code_ind1 + 4 + code_ind2]
 
-    logger.info("code: " + code)
+    if code == '':
+        return text_processor.extract_response(markdown_text)
+    logger.info("executable codes: " + code)
 
     return code
 
-
-def get_test_semantics(file_path, gpt_config, source_test_code):
-    if os.path.exists(file_path):
-        with open(file_path, 'r') as file:
-            test_semantics = file.read()
-    else:
-        local_contest = {'agents': agents, 'gpt_config': gpt_config, 'source_test_code': source_test_code}
-        test_semantics = request_agent('response = agents.test_semantic_analyzer.analyze(gpt_config, source_test_code)',
-                                       local_contest)
-        with open(file_path, 'w') as file:
-            file.write(test_semantics)
-    return test_semantics
 
 def update_actions(actions, cur_action):
     """
     Appends the current action to the list of actions.
     """
+    logger.info("updating new actions:\n {}".format(cur_action))
     if actions == "":
         actions = cur_action
     else:
         actions = actions + "\n" + cur_action
 
-    # logger.info("actions: "+actions)
+    logger.info("-----------")
+    logger.info("current executed actions:\n {}".format(actions))
     return actions
 
 
-def exec_cur_code(codes, rollbacker, cur_actions):
+def exec_cur_code(codes, cur_actions):
     """
     Executes the current code block if it's not empty and doesn't contain the word "assert."
     """
@@ -265,7 +227,7 @@ def exec_cur_code(codes, rollbacker, cur_actions):
     action_states = []
     previous_exec_action = ""
     for code in codes.splitlines():
-        if code.startswith("# "):
+        if code.startswith("# ") or code == "":
             continue
         if cnt >= len(exec_actions):
             exec_action = previous_exec_action
@@ -275,23 +237,27 @@ def exec_cur_code(codes, rollbacker, cur_actions):
         if code != "" and "assert" not in code:
             action_state = None
             for i in range(0, constants.MAX_RETRY_TIMES):
+                if exec_action == previous_exec_action:
+                    break
                 try:
-                    logger.info("exec code count: " + str(i + 1))
-                    exec(code)
-                    rollbacker += code + '\n'
-                    rollbacker += 'time.sleep(3)' + '\n'
+                    device_operator.exec_code(code)
+                    logger.info("exec code success: {}".format(code))
+                    page_reproducer.collect(code)
                     action_state = (exec_action, 'Exec_Success')
                     break
                 except Exception as e:
+                    logger.info("exec code fail: {}, count: {}".format(code, str(i + 1)))
                     logger.info(e)
                     if i == constants.MAX_RETRY_TIMES - 1:
                         action_state = (exec_action, 'Exec_Fail')
-            action_states.append(action_state)
+
+            if exec_action != previous_exec_action:
+                action_states.append(action_state)
         else:
-            if code != "":
+            if code != "" and exec_action != previous_exec_action:
                 action_states.append((exec_action, 'Exec_Success'))
         previous_exec_action = exec_action
-    return action_states, rollbacker
+    return action_states
 
 
 def w_markdown_proceed(markdown_file, json_intent, match_result):
@@ -301,169 +267,113 @@ def w_markdown_proceed(markdown_file, json_intent, match_result):
         + "\n#### Selected Event(s) and Script\n````\n" + match_result + "\n````" \
         + "\n"
     markdown_file.write(markdown_text)
-
+    markdown_file.flush()
     return markdown_text
 
 
-def w_markdown_h2(markdown_file, test_intents, markdown_h2):
-    intent_list = "> "
-    for test_intent in test_intents:
-        if test_intent != "\n":
-            intent_list += test_intent
-        else:
-            intent_list += "\n> "
-    markdown_text = "## " + markdown_h2 + "\n\n### Semantics of Source Test case" + intent_list + "\n\n### Process\n"
-    markdown_file.write(markdown_text)
-
-
-def w_markdown_done(markdown_file, actions):
-    if "DONE" in actions:
-        result = "### Success\n"
-    else:
-        result = "### Fail\n"
-    result += "````\n" + actions + "\n````\n"
-    markdown_file.write(result)
-
-
-def read_file(file_path):
-    with open(file_path, 'r', encoding='utf-8') as file:
-        content = file.read()
-    return content
-
-
-def get_java_and_kotlin_files(directory):
+def get_test_case_files(directory):
     java_files = glob.glob(os.path.join(directory, '**', '*.java'), recursive=True)
     kotlin_files = glob.glob(os.path.join(directory, '**', '*.kt'), recursive=True)
-    return java_files + kotlin_files
+    json_files = glob.glob(os.path.join(directory, '**', '*.json'), recursive=True)
+    return java_files + kotlin_files + json_files
 
-def generate_script(cur_action):
-    """
-    generate script via test_script_generator
-    """
-    logger.info("-----------")
-    logger.info("test_script_generator processing...")
-    local_contest = {'agents': agents, 'gpt_4': gpt_4, 'cur_action': cur_action}
-    script = request_agent(
-        'response = agents.test_script_generator.generate(gpt_4, "d", cur_action)',
-        local_contest)
-    logger.info("script: {}".format(script))
-    return script
 
-def match_and_update_actions(markdown_file, test_semantics, actions, pages_intentions, rollbacker):
+def select_event_and_execute(markdown_file, test_semantics, actions, pages_intentions):
     """
     This function orchestrates a single step of the testing process.
     It fetches the JSON intention, matches the test semantics with it,
     writes the results to a markdown file, executes code if necessary,
     and updates the list of actions.
     """
-
-    select_result = select_event(test_semantics, actions, pages_intentions)
+    select_result = task_dispatcher.select_event(test_semantics, actions, pages_intentions)
     cur_action = get_cur_action(select_result)
 
-    script = generate_script(cur_action)
+    script = task_dispatcher.generate_script(cur_action)
+    executable_codes = get_cur_code(script)
 
-    codes = get_cur_code(script)
+    text_processor.generate_markdown_procedure(markdown_file, pages_intentions, select_result + '\n' + script)
 
-
-    w_markdown_proceed(markdown_file, pages_intentions, select_result + '\n' + script)
-    action_states, rollbacker = exec_cur_code(codes, rollbacker, cur_action)
-
-    actions_with_state = ""
-    for action_state in action_states:
-        actions_with_state += action_state[0] + ', ' + action_state[1] + '\n'
-
-    logger.info("updating new actions: {}".format(cur_action))
+    action_states = exec_cur_code(executable_codes, cur_action)
+    actions_with_state = text_processor.concat_action_states(action_states, cur_action)
     actions = update_actions(actions, actions_with_state)
-    time.sleep(0.5)
 
-    return actions, rollbacker
-
+    return actions
 
 
-def run(markdown_file_path, markdown_h2, test_semantics, rollbacker):
+def begin_operate(markdown_file, test_semantics):
     """
     The main entry point of the script. It initializes variables, opens a markdown file for writing,
     and runs the testing process using a loop until a termination condition is met.
     """
-    if os.path.exists(markdown_file_path):
-        os.remove(markdown_file_path)
-        logger.info(f"deleted the existing markdown file at {markdown_file_path}")
-    else:
-        os.makedirs(os.path.dirname(markdown_file_path), exist_ok=True)
-
-    markdown_file = open(markdown_file_path, "a")
 
     try:
         actions = ""
-        if actions == "":
-            w_markdown_h2(markdown_file, test_semantics, markdown_h2)
+        text_processor.generate_markdown_test_semantic(markdown_file, test_semantics)
 
         previous_page = ""
         while "DONE" not in actions and "NOT FOUND" not in actions:
-            pages_intentions, previous_page = get_json_intent(previous_page, rollbacker)
+            pages_intentions, previous_page = get_page_intent(previous_page)
 
-            actions, rollbacker = match_and_update_actions(markdown_file, test_semantics, actions, pages_intentions,
-                                                           rollbacker)
-        w_markdown_done(markdown_file, actions)
-        markdown_file.flush()
+            actions = select_event_and_execute(markdown_file, test_semantics, actions, pages_intentions)
+        text_processor.generate_markdown_result(markdown_file, actions)
     except Exception as e:
         raise e
     finally:
-        markdown_file.close()
+        markdown_file.flush()
 
 
-device = _AndroidDevice("")
-d = device.d
-
-gpt_4 = None
+d = None
 
 
-def migrate(source_test_code_dir_path, package_name, target_launch_activity, gpt_config):
-    global gpt_4
-    global device
+def migrate(source_test_code_dir_path, package_name, target_launch_activity, device_number):
+    device_operator.setup(device_number)
+    device_operator.activate_device()
     global d
-    gpt_4 = gpt_config
+    d = device_operator.d
+
     logger.info("-----------")
     logger.info("beginning to migrate")
+    start_time = time.time()
     logger.info("-----------")
 
-    source_test_code_paths = get_java_and_kotlin_files(source_test_code_dir_path)
+    source_test_case_paths = get_test_case_files(source_test_code_dir_path)
 
-    for source_test_code_path in source_test_code_paths:
-        source_test_code_file_dir = os.path.dirname(source_test_code_path)
-        source_test_code_file_name = os.path.splitext(os.path.basename(source_test_code_path))[0]
+    for source_test_case_path in source_test_case_paths:
+        source_test_code_file_dir = os.path.dirname(source_test_case_path)
+        source_test_code_file_name = os.path.splitext(os.path.basename(source_test_case_path))[0]
+        markdown_file_path = source_test_code_file_dir + "/" + source_test_code_file_name + "_AutoTM.md"
+        if os.path.exists(markdown_file_path):
+            os.remove(markdown_file_path)
+            logger.info(f"deleted the existing markdown file at {markdown_file_path}")
+        else:
+            os.makedirs(os.path.dirname(markdown_file_path), exist_ok=True)
+        markdown_file = open(markdown_file_path, "a")
+        logger.info("workflow markdown file path: " + markdown_file_path)
+
+        text_processor.generate_markdown_title(markdown_file, source_test_code_file_name)
 
         logger.info("-----------")
         logger.info("test_semantic_analyzer_agent processing...")
         test_semantics_file = source_test_code_file_dir + "/" + source_test_code_file_name + "_Semantics_AutoTM.txt"
-        test_semantics = get_test_semantics(test_semantics_file, gpt_config, read_file(source_test_code_path))
-        logger.info("source_test_code_path: {}, semantics: {}".format(source_test_code_path, test_semantics))
+        test_semantics = task_dispatcher.get_test_semantics(test_semantics_file,
+                                                            text_processor.read_file(source_test_case_path))
+        logger.info("source_test_case_path: {}, semantics: {}".format(source_test_case_path, test_semantics))
         logger.info("-----------")
 
-        rollbacker = ''
-        stop_app_cmd = "adb shell am force-stop " + package_name
-        os.system(stop_app_cmd)
-        time.sleep(3)
-        rollbacker += f'os.system("{stop_app_cmd}")' + '\n'
-        rollbacker += 'time.sleep(3)' + '\n'
-
-        start_app_cmd = "adb shell am start -n " + target_launch_activity
-        os.system(start_app_cmd)
-        time.sleep(3)
-        rollbacker += f'os.system("{start_app_cmd}")' + '\n'
-        rollbacker += 'time.sleep(3)' + '\n'
-
-        device = _AndroidDevice("")
-        d = device.d
-
-        markdown_file_path = source_test_code_file_dir + "/" + source_test_code_file_name + "_AutoTM.md"
-
-        logger.info("workflow markdown file path: " + markdown_file_path)
+        device_operator.stop_app(package_name)
+        device_operator.start_app(target_launch_activity)
+        device_operator.activate_device()
 
         try:
-            run(markdown_file_path, source_test_code_file_name, test_semantics, rollbacker)
+            begin_operate(markdown_file, test_semantics)
         except Exception as e:
             logger.info("error occurred, error info: {}".format(e.__str__()))
-        stop_app_cmd = "adb shell am force-stop " + package_name
-        os.system(stop_app_cmd)
+            logger.info("error stack: {}".format(traceback.format_exc()))
+        device_operator.stop_app(package_name)
+
+        end_time = time.time()
+        logger.info("time-consuming /s: {}".format(str(end_time - start_time)))
+        text_processor.generate_markdown_cost(markdown_file, start_time, end_time)
+        markdown_file.close()
+        page_reproducer.clear()
         logger.info("---------------------finished-----------------------")

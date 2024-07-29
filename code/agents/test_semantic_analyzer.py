@@ -13,15 +13,15 @@ def analyze(gpt, test_code):
             {"role": "system", "content": "You are a project manager. You understand Android software and its operating logic. You are conducting test case migration between applications of the same type."},
             {"role": "user", "content":
              """
-Please analyze the provided Android test code and generate a corresponding function description. The descriptions should follow the specified format below:
+Please analyze the provided Android test case and generate a corresponding function description. The descriptions should follow the specified format below:
 
 ### Format:
 
 Incorporate the necessary components as appropriate:
 
-- **'ASSERT (element, id, coordinates, oracle):purpose'**: If an action is verified, provide an assertion detailing the expected result.
-- **'ACTION (element, id, coordinates, action, value):purpose'**: Specify the interaction with an element (click, long click, input). Use 'Input' for input actions (where NULL clears the input and "" generates a random string); for other actions, the value should be NULL.
-- **'RETURN:purpose'**: Describe the purpose of returning to a previous state or screen.
+- 'ASSERT (element, id, coordinates, oracle):purpose': If an action is verified, provide an assertion detailing the expected result.
+- 'ACTION (element, id, coordinates, action, value):purpose': Specify the interaction with an element (click, long click, input). Use 'Input' for input actions (where NULL clears the input and "" generates a random string); for other actions, the value should be NULL.
+- 'RETURN:purpose': Describe the purpose of returning to a previous state or screen.
 
 Each action should be encapsulated within the following markers:
 
@@ -37,66 +37,86 @@ RETURN:purpose
 
 #### Input:
 
-Android test code snippet:
+Android test case:
 
 ```
-    @Test
-    public void expensesTest5() {
-        ViewInteraction appCompatButton4 = onView(
-                allOf(withId(R.id.total_month), withText("$35.00"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.ScrollView")),
-                                        0),
-                                1)));
-        appCompatButton4.perform(click());
-
-        DataInteraction linearLayout = onData(anything())
-                .inAdapterView(allOf(withId(R.id.listView),
-                        childAtPosition(
-                                withClassName(is("android.widget.LinearLayout")),
-                                0)))
-                .atPosition(0);
-        linearLayout.perform(click());
-
-        ViewInteraction actionMenuItemView = onView(
-                allOf(withId(R.id.action_delete), withContentDescription("Delete"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.action_bar),
-                                        2),
-                                0),
-                        isDisplayed()));
-        actionMenuItemView.perform(click());
-
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.total_history), withText("$0.00"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                        1),
-                                1),
-                        isDisplayed()));
-        textView.check(matches(withText("$0.00")));
-    }
+    [
+  {
+    "class": "android.widget.EditText",
+    "resource-id": "acr.browser.lightning:id/search",
+    "text": "Search",
+    "content-desc": "",
+    "clickable": "true",
+    "password": "false",
+    "parent_text": "",
+    "sibling_text": "",
+    "tid": "a11",
+    "package": "acr.browser.lightning",
+    "activity": ".MainActivity",
+    "ignorable": "false",
+    "event_type": "gui",
+    "action": [
+      "click"
+    ]
+  },
+  {
+    "class": "android.widget.EditText",
+    "resource-id": "acr.browser.lightning:id/search",
+    "text": "Search",
+    "content-desc": "",
+    "clickable": "true",
+    "password": "false",
+    "parent_text": "",
+    "sibling_text": "",
+    "tid": "a11",
+    "package": "acr.browser.lightning",
+    "activity": ".MainActivity",
+    "ignorable": "false",
+    "event_type": "gui",
+    "action": [
+      "send_keys_and_enter",
+      "https://www.ics.uci.edu"
+    ]
+  },
+  {
+    "class": "android.view.View",
+    "resource-id": "",
+    "text": "",
+    "content-desc": "Donald Bren School of Information and Computer Sciences",
+    "clickable": "true",
+    "password": "false",
+    "parent_text": "",
+    "sibling_text": "",
+    "tid": "a11",
+    "package": "acr.browser.lightning",
+    "activity": ".MainActivity",
+    "ignorable": "false",
+    "event_type": "oracle",
+    "action": [
+      "wait_until_element_presence",
+      10,
+      "xpath",
+      "//android.view.View[@content-desc=\"Donald Bren School of Information and Computer Sciences\"]"
+    ]
+  }
+]
 ```
 
 #### Output:
 
 ```
-This test case is testing the functionality of deleting an existing expense of "35" from the list in Expenses App.
+This test case is testing the search functionality that tests navigation to a website and verifying the presence of a specific element.
 
 The detailed process with serial numbers is as follows:
 
-1. ACTION (Button, R.id.total_month, (), click, NULL) : Click on the total month button displaying '$35.00'.
-2. ACTION (LinearLayout, R.id.listView, (0), click, NULL) : Select the first expense item in the list.
-3. ACTION (Menu Item, R.id.action_delete, (), click, NULL) : Click on the 'Delete' option in the action bar.
-4. ASSERT (TextView, R.id.total_history, (), setText("$0.00"), NULL) : Verify the total expenses in history total $0.00.
+1. ACTION (EditText, acr.browser.lightning:id/search, (), click, NULL) : Click on the search field to activate it for text input.
+2. ACTION (EditText, acr.browser.lightning:id/search, (), input, "https://www.ics.uci.edu") : Input the URL 'https://www.ics.uci.edu' into the search field and press enter.
+3. ASSERT (View, , (), wait_until_element_presence, "xpath://android.view.View[@content-desc=\"Donald Bren School of Information and Computer Sciences\"]") : Verify that the element with the content description 'Donald Bren School of Information and Computer Sciences' is present within 10 seconds.
 ```
 
-### test code to be migrated: """ + test_code
+### test case to be migrated: """ + test_code
              },
         ],
-        temperature=1
+        temperature=0
     )
     return list(response.choices)[0].to_dict()["message"]['content']

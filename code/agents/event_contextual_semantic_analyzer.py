@@ -36,7 +36,7 @@ Assist in generating formal responses of Output Format below for interactions wi
 
 ### Output Format
 
-Describe each widget interaction using the format below, outlining the executed action and its purpose with widgets of next page by Next Page JSON:
+Only output the specified widget below(Widget ID) interaction using the format below, outlining the executed action and its purpose with widgets of next page by Next Page JSON:
 
 ```
 ~~~
@@ -120,11 +120,11 @@ ACTION (element_type, element_id, (x, y), action, value): purpose
 }
 ```
 
-#### Output Format(Containing only the following ACTION text, no need to reply to others):
+#### Output Format(Containing only the following ACTION text, only no need to reply to others. Just one line, which specifies the executed action and its purpose with widgets of the next page by Next Page JSON for the designated Widget ID:):
 ACTION (android.widget.TextView, privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist:id/imageview_delete, (272, 28), click, NULL): Click to delete the list. The page after clicking this control is the delete list page, which has a delete button and a delete item component.
 
 
-
+The following is the parameter information that will be entered soon，Just one line of your response, which specifies the executed action and its purpose with widgets of the next page by Next Page JSON for the designated Widget ID below:
 ## Widget ID:
 """+current_widget_id+"""
 ## Previous Page JSON:
@@ -136,7 +136,6 @@ ACTION (android.widget.TextView, privacyfriendlyshoppinglist.secuso.org.privacyf
              },
         ],
         temperature=0,
-        max_tokens = 2048,
     )
     return list(response.choices)[0].to_dict()["message"]['content']
 
