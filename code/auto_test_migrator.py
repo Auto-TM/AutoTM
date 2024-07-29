@@ -11,6 +11,7 @@ import text_processor
 import task_dispatcher
 import page_reproducer
 import device_operator
+import page_info_cache
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -165,7 +166,13 @@ def get_page_intent(previous_page):
         time.sleep(3)
 
         logger.info("-----------")
-        widget_intent = task_dispatcher.analyze_widget_contextual_info(json, nex_page_json, previous_page, widget_info)
+        widget_intent = page_info_cache.get(json, nex_page_json, previous_page, widget_info)
+        logger.info("widget_info:{}".format(widget_info))
+        if widget_intent == "":
+            widget_intent = task_dispatcher.analyze_widget_contextual_info(json, nex_page_json, previous_page, widget_info)
+            page_info_cache.put(json, nex_page_json, previous_page, widget_info, widget_intent)
+        else:
+            logger.info("hit cache, intention: {}".format(widget_intent))
 
         json_intent = json_intent + widget_intent + "\n"
 
@@ -376,4 +383,5 @@ def migrate(source_test_code_dir_path, package_name, target_launch_activity, dev
         text_processor.generate_markdown_cost(markdown_file, start_time, end_time)
         markdown_file.close()
         page_reproducer.clear()
+        page_info_cache.clear()
         logger.info("---------------------finished-----------------------")

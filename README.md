@@ -12,6 +12,7 @@ This repository contains the source code of Android test case migration tool Aut
 
 2. Usage
    - Install the required packages using the command: `pip3 install -r requirements.txt`.
+   - Populate the `constants.py` file with the information of gpt apikey.
    - Populate the `main.py` file with the information mentioned in the Prerequisites section, and then initiate the program.
    - You can view the operation logs of the four agents (test semantic analyzer, event contextual semantic analyzer, event selector, test script generator) in the console or in the `log/run.log` file.
    - After the migration is complete, you will find a markdown file summarizing the workflow of this migration in the folder containing the 'source app test case code'.

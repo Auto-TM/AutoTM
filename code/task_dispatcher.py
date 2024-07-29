@@ -67,7 +67,6 @@ def analyze_widget_contextual_info(json, nex_page_json, previous_page, widget_in
     widget_intent = request_agent(
         'response = agents.event_contextual_semantic_analyzer.analyze(gpt_4, previous_page, widget_info, json, nex_page_json)',
         local_contest)
-    logger.info("widget_info:{}".format(widget_info))
     logger.info("intention: {}".format(widget_intent))
     return widget_intent
 
