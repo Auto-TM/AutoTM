@@ -117,6 +117,6 @@ The detailed process with serial numbers is as follows:
 ### test case to be migrated: """ + test_code
              },
         ],
-        temperature=0
+        temperature=0.2
     )
     return list(response.choices)[0].to_dict()["message"]['content']

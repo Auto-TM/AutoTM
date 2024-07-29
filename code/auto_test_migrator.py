@@ -1,7 +1,8 @@
 import os
+import re
 import json as j
 
-from json_extractor import  simplify_json
+from json_extractor import simplify_json
 import time
 import constants
 import logging
@@ -37,6 +38,7 @@ def get_json():
 
     for i in range(0, 10):
         time.sleep(1)
+        device_operator.activate_device()
         json_page = device_operator.device.dump_hierarchy()
         if len(json_page['children']) > 0:
             break
@@ -82,11 +84,12 @@ def get_page_intent(previous_page):
     json = ''
     for index in range(5):
         json = get_json()
+        time.sleep(3)
         if json != '[]':
             break
         logger.info("dump hierarchy empty, retrying...")
         device_operator.activate_device()
-        time.sleep(1)
+        time.sleep(3)
 
     if json == '[]':
         raise RuntimeError("dump hierarchy empty")
@@ -126,13 +129,16 @@ def get_page_intent(previous_page):
                     recurse(items['children'])
 
         recurse(json_data)
+        time.sleep(3)
         return results
 
     results = extract_fields(current_page_data)
     logger.info("-----------")
     logger.info("begin to extract context information for all widgets in the GUI interface: {}".format(results))
+    logger.info("widgets number: {}".format(len(results)))
     json_intent = ""
-    for item in results:
+    for i in range(len(results)):
+        item = results[i]
         id = item['id']
         if 'selected' in id:
             continue
@@ -167,9 +173,10 @@ def get_page_intent(previous_page):
 
         logger.info("-----------")
         widget_intent = page_info_cache.get(json, nex_page_json, previous_page, widget_info)
-        logger.info("widget_info:{}".format(widget_info))
+        logger.info("widget_number:{}, info:{}, widgets_number:{}".format(str(i + 1), widget_info, str(len(results))))
         if widget_intent == "":
-            widget_intent = task_dispatcher.analyze_widget_contextual_info(json, nex_page_json, previous_page, widget_info)
+            widget_intent = task_dispatcher.analyze_widget_contextual_info(json, nex_page_json, previous_page,
+                                                                           widget_info)
             page_info_cache.put(json, nex_page_json, previous_page, widget_info, widget_intent)
         else:
             logger.info("hit cache, intention: {}".format(widget_intent))
@@ -244,12 +251,9 @@ def exec_cur_code(codes, cur_actions):
         if code != "" and "assert" not in code:
             action_state = None
             for i in range(0, constants.MAX_RETRY_TIMES):
-                if exec_action == previous_exec_action:
-                    break
                 try:
                     device_operator.exec_code(code)
                     logger.info("exec code success: {}".format(code))
-                    page_reproducer.collect(code)
                     action_state = (exec_action, 'Exec_Success')
                     break
                 except Exception as e:
@@ -257,32 +261,25 @@ def exec_cur_code(codes, cur_actions):
                     logger.info(e)
                     if i == constants.MAX_RETRY_TIMES - 1:
                         action_state = (exec_action, 'Exec_Fail')
-
-            if exec_action != previous_exec_action:
-                action_states.append(action_state)
+                if cnt >= len(exec_actions):
+                    action_states.append(action_state)
         else:
-            if code != "" and exec_action != previous_exec_action:
+            if code != "" and cnt < len(exec_actions):
                 action_states.append((exec_action, 'Exec_Success'))
         previous_exec_action = exec_action
     return action_states
 
 
-def w_markdown_proceed(markdown_file, json_intent, match_result):
-    markdown_text = \
-        "#### Contextual Semantics of Widgets\n````\n" + json_intent + "\n````" \
-        + "\n" \
-        + "\n#### Selected Event(s) and Script\n````\n" + match_result + "\n````" \
-        + "\n"
-    markdown_file.write(markdown_text)
-    markdown_file.flush()
-    return markdown_text
+def sort_key(path):
+    match = re.search(r'(\d+)\.\w+$', path)
+    return int(match.group(1)) if match else float('inf')
 
 
 def get_test_case_files(directory):
     java_files = glob.glob(os.path.join(directory, '**', '*.java'), recursive=True)
     kotlin_files = glob.glob(os.path.join(directory, '**', '*.kt'), recursive=True)
     json_files = glob.glob(os.path.join(directory, '**', '*.json'), recursive=True)
-    return java_files + kotlin_files + json_files
+    return sorted(java_files + kotlin_files + json_files, key=sort_key)
 
 
 def select_event_and_execute(markdown_file, test_semantics, actions, pages_intentions):
@@ -320,7 +317,6 @@ def begin_operate(markdown_file, test_semantics):
         previous_page = ""
         while "DONE" not in actions and "NOT FOUND" not in actions:
             pages_intentions, previous_page = get_page_intent(previous_page)
-
             actions = select_event_and_execute(markdown_file, test_semantics, actions, pages_intentions)
         text_processor.generate_markdown_result(markdown_file, actions)
     except Exception as e:
@@ -332,56 +328,37 @@ def begin_operate(markdown_file, test_semantics):
 d = None
 
 
-def migrate(source_test_code_dir_path, package_name, target_launch_activity, device_number):
+def migrate(source_test_case_path, markdown_file, package_name, target_launch_activity, device_number):
     device_operator.setup(device_number)
     device_operator.activate_device()
     global d
     d = device_operator.d
 
-    logger.info("-----------")
-    logger.info("beginning to migrate")
     start_time = time.time()
+
     logger.info("-----------")
 
-    source_test_case_paths = get_test_case_files(source_test_code_dir_path)
+    test_semantics_file = markdown_file.name.replace("AutoTM.md", "Semantics_AutoTM.txt")
+    test_semantics = task_dispatcher.get_test_semantics(test_semantics_file,
+                                                        text_processor.read_file(source_test_case_path))
+    logger.info("source_test_case_path: {}, semantics: {}".format(source_test_case_path, test_semantics))
+    logger.info("-----------")
 
-    for source_test_case_path in source_test_case_paths:
-        source_test_code_file_dir = os.path.dirname(source_test_case_path)
-        source_test_code_file_name = os.path.splitext(os.path.basename(source_test_case_path))[0]
-        markdown_file_path = source_test_code_file_dir + "/" + source_test_code_file_name + "_AutoTM.md"
-        if os.path.exists(markdown_file_path):
-            os.remove(markdown_file_path)
-            logger.info(f"deleted the existing markdown file at {markdown_file_path}")
-        else:
-            os.makedirs(os.path.dirname(markdown_file_path), exist_ok=True)
-        markdown_file = open(markdown_file_path, "a")
-        logger.info("workflow markdown file path: " + markdown_file_path)
+    device_operator.stop_app(package_name)
+    device_operator.start_app(target_launch_activity)
+    device_operator.activate_device()
 
-        text_processor.generate_markdown_title(markdown_file, source_test_code_file_name)
+    try:
+        begin_operate(markdown_file, test_semantics)
+    except Exception as e:
+        logger.info("error occurred, error info: {}".format(e.__str__()))
+        logger.info("error stack: {}".format(traceback.format_exc()))
+    device_operator.stop_app(package_name)
 
-        logger.info("-----------")
-        logger.info("test_semantic_analyzer_agent processing...")
-        test_semantics_file = source_test_code_file_dir + "/" + source_test_code_file_name + "_Semantics_AutoTM.txt"
-        test_semantics = task_dispatcher.get_test_semantics(test_semantics_file,
-                                                            text_processor.read_file(source_test_case_path))
-        logger.info("source_test_case_path: {}, semantics: {}".format(source_test_case_path, test_semantics))
-        logger.info("-----------")
-
-        device_operator.stop_app(package_name)
-        device_operator.start_app(target_launch_activity)
-        device_operator.activate_device()
-
-        try:
-            begin_operate(markdown_file, test_semantics)
-        except Exception as e:
-            logger.info("error occurred, error info: {}".format(e.__str__()))
-            logger.info("error stack: {}".format(traceback.format_exc()))
-        device_operator.stop_app(package_name)
-
-        end_time = time.time()
-        logger.info("time-consuming /s: {}".format(str(end_time - start_time)))
-        text_processor.generate_markdown_cost(markdown_file, start_time, end_time)
-        markdown_file.close()
-        page_reproducer.clear()
-        page_info_cache.clear()
-        logger.info("---------------------finished-----------------------")
+    end_time = time.time()
+    logger.info("time-consuming /s: {}".format(str(end_time - start_time)))
+    text_processor.generate_markdown_cost(markdown_file, start_time, end_time)
+    markdown_file.close()
+    page_reproducer.clear()
+    page_info_cache.clear()
+    logger.info("---------------------finished-----------------------")

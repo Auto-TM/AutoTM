@@ -48,6 +48,7 @@ def request_agent(request_str, local_contest):
 
 
 def get_test_semantics(file_path, source_test_code):
+    logger.info("test_semantic_analyzer_agent processing...")
     if os.path.exists(file_path):
         with open(file_path, 'r') as file:
             test_semantics = file.read()

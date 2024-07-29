@@ -6,7 +6,7 @@ def generate(gpt, device_variable_name, actions):
     openai.api_base = gpt.api_base
 
     response = openai.ChatCompletion.create(
-        model=gpt.model,
+        model='gpt-4-32k',
         messages=[
             {"role": "system",
              "content": "You are a project manager. You understand Android software and its operating logic. You are conducting test case migration between applications of the same type. You can examine past behaviors, judge whether they are correct based on the current environment, and make the next decision correctly. You are not an indecisive person, but you are still willing to make multiple attempts for a better success rate. You can take a different path to achieve your goals, but the methods must be effective rather than unrealistic fantasies. You are a person who respects the facts and will not confuse black and white. You will carefully examine every detail given, especially the Executed action sequence, and if it does not align with logic, you will think about the reasons behind it. You understand  natural language and can judge its structure, meaning, and correlation well"},
@@ -74,6 +74,6 @@ Actions:
 """
              },
         ],
-        temperature=0
+        temperature=0.5
     )
     return list(response.choices)[0].to_dict()["message"]['content']

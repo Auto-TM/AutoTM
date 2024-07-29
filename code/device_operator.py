@@ -43,3 +43,10 @@ def stop_app(package_name):
 def exec_code(code):
     exec(code)
     time.sleep(3)
+    page_reproducer.collect(code)
+
+
+setup("emulator-5554")
+activate_device()
+
+d.send_action('done')
