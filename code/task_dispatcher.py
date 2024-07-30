@@ -37,13 +37,19 @@ def request_agent(request_str, local_contest):
         except Exception as ex:
             i += 1
             logger.info("agent_error, retrying, error info: {}".format(ex.__str__()))
+            if "8192 tokens" in ex.__str__() and "gpt_4" in local_contest:
+                gpt_4.model = "gpt-4-32k"
+                local_contest["gpt_4"] = gpt_4
+
             logger.info("agent_error, sleeping 1 minutes, retry times: {}".format(i))
             time.sleep(60 * 1)
             if i == constants.MAX_AGENT_RETRY_TIMES:
                 logger.info("retrying max reached, error info: {}".format(ex.__str__()))
                 raise ex
             continue
+
         break
+    gpt_4.model = "'gpt-4"
     return local_contest['response']
 
 
@@ -53,8 +59,8 @@ def get_test_semantics(file_path, source_test_code):
         with open(file_path, 'r') as file:
             test_semantics = file.read()
     else:
-        local_contest = {'agents': agents, 'gpt_config': gpt_4, 'source_test_code': source_test_code}
-        test_semantics = request_agent('response = agents.test_semantic_analyzer.analyze(gpt_config, source_test_code)',
+        local_contest = {'agents': agents, 'gpt_4': gpt_4, 'source_test_code': source_test_code}
+        test_semantics = request_agent('response = agents.test_semantic_analyzer.analyze(gpt_4, source_test_code)',
                                        local_contest)
         with open(file_path, 'w') as file:
             file.write(test_semantics)

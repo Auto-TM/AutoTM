@@ -167,16 +167,16 @@ def get_pages_intentions(previous_page_json):
         else:
             d.click(item['x'], item['y'])
 
-        time.sleep(3)
+        time.sleep(5)
 
         nex_page_json = get_page_json()
 
-        widget_intent = page_info_cache.get(current_page_json, nex_page_json, previous_page_json, widget_info)
+        widget_intent = page_info_cache.get(current_page_json, nex_page_json, widget_info)
         if widget_intent == "":
             widget_intent = task_dispatcher.analyze_widget_contextual_info(current_page_json, nex_page_json,
                                                                            previous_page_json,
                                                                            widget_info)
-            page_info_cache.put(current_page_json, nex_page_json, previous_page_json, widget_info, widget_intent)
+            page_info_cache.put(current_page_json, nex_page_json, widget_info, widget_intent)
         else:
             logger.info("hit cache, intention: {}".format(widget_intent))
 
@@ -370,5 +370,5 @@ def migrate(source_test_case_path, markdown_file, package_name, target_launch_ac
 
         markdown_file.close()
         page_reproducer.clear()
-        page_info_cache.clear()
+        # page_info_cache.clear()
         logger.info("---------------------finished-----------------------")

@@ -52,8 +52,9 @@ Begin with the executed action and combine the following options as needed:
 - 'ASSERT (element, id, coordinates, oracle):purpose': Provide an assertion if an action has been confirmed.
 - 'ACTION (element, id, coordinates, action, value):purpose': Describe the interaction with an element (click, long click, input). Use 'Input' for input actions (NULL to clear input; "" for a random string). For others, the value should be NULL.
 - 'RETURN:purpose': Describe the purpose of going back.
-- 'DONE': Indicate that the path(The source test case) has been successfully matched(migrated).
+- 'DONE': Indicate that the path has been successfully matched. That is to say, all steps of the source test case were successfully migrated.
 - 'NOT FOUND': State when a feature doesn't exist. Explore other options before concluding this.
+
 Enclose all responses within, wrapping them all together with a pair of '~~~' like(Please make sure to comply with this format, don't miss ~~~):
 
 ~~~
