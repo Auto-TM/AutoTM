@@ -83,7 +83,7 @@ def generate_markdown_cost(markdown_file, start_time, end_time):
     result += "````\n" + "time cost: {} s".format(str(int(end_time - start_time))) + "\n"
     result += "in_token: {}".format(str(in_token)) + "\n"
     result += "out_token: {}".format(str(out_token)) + "\n"
-    result += "spent: {} $".format(str(price)) + "\n````\n"
+    result += "spent: {} $".format(str(round(price, 2))) + "\n````\n"
 
     markdown_file.write(result)
     markdown_file.flush()

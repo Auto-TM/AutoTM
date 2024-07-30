@@ -1,8 +1,38 @@
 import auto_test_migrator
 import text_processor
 import os
+import migrate_subjects
 from app_info import get_apps_info
 from auto_test_migrator import logger, get_test_case_files
+
+
+def match_craftdroid_source_target_case():
+    if "{}_{}_{}".format(source_test_code_file_name, function_id, target_app_info.app_number) not in migrate_subjects.subjects:
+        return
+    logger.info("-----------")
+    logger.info("beginning to migrate, source app: {}, target app: {}, function: {}, test case path: {}"
+                .format(source_test_code_file_name, target_app_info.app_number, function_id, source_test_case_path))
+    logger.info("-----------")
+    # a11_b11_a12_AutoTM.md
+    markdown_file_path = ("../dataset/result/" + source_app_info.dataset_affiliation
+                          + "/" + source_app_info.classification
+                          + "/" + source_test_code_file_name + "_" + function_id
+                          + "/" + source_test_code_file_name
+                          + "_" + function_id
+                          + "_" + target_app_info.app_number
+                          + "_AutoTM.md")
+    if os.path.exists(markdown_file_path):
+        os.remove(markdown_file_path)
+    else:
+        os.makedirs(os.path.dirname(markdown_file_path), exist_ok=True)
+    markdown_file = open(markdown_file_path, "a")
+    logger.info("workflow markdown file path: " + markdown_file_path)
+    text_processor.generate_markdown_title(markdown_file, source_test_code_file_name
+                                           + "'s " + function_id
+                                           + " to " + target_app_info.app_number)
+    auto_test_migrator.migrate(source_test_case_path, markdown_file, target_app_info.packagename,
+                               target_app_info.launch_activity, device_name)
+
 
 if __name__ == "__main__":
     device_name = 'emulator-5554'
@@ -32,31 +62,7 @@ if __name__ == "__main__":
                         for target_app_info in app_classification_list:
                             if source_test_code_file_name == target_app_info.app_number:
                                 continue
-                            logger.info("-----------")
-                            logger.info("beginning to migrate, source test: {}, target test: {}, function: {}, "
-                                        .format(source_test_code_file_name, target_app_info.app_number, function_id))
-                            logger.info("-----------")
-
-                            # a11_b11_a12_AutoTM_Success.md
-
-                            markdown_file_path = ("../dataset/result/" + source_app_info.dataset_affiliation
-                                                  + "/" + source_app_info.classification
-                                                  + "/" + source_test_code_file_name + " to " + target_app_info.app_number
-                                                  + "/" + source_test_code_file_name
-                                                  + "_" + function_id
-                                                  + "_" + target_app_info.app_number
-                                                  + "_AutoTM.md")
-                            if os.path.exists(markdown_file_path):
-                                os.remove(markdown_file_path)
-                            else:
-                                os.makedirs(os.path.dirname(markdown_file_path), exist_ok=True)
-                            markdown_file = open(markdown_file_path, "a")
-                            logger.info("workflow markdown file path: " + markdown_file_path)
-                            text_processor.generate_markdown_title(markdown_file, source_test_code_file_name
-                                                                   + "'s " + function_id
-                                                                   + " to " + target_app_info.app_number)
-                            auto_test_migrator.migrate(source_test_case_path, markdown_file, target_app_info.packagename,
-                                                       target_app_info.launch_activity, device_name)
+                            match_craftdroid_source_target_case()
                 else:
                     # atm
                     pass
