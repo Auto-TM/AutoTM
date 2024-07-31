@@ -32,6 +32,9 @@ def match_craftdroid_source_target_case():
                                            + " to " + target_app_info.app_number)
     auto_test_migrator.migrate(source_test_case_path, markdown_file, target_app_info.packagename,
                                target_app_info.launch_activity, device_name)
+    logger.info("finish migrating, source app: {}, target app: {}, function: {}, test case path: {}"
+                .format(source_test_code_file_name, target_app_info.app_number, function_id, source_test_case_path))
+    logger.info("---------------------finished-----------------------")
 
 
 if __name__ == "__main__":

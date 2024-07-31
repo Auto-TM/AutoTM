@@ -1,6 +1,6 @@
 import openai
 
-def analyze(gpt, previous_json, current_widget_id, current_page, next_page):
+def analyze(gpt, previous_json, current_widget_id, current_page, next_page, widget_control):
     openai.api_key = gpt.key
     openai.api_base = gpt.api_base
 
@@ -18,6 +18,14 @@ Assist in generating formal responses of Output Format below for interactions wi
 
 ### Input Description
 
+**Widget ID**:
+
+- The identifier of the widget being interacted with on the current page.
+
+**Control of Widget ID**:
+
+- The Widget ID mentioned above is how it is interacted.("clickable", "longClickable", "scrollable", "password", "selected", "checkable")
+
 **Previous Page JSON**:
 
 - JSON data describing the GUI elements on the page preceding the current interaction.
@@ -29,10 +37,6 @@ Assist in generating formal responses of Output Format below for interactions wi
 **Next Page JSON**:
 
 - JSON data describing the GUI elements on the page that appears after interacting with the widget on the current page.
-
-**Widget ID**:
-
-- The identifier of the widget being interacted with on the current page.
 
 ### Output Format
 
@@ -52,6 +56,12 @@ ACTION (element_type, element_id, (x, y), action, value): purpose
 
 ```
 "privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist:id/imageview_delete"
+```
+
+**Control of Widget ID of Current Page**:
+
+```
+"longClickable"
 ```
 
 **Previous Page JSON**:
@@ -120,13 +130,15 @@ ACTION (element_type, element_id, (x, y), action, value): purpose
 }
 ```
 
-#### Output Format(Containing only the following ACTION text, only no need to reply to others. Just one line, which specifies the executed action and its purpose with widgets of the next page by Next Page JSON for the designated Widget ID:):
-ACTION (android.widget.TextView, privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist:id/imageview_delete, (272, 28), click, NULL): Click to delete the list. The page after clicking this control is the delete list page, which has a delete button and a delete item component.
+#### Output Format(Containing only the following ACTION text, only no need to reply to others. Just one line, which specifies the executed action and its purpose with widgets of the next page by Next Page JSON for the designated Widget ID. The actions such as click, long click, or scroll in the response should be determined by the provided control. :):
+ACTION (android.widget.TextView, privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist:id/imageview_delete, (272, 28), click, NULL): Long click to delete the list. The page after long clicking this control is the delete list page, which has a delete button and a delete item component.
 
 
 The following is the parameter information that will be entered soon，Just one line of your response, which specifies the executed action and its purpose with widgets of the next page by Next Page JSON for the designated Widget ID below:
 ## Widget ID:
 """+current_widget_id+"""
+## Control of the Widget ID above:
+"""+widget_control+"""
 ## Previous Page JSON:
 """+previous_json+"""
 ## Current Page JSON:

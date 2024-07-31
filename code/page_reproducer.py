@@ -17,7 +17,7 @@ def reproduce(d):
     for code in executed_codes:
         try:
             exec(code)
-            time.sleep(5)
+            time.sleep(3)
         except Exception as ex:
             pass
 

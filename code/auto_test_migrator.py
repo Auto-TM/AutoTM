@@ -5,7 +5,6 @@ import json as j
 from json_extractor import simplify_json
 import time
 import constants
-import logging
 import glob
 import traceback
 import text_processor
@@ -14,20 +13,7 @@ import page_reproducer
 import device_operator
 import page_info_cache
 import backup_file
-
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-
-console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.INFO)
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-console_handler.setFormatter(formatter)
-logger.addHandler(console_handler)
-
-file_handler = logging.FileHandler('../log/run.log')
-file_handler.setLevel(logging.INFO)
-file_handler.setFormatter(formatter)
-logger.addHandler(file_handler)
+from run_logger import logger
 
 
 def get_page_json():
@@ -60,25 +46,6 @@ def get_test_intents(test_file_dir):
     # logger.info(test_intents)
 
     return test_intents
-
-
-def request_agent(request_str, local_contest):
-    i = 0
-
-    while i < constants.MAX_RETRY_TIMES:
-        try:
-            exec(request_str, {}, local_contest)
-        except Exception as ex:
-            i += 1
-            logger.info("agent_error, retrying, error info: {}".format(ex.__str__()))
-            logger.info("agent_error, sleeping 1 minutes, retry times: {}".format(i))
-            time.sleep(60 * 1)
-            if i == constants.MAX_RETRY_TIMES:
-                logger.info("retrying max reached, error info: {}".format(ex.__str__()))
-                raise ex
-            continue
-        break
-    return local_contest['response']
 
 
 def get_pages_intentions(previous_page_json):
@@ -120,12 +87,23 @@ def get_pages_intentions(previous_page_json):
                     recurse(item)
             elif isinstance(items, dict):
                 if all(k in items for k in ['id', 'x', 'y', 'desc']):
-                    results.append({
-                        'id': items['id'],
-                        'x': items['x'],
-                        'y': items['y'],
-                        'desc': items['desc']
-                    })
+                    control_funs = items['control']
+                    if len(control_funs) == 0:
+                        results.append({
+                            'id': items['id'],
+                            'x': items['x'],
+                            'y': items['y'],
+                            'desc': items['desc']
+                        })
+                    else:
+                        for control_fun in control_funs:
+                            results.append({
+                                'id': items['id'],
+                                'x': items['x'],
+                                'y': items['y'],
+                                'control': control_fun,
+                                'desc': items['desc']
+                            })
                 if 'children' in items and items['children']:
                     recurse(items['children'])
 
@@ -157,26 +135,40 @@ def get_pages_intentions(previous_page_json):
         d = device_operator.d
 
         logger.info("-----------")
-        logger.info("widget_number:{}, info:{}, widgets_number:{}".format(str(i + 1), widget_info, str(len(results))))
-
-        if item['id'] != '':
-            try:
-                d(resourceId=id).click()
-            except Exception as e:
-                d.click(item['x'], item['y'])
+        if 'control' in item and item['control'] == "longClickable":
+            control = "longClickable"
+            if item['id'] != '':
+                try:
+                    d(resourceId=id).long_click()
+                except Exception as e:
+                    d.long_click(item['x'], item['y'])
+            else:
+                d.long_click(item['x'], item['y'])
         else:
-            d.click(item['x'], item['y'])
+            if 'control' in item and item['control'] != "clickable":
+                control = item['control']
+            else:
+                control = "clickable"
 
-        time.sleep(5)
+            if item['id'] != '':
+                try:
+                    d(resourceId=id).click()
+                except Exception as e:
+                    d.click(item['x'], item['y'])
+            else:
+                d.click(item['x'], item['y'])
+        logger.info("widget_number:{}, info and operator:{} | {}, widgets_number:{}".format(str(i + 1), widget_info, control, str(len(results))))
+
+        time.sleep(3)
 
         nex_page_json = get_page_json()
 
-        widget_intent = page_info_cache.get(current_page_json, nex_page_json, widget_info)
+        widget_intent = page_info_cache.get(current_page_json, nex_page_json, widget_info + control)
         if widget_intent == "":
             widget_intent = task_dispatcher.analyze_widget_contextual_info(current_page_json, nex_page_json,
                                                                            previous_page_json,
-                                                                           widget_info)
-            page_info_cache.put(current_page_json, nex_page_json, widget_info, widget_intent)
+                                                                           widget_info, control)
+            page_info_cache.put(current_page_json, nex_page_json, widget_info + control, widget_intent)
         else:
             logger.info("hit cache, intention: {}".format(widget_intent))
 
@@ -190,7 +182,6 @@ def get_pages_intentions(previous_page_json):
         if return_current_page != current_page_json:
             logger.info("back to current page fail, begin to reproduce current page")
             page_reproducer.reproduce(d)
-            time.sleep(3)
 
     logger.info("current page's intentions: " + json_intent)
     return json_intent, current_page_json
@@ -200,9 +191,7 @@ def get_cur_action(markdown_text):
     """
     Extract the current action and code block from markdown text.
     """
-    if "~~~" not in markdown_text:
-        return markdown_text
-    return markdown_text.split("~~~\n")[1].split("\n~~~")[0]
+    return text_processor.extract_select_action(markdown_text)
 
 
 def get_cur_code(markdown_text):
@@ -245,14 +234,14 @@ def exec_cur_code(codes, cur_actions):
     action_states = []
     previous_exec_action = ""
     for code in codes.splitlines():
-        if code.startswith("# ") or code == "":
+        if code.startswith("# ") or code.strip() == "":
             continue
         if cnt >= len(exec_actions):
             exec_action = previous_exec_action
         else:
             exec_action = exec_actions[cnt]
         cnt += 1
-        if code != "" and "assert" not in code:
+        if code.strip() != "" and "assert" not in code:
             action_state = None
             for i in range(0, constants.MAX_RETRY_TIMES):
                 try:
@@ -268,7 +257,7 @@ def exec_cur_code(codes, cur_actions):
             if cnt <= len(exec_actions):
                 action_states.append(action_state)
         else:
-            if code != "" and cnt <= len(exec_actions):
+            if code.strip() != "" and cnt <= len(exec_actions):
                 action_states.append((exec_action, 'Exec_Success'))
         previous_exec_action = exec_action
     return action_states
@@ -341,7 +330,6 @@ def migrate(source_test_case_path, markdown_file, package_name, target_launch_ac
     start_time = time.time()
 
     logger.info("-----------")
-
     # get a11_b11 of ./dataset/result/craftdroid/a1-Browser/a11_b11 as Semantics file name
     test_semantics_file_path = (os.path.dirname(markdown_file.name) + "/"
                                 + os.path.basename(os.path.dirname(markdown_file.name)) + "_Semantics_AutoTM.txt")
@@ -350,15 +338,18 @@ def migrate(source_test_case_path, markdown_file, package_name, target_launch_ac
     logger.info("source_test_case_path: {}, semantics: {}".format(source_test_case_path, test_semantics))
     logger.info("-----------")
 
-    device_operator.stop_app(package_name)
-    device_operator.start_app(target_launch_activity)
     device_operator.activate_device()
+    device_operator.stop_app(package_name)
+    device_operator.start_app(package_name)
+
 
     try:
         begin_operate(markdown_file, test_semantics)
     except Exception as e:
         logger.info("error occurred, error info: {}".format(e.__str__()))
-        logger.info("error stack: {}".format(traceback.format_exc()))
+        error_stack = traceback.format_exc()
+        logger.info("error stack: {}".format(error_stack))
+        text_processor.generate_markdown_exception(markdown_file, error_stack)
     finally:
         device_operator.stop_app(package_name)
 
@@ -371,4 +362,4 @@ def migrate(source_test_case_path, markdown_file, package_name, target_launch_ac
         markdown_file.close()
         page_reproducer.clear()
         # page_info_cache.clear()
-        logger.info("---------------------finished-----------------------")
+

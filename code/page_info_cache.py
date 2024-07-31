@@ -4,7 +4,7 @@ for caching page's widget contextual information
 widget_dict = {}
 
 import json
-file_path = '/home/testmigration/文档/fse2024/AutoTM/code/cache.json'
+file_path = './cache.json'
 with open(file_path, 'r', encoding='utf-8') as file:
     widget_dict = json.load(file)
 

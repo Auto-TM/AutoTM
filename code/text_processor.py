@@ -15,6 +15,29 @@ def extract_response(text):
     return res
 
 
+def extract_select_action(text):
+    res = ""
+
+    lines = text.strip().split('\n')
+    keywords = ["ASSERT", "ACTION", "RETURN", "DONE", "NOT FOUND"]
+    matching_lines = [line for line in lines if any(line.startswith(keyword) for keyword in keywords)]
+    for line in matching_lines:
+        if line.strip() == "":
+            continue
+        res += line.strip() + '\n'
+
+    if res == "":
+        extracted_texts = re.findall(r'(?:```|~~~)(.*?)(?:```|~~~)', text, re.DOTALL)
+        for line in extracted_texts:
+            if line.strip() == "":
+                continue
+            res += line.strip() + '\n'
+
+    if res == "":
+        return text.replace("~~~", "")
+    return res
+
+
 def read_file(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         content = file.read()
@@ -24,9 +47,9 @@ def read_file(file_path):
 def concat_action_states(action_states, cur_action):
     actions_with_state = ""
     for action_state in action_states:
-        if "DONE" in action_state[0] or "NOT FOUND" in action_state[0]:
+        if "DONE" in action_state or "NOT FOUND" in action_state:
             actions_with_state += action_state[0]
-            continue
+            break
         actions_with_state += action_state[0] + ', ' + action_state[1] + '\n'
 
     if "DONE" in cur_action and "DONE" not in actions_with_state:
@@ -72,6 +95,12 @@ def generate_markdown_result(markdown_file, actions):
     else:
         result = "### Fail\n"
     result += "````\n" + actions + "\n````\n"
+    markdown_file.write(result)
+    markdown_file.flush()
+
+
+def generate_markdown_exception(markdown_file, error):
+    result = "### Runtime Exception\n````\n" + error + "\n````\n"
     markdown_file.write(result)
     markdown_file.flush()
 

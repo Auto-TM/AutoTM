@@ -37,9 +37,12 @@ RETURN:purpose': Describe the purpose of going back in the navigation flow.
 ### Output Format(The code should be wrapped using '···'). Avoid adding extra information beyond the requested format. Use the following structure for generating UIAutomator2 code,combine the following options as needed:
 ···
 device.click(x1, y1)
-device(resourceId="id1", className="[android.widget.xxx](http://android.widget.xxx/)").child(index=0).click()
+device.press('back')
+device(resourceId="id0").click()
+device.press('enter')
 device.xpath('//*[@resource-id="id2"]/android.widget.xxx').click()
-assert device(resourceId="id3", className="[android.widget.xxx](http://android.widget.xxx/)").get_text() == "y"
+device(className="android.widget.xx", resourceId="android:id/id1") .child_by_text("xx", className="android.widget.yy") .child(className="android.widget.zz").click()
+assert device(resourceId="id3", className="android.widget.kk").get_text() == "y"
 ···
 
 ### Example:

@@ -74,6 +74,6 @@ DONE
 ## Executed Action Sequence: """ + actions
              },
         ],
-        temperature=0.5
+        temperature=0.2
     )
     return list(response.choices)[0].to_dict()["message"]['content']

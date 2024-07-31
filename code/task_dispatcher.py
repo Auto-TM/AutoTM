@@ -3,27 +3,13 @@ call agents
 """
 
 import constants
-import logging
 import time
 import os
 import agents.test_semantic_analyzer
 import agents.event_contextual_semantic_analyzer
 import agents.event_selector
 import agents.test_script_generator
-
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-
-console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.INFO)
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-console_handler.setFormatter(formatter)
-logger.addHandler(console_handler)
-
-file_handler = logging.FileHandler('../log/run.log')
-file_handler.setLevel(logging.INFO)
-file_handler.setFormatter(formatter)
-logger.addHandler(file_handler)
+from run_logger import logger
 
 gpt_4 = constants.openai_api_config
 
@@ -43,8 +29,8 @@ def request_agent(request_str, local_contest):
                 logger.info("8192 tokens is not enough, switch to 32k model")
             else :
                 logger.info("agent_error, retrying, error info: {}".format(ex.__str__()))
-            logger.info("agent_error, sleeping 30 s, retry times: {}".format(i))
-            time.sleep(30)
+            logger.info("agent_error, sleeping " + str(3 * i) + " s, retry times: {}".format(i))
+            time.sleep(3 * i)
             if i == constants.MAX_AGENT_RETRY_TIMES:
                 logger.info("retrying max reached, error info: {}".format(ex.__str__()))
                 raise ex
@@ -69,12 +55,12 @@ def get_test_semantics(file_path, source_test_code):
     return test_semantics
 
 
-def analyze_widget_contextual_info(json, nex_page_json, previous_page, widget_info):
+def analyze_widget_contextual_info(json, next_page_json, previous_page, widget_info, widget_control):
     logger.info("event_contextual_semantic_analyzer processing...")
     local_contest = {'agents': agents, 'gpt_4': gpt_4, 'previous_page': previous_page,
-                     'widget_info': widget_info, 'json': json, 'nex_page_json': nex_page_json}
+                     'widget_info': widget_info, 'json': json, 'next_page_json': next_page_json, 'widget_control': widget_control}
     widget_intent = request_agent(
-        'response = agents.event_contextual_semantic_analyzer.analyze(gpt_4, previous_page, widget_info, json, nex_page_json)',
+        'response = agents.event_contextual_semantic_analyzer.analyze(gpt_4, previous_page, widget_info, json, next_page_json, widget_control)',
         local_contest)
     logger.info("intention: {}".format(widget_intent))
     return widget_intent
