@@ -36,20 +36,22 @@ def request_agent(request_str, local_contest):
             exec(request_str, {}, local_contest)
         except Exception as ex:
             i += 1
-            logger.info("agent_error, retrying, error info: {}".format(ex.__str__()))
-            if "8192 tokens" in ex.__str__() and "gpt_4" in local_contest:
+
+            if "maximum context length is 819" in ex.__str__() and "gpt_4" in local_contest:
                 gpt_4.model = "gpt-4-32k"
                 local_contest["gpt_4"] = gpt_4
-
-            logger.info("agent_error, sleeping 1 minutes, retry times: {}".format(i))
-            time.sleep(60 * 1)
+                logger.info("8192 tokens is not enough, switch to 32k model")
+            else :
+                logger.info("agent_error, retrying, error info: {}".format(ex.__str__()))
+            logger.info("agent_error, sleeping 30 s, retry times: {}".format(i))
+            time.sleep(30)
             if i == constants.MAX_AGENT_RETRY_TIMES:
                 logger.info("retrying max reached, error info: {}".format(ex.__str__()))
                 raise ex
             continue
 
         break
-    gpt_4.model = "'gpt-4"
+    gpt_4.model = "gpt-4"
     return local_contest['response']
 
 

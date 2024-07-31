@@ -24,11 +24,14 @@ def read_file(file_path):
 def concat_action_states(action_states, cur_action):
     actions_with_state = ""
     for action_state in action_states:
+        if "DONE" in action_state[0] or "NOT FOUND" in action_state[0]:
+            actions_with_state += action_state[0]
+            continue
         actions_with_state += action_state[0] + ', ' + action_state[1] + '\n'
 
-    if "DONE" in cur_action:
+    if "DONE" in cur_action and "DONE" not in actions_with_state:
         actions_with_state += "DONE"
-    if "NOT FOUND" in cur_action:
+    if "NOT FOUND" in cur_action and "NOT FOUND" not in actions_with_state:
         actions_with_state += "NOT FOUND"
 
     return actions_with_state
