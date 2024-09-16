@@ -1,0 +1,17 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is verifying the search functionality for weather information in a specific city.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ActionMenuItemView, R.id.action_search, (), click, NULL): Click on the search icon in the toolbar to open the search dialog.
+
+2. ACTION (EditText, R.id.custom, (), input, "Atlanta"): Enter "Atlanta" into the search input field.
+
+3. ACTION (AppCompatButton, android.R.id.button1, (), click, NULL): Click the "OK" button to confirm the search.
+
+4. ASSERT (TextView, , (), matches, "Atlanta, US"): Verify that the toolbar title displays "Atlanta, US" after the search is completed.
+```
+
+This description captures the main steps of the test case, including the search action, input of the city name, confirmation of the search, and verification of the result. The format follows the specified structure with ACTION and ASSERT statements, and includes the sequence numbers for each step.

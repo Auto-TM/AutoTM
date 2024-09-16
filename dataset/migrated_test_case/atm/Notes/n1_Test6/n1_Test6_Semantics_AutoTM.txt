@@ -1,0 +1,47 @@
+Based on the provided Android test case, here's a corresponding function description following the specified format:
+
+```
+This test case is testing the functionality of creating, saving, and sorting notes in a note-taking application.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ActionMenuItemView, R.id.action_add, (), click, NULL): Click on the "New note" action menu item to create a new note.
+
+2. ACTION (EditText, R.id.note_title, (), input, "Title2"): Enter "Title2" as the title of the new note.
+
+3. ACTION (EditText, R.id.note_body, (), input, "Text2"): Enter "Text2" as the body of the new note.
+
+4. ACTION (ActionMenuItemView, R.id.action_save_changes, (), click, NULL): Click on the "Done" action menu item to save the note.
+
+5. ASSERT (TextView, R.id.title, (), matches, isDisplayed()): Verify that the note title "Title2" is displayed.
+
+6. ASSERT (TextView, R.id.subtitle, (), matches, isDisplayed()): Verify that the note body "Text2" is displayed.
+
+7. ACTION (ActionMenuItemView, R.id.action_add, (), click, NULL): Click on the "New note" action menu item to create another new note.
+
+8. ACTION (EditText, R.id.note_title, (), input, "Title1"): Enter "Title1" as the title of the new note.
+
+9. ACTION (EditText, R.id.note_body, (), input, "Text1"): Enter "Text1" as the body of the new note.
+
+10. ACTION (ActionMenuItemView, R.id.action_save_changes, (), click, NULL): Click on the "Done" action menu item to save the note.
+
+11. ASSERT (TextView, R.id.title, (), matches, isDisplayed()): Verify that the note title "Title1" is displayed.
+
+12. ASSERT (TextView, R.id.subtitle, (), matches, isDisplayed()): Verify that the note body "Text1" is displayed.
+
+13. ACTION (OptionsMenu, , (), click, NULL): Open the options menu.
+
+14. ACTION (TextView, android.R.id.title, (), click, NULL): Click on the "Sort" option in the menu.
+
+15. ACTION (TextView, android.R.id.title, (), click, NULL): Click on the "By title" option to sort the notes by title.
+
+16. ASSERT (TextView, R.id.title, (), matches, isDisplayed()): Verify that the note title "Title1" is displayed first after sorting.
+
+17. ASSERT (TextView, R.id.subtitle, (), matches, isDisplayed()): Verify that the note body "Text1" is displayed with "Title1".
+
+18. ASSERT (TextView, R.id.title, (), matches, isDisplayed()): Verify that the note title "Title2" is displayed second after sorting.
+
+19. ASSERT (TextView, R.id.subtitle, (), matches, isDisplayed()): Verify that the note body "Text2" is displayed with "Title2".
+```
+
+This function description outlines the steps to create two notes, save them, and then sort them by title. It includes actions for interacting with UI elements and assertions to verify the expected results.

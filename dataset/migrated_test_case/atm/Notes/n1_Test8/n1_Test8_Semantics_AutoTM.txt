@@ -1,0 +1,19 @@
+Based on the provided Android test case, I'll generate a corresponding function description following the specified format:
+
+```
+1. ACTION (TextView, android.R.id.title, (), click, NULL): Click on the "Search" option in the overflow menu to open the search functionality.
+
+2. ACTION (SearchAutoComplete, , (), input, "note1"): Enter "note1" into the search field and press the IME action button.
+
+3. ASSERT (TextView, , (), matches, "Oops! No notes found"): Verify that the text "Oops! No notes found" is displayed, indicating no results for the search.
+
+4. ACTION (SearchAutoComplete, , (), input, "Title2"): Clear the previous search and enter "Title2" into the search field, then press the IME action button.
+
+5. ASSERT (TextView, R.id.title, (), matches, "Title2"): Verify that a note with the title "Title2" is displayed in the search results.
+
+6. ASSERT (TextView, R.id.subtitle, (), matches, "Text2"): Verify that the subtitle of the found note contains the text "Text2".
+
+7. ACTION (ImageView, , (), click, NULL): Click on the clear query button (represented by an ImageView with the content description "Clear query") to reset the search.
+```
+
+This test case is checking the search functionality of the notes application, including searching for non-existent notes, finding existing notes, and clearing the search query.

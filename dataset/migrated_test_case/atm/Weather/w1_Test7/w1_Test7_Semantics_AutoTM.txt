@@ -1,0 +1,17 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is verifying the functionality of the Graphs option in the action bar overflow menu and checking the presence of specific graph types.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (OptionsMenu, , (), click, NULL): Open the action bar overflow or options menu.
+
+2. ACTION (TextView, R.id.title, (), click, NULL): Click on the "Graphs" option in the opened menu.
+
+3. ASSERT (TextView, , (), isDisplayed, "Temperature"): Verify that a TextView with the text "Temperature" is displayed on the screen.
+
+4. ASSERT (TextView, , (), isDisplayed, "Rain"): Verify that a TextView with the text "Rain" is displayed on the screen.
+```
+
+This description captures the main steps of the test case, including opening the menu, selecting the Graphs option, and verifying the presence of specific graph types (Temperature and Rain) on the resulting screen.

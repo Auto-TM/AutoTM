@@ -1,0 +1,19 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the functionality of editing an existing expense in the EasyBudget app.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (RecyclerView, R.id.expensesRecyclerView, (), long_click, NULL): Long click on the first item in the expenses list to open the edit options.
+
+2. ACTION (ListView, R.id.select_dialog_listview, (), click, NULL): Click on the first option in the popup menu (presumably "Edit").
+
+3. ACTION (EditText, R.id.amount_edittext, (), input, "40.00"): Enter the new amount "40.00" in the amount input field.
+
+4. ACTION (FloatingActionButton, R.id.save_expense_fab, (), click, NULL): Click on the save button to confirm the changes.
+
+5. ASSERT (TextView, R.id.expense_amount, (), matches, "-$40.00"): Verify that the expense amount is displayed as "-$40.00" after editing.
+```
+
+This test case focuses on editing an existing expense entry, changing its amount, and verifying that the change is reflected correctly in the app's UI.

@@ -1,0 +1,23 @@
+This test case is testing the account creation functionality of the application, which includes filling out the account creation form, confirming the email, setting a password, providing a name, and verifying the presence of specific elements.
+
+The detailed process with serial numbers is as follows:
+
+1. ASSERT (TextView, com.contextlogic.geek:id/login_fragment_create_account_button, (), wait_until_element_presence, "id:com.contextlogic.geek:id/login_fragment_create_account_button") : Verify that the 'Create Account' button is present within 20 seconds.
+2. ACTION (TextView, com.contextlogic.geek:id/login_fragment_create_account_button, (), click, NULL) : Click on the 'Create Account' button to initiate account creation.
+3. ASSERT (EditText, com.contextlogic.geek:id/create_account_fragment_email_text, (), wait_until_element_presence, "id:com.contextlogic.geek:id/create_account_fragment_email_text") : Verify that the 'Email' input field is present within 20 seconds.
+4. ACTION (EditText, com.contextlogic.geek:id/create_account_fragment_email_text, (), input, "q196119ge@nwytg.net") : Input the email 'q196119ge@nwytg.net' into the 'Email' input field.
+5. ACTION (EditText, com.contextlogic.geek:id/create_account_fragment_confirm_email_text, (), input, "q196119ge@nwytg.net") : Input the same email into the 'Confirm Email' input field to confirm the email.
+6. ACTION (EditText, com.contextlogic.geek:id/create_account_fragment_password_text, (), input, "1qaz2wsX") : Input the password '1qaz2wsX' into the 'Password' input field.
+7. ACTION (EditText, com.contextlogic.geek:id/create_account_fragment_last_name_text, (), input, "Labfellow") : Input the last name 'Labfellow' into the 'Last Name' input field.
+8. ACTION (EditText, com.contextlogic.geek:id/create_account_fragment_first_name_text, (), input, "Sealbot") : Input the first name 'Sealbot' into the 'First Name' input field and hide the keyboard.
+9. ACTION (TextView, com.contextlogic.geek:id/create_account_fragment_create_account_button, (), click, NULL) : Click on the 'Create Account' button to submit the account creation form.
+10. ASSERT (TextView, , (), wait_until_element_presence, "xpath://android.widget.TextView[@content-desc=\"Skip\"]") : Verify that the 'Skip' button is present within 10 seconds.
+11. ACTION (TextView, , (), click, NULL) : Click on the 'Skip' button to skip the next step.
+12. ACTION (Button, , (), click, NULL) : Click on the 'Yes' button to confirm the action.
+13. ASSERT (ImageView, com.contextlogic.geek:id/signup_category_grid_cell_image1, (), wait_until_element_presence, "id:com.contextlogic.geek:id/signup_category_grid_cell_image1") : Verify that the image element is present within 10 seconds.
+14. ACTION (ImageView, com.contextlogic.geek:id/signup_category_grid_cell_image1, (), click, NULL) : Click on the image element.
+15. ASSERT (Button, com.contextlogic.geek:id/signup_category_fragment_next_button, (), wait_until_element_presence, "id:com.contextlogic.geek:id/signup_category_fragment_next_button") : Verify that the 'Next' button is present within 10 seconds.
+16. ACTION (Button, com.contextlogic.geek:id/signup_category_fragment_next_button, (), click, NULL) : Click on the 'Next' button to proceed to the next step.
+17. ASSERT (ImageButton, , (), wait_until_element_presence, "xpath://*[@content-desc=\"Open Menu\"]") : Verify that the 'Open Menu' button is present within 10 seconds.
+18. ACTION (ImageButton, , (), click, NULL) : Click on the 'Open Menu' button to open the menu.
+19. ASSERT (TextView, com.contextlogic.geek:id/menu_profile_name, (), wait_until_text_presence, "text:Sealbot") : Verify that the text 'Sealbot' is present within 10 seconds.

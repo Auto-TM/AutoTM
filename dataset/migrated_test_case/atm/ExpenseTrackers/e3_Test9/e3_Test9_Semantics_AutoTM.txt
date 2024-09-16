@@ -1,0 +1,20 @@
+This test case is testing the navigation and tab selection functionality in an expense tracker application. Here's the corresponding function description following the specified format:
+
+```
+1. ACTION (ImageButton, , (), click, NULL):Click on the navigation drawer button to open the side menu.
+
+2. ACTION (TextView, R.id.navigation_drawer, (), click, NULL):Select the second item in the navigation drawer.
+
+3. ACTION (LinearLayout, R.id.tabsLayout, (), click, NULL):Click on the second tab in the tab layout.
+
+4. ACTION (LinearLayout, R.id.tabsLayout, (), click, NULL):Click on the third tab in the tab layout.
+```
+
+This test case performs the following actions:
+
+1. Opens the navigation drawer by clicking on the hamburger menu icon.
+2. Selects the second item in the navigation drawer, likely navigating to a different screen or section of the app.
+3. Clicks on the second tab in a tab layout, presumably switching to a different view or category within the current screen.
+4. Clicks on the third tab in the same tab layout, again switching to a different view or category.
+
+The test case appears to be verifying the basic navigation and tab switching functionality of the expense tracker application.

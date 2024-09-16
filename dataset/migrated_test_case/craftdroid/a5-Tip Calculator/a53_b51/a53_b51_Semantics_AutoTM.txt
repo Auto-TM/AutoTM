@@ -1,0 +1,11 @@
+This test case is designed to validate the functionality of a simple tip calculator application by entering bill and tip amounts, performing a calculation, and verifying the total amount to be paid.
+
+The detailed process with serial numbers is as follows:
+
+~~~
+1. ACTION (Button, android:id/button1, (), click, NULL): Click on the 'Accept' button to proceed with the default settings or values.
+2. ACTION (EditText, com.tleapps.simpletipcalculator:id/editTextBill, (), input, "56.6"): Clear the bill amount field and input the value '56.6'.
+3. ACTION (EditText, com.tleapps.simpletipcalculator:id/editTextTip, (), input, "15"): Clear the tip percentage field and input the value '15', then hide the keyboard.
+4. ACTION (Button, com.tleapps.simpletipcalculator:id/buttonCalculate, (), click, NULL): Click on the 'Calculate' button to compute the total amount to pay based on the bill and tip values entered.
+5. ASSERT (TextView, com.tleapps.simpletipcalculator:id/textViewTotalToPay, (), wait_until_text_presence, "text:65.09"): Verify that the 'Total to Pay' field displays '$65.09' within 10 seconds, confirming the correct calculation.
+~~~

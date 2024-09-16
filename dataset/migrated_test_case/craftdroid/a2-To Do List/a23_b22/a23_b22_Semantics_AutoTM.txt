@@ -1,0 +1,14 @@
+This test case is testing the functionality of creating a new to-do task in a to-do list application and then deleting it, verifying that the task is added and then removed successfully.
+
+The detailed process with serial numbers is as follows:
+
+```
+1. ACTION (Button, org.secuso.privacyfriendlytodolist:id/btn_skip, (), click, NULL) : Click on the 'Skip' button to bypass the tutorial.
+2. ACTION (ImageButton, org.secuso.privacyfriendlytodolist:id/fab_new_task, (), click, NULL) : Click on the 'New Task' button to create a new to-do task.
+3. ACTION (EditText, org.secuso.privacyfriendlytodolist:id/et_new_task_name, (), input, "Sample Todo") : Input the name 'Sample Todo' for the new task and hide the keyboard.
+4. ACTION (Button, org.secuso.privacyfriendlytodolist:id/bt_new_task_ok, (), click, NULL) : Click on the 'Okay' button to confirm the creation of the new task.
+5. ASSERT (TextView, org.secuso.privacyfriendlytodolist:id/tv_exlv_task_name, (), wait_until_text_presence, "Sample Todo") : Verify that the new task with the name 'Sample Todo' is present within 10 seconds.
+6. ACTION (TextView, org.secuso.privacyfriendlytodolist:id/tv_exlv_task_name, (), long_click, NULL) : Long click on the task named 'Sample Todo' to bring up the deletion option.
+7. ACTION (TextView, android:id/title, (), click, NULL) : Click on the 'Delete To-Do Task' option to delete the selected task.
+8. ASSERT (TextView, org.secuso.privacyfriendlytodolist:id/tv_exlv_task_name, (), wait_until_text_invisible, "Sample Todo") : Verify that the task 'Sample Todo' is no longer visible within 10 seconds after deletion.
+```

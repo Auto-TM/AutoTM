@@ -1,0 +1,33 @@
+This test case is testing the functionality of adding an exchange rate in an expense tracker application. Here's the detailed process with serial numbers:
+
+```
+1. ACTION (ImageButton, , (), click, NULL):Click on the navigation drawer button to open the side menu.
+
+2. ACTION (NavigationMenuItemView, , (), click, NULL):Click on the third item in the navigation menu (likely the Exchange Rates section).
+
+3. ACTION (Button, R.id.btn_add_exchange_rate, (), click, NULL):Click on the "Add exchange rate" button.
+
+4. ACTION (Spinner, R.id.spinner_from_currency, (), click, NULL):Click on the "From Currency" spinner to open the currency selection dropdown.
+
+5. ACTION (TextView, , (), click, NULL):Select the 139th item in the "From Currency" dropdown (likely USD).
+
+6. ACTION (Spinner, R.id.spinner_to_currency, (), click, NULL):Click on the "To Currency" spinner to open the currency selection dropdown.
+
+7. ACTION (TextView, , (), click, NULL):Select the 44th item in the "To Currency" dropdown (likely EUR).
+
+8. ACTION (EditText, R.id.et_buy, (), input, "1"):Enter "1" in the "Buy" rate field.
+
+9. ACTION (EditText, R.id.et_sell, (), input, "0.8"):Enter "0.8" in the "Sell" rate field.
+
+10. ACTION (MenuItem, R.id.action_done, (), click, NULL):Click on the "Add" action button to save the exchange rate.
+
+11. ASSERT (TextView, R.id.tv_from_currency, (), matches, "USD"):Verify that the "From Currency" in the added exchange rate is displayed as "USD".
+
+12. ASSERT (TextView, R.id.tv_to_currency, (), matches, "EUR"):Verify that the "To Currency" in the added exchange rate is displayed as "EUR".
+
+13. ASSERT (TextView, R.id.tv_amount_buy, (), matches, "1.00"):Verify that the "Buy" rate in the added exchange rate is displayed as "1.00".
+
+14. ASSERT (TextView, R.id.tv_amount_sell, (), matches, "0.80"):Verify that the "Sell" rate in the added exchange rate is displayed as "0.80".
+```
+
+This test case verifies the process of adding a new exchange rate (USD to EUR) and checks if the added rate is correctly displayed in the list of exchange rates.

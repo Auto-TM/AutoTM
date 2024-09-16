@@ -1,0 +1,31 @@
+Based on the provided Android test case, I'll generate a corresponding function description following the specified format:
+
+```
+This test case is testing the functionality of deleting all items in a shopping list.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (OptionsMenu, , (), click, NULL): Open the options menu or overflow menu in the action bar.
+
+2. ACTION (TextView, android.R.id.title, (), click, NULL): Click on the "Delete all" option in the menu.
+
+3. ACTION (Button, android.R.id.button1, (), click, NULL): Click on the "Yes" button in the confirmation dialog.
+
+~~~
+ACTION (OptionsMenu, , (), click, NULL): Open the options menu to access additional actions.
+~~~
+
+~~~
+ACTION (TextView, android.R.id.title, (), click, NULL): Select the "Delete all" option to initiate the deletion of all items.
+~~~
+
+~~~
+ACTION (Button, android.R.id.button1, (), click, NULL): Confirm the deletion action by clicking the "Yes" button in the confirmation dialog.
+~~~
+
+~~~
+ASSERT (ListView, , (), isEmpty, true): Verify that the shopping list is now empty after deleting all items.
+~~~
+```
+
+Note: I've added an assertion at the end to verify that the shopping list is empty after the deletion, as this would be a logical next step in testing this functionality. However, this assertion is not explicitly present in the original test case and would need to be implemented if desired.

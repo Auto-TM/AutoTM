@@ -1,0 +1,9 @@
+This test case is testing the functionality of a tip calculator application that calculates the amount each person needs to pay based on the total bill, tip percentage, and number of people.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (EditText, com.jpstudiosonline.tipcalculator:id/etBillTotal, (), input, "56.6") : Clear the current input and enter the total bill amount of "56.6".
+2. ACTION (EditText, com.jpstudiosonline.tipcalculator:id/etTipAmount, (), input, "15") : Clear the current input and enter the tip percentage as "15".
+3. ACTION (EditText, com.jpstudiosonline.tipcalculator:id/etPerson, (), input, "4") : Clear the current input, enter the number of people as "4", and hide the keyboard.
+4. ACTION (Button, com.jpstudiosonline.tipcalculator:id/btCalculate, (), click, NULL) : Click on the 'Calculate' button to compute the amount each person needs to pay.
+5. ASSERT (TextView, com.jpstudiosonline.tipcalculator:id/tvPersonPay, (), wait_until_text_presence, "text:16.27") : Verify that the text indicating the amount each person needs to pay is "$ 16.27" within 10 seconds.

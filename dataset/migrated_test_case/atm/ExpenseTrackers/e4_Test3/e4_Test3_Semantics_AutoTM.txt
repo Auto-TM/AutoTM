@@ -1,0 +1,19 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the expense addition functionality and verifying the total expense display.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (Button, R.id.btn_add_expense, (), click, NULL): Click on the "Add expense" button to open the expense addition screen.
+
+2. ACTION (EditText, R.id.et_title, (), input, "Shoes"): Enter "Shoes" as the title of the expense.
+
+3. ACTION (EditText, R.id.et_price, (), input, "69.99"): Enter "69.99" as the price of the expense.
+
+4. RETURN: Press the back button to return to the main screen.
+
+5. ASSERT (TextView, R.id.tv_total_expense, (), matches, "- 0 NON"): Verify that the total expense displayed is "- 0 NON" and the element is both displayed and enabled.
+```
+
+This description captures the main steps of the test case, including the actions performed and the final assertion. Note that the test case doesn't actually save the expense, which is why the total expense remains at 0 despite entering an expense amount.

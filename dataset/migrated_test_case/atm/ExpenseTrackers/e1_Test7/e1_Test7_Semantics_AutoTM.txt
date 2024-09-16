@@ -1,0 +1,25 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the functionality of adding a recurring expense in the EasyBudget app.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (RecyclerView, R.id.expensesRecyclerView, (), long_click, NULL): Long click on the first item in the expenses list.
+
+2. ACTION (ListView, R.id.select_dialog_listview, (), click, NULL): Click on the second option in the popup menu (likely an edit or delete option).
+
+3. ACTION (FloatingActionButton, R.id.fab_expand_menu_button, (), click, NULL): Click on the expandable floating action button.
+
+4. ACTION (FloatingActionButton, R.id.fab_new_recurring_expense, (), click, NULL): Click on the button to add a new recurring expense.
+
+5. ACTION (EditText, R.id.description_edittext, (), input, "Entertainment"): Enter "Entertainment" as the description for the recurring expense.
+
+6. ACTION (EditText, R.id.amount_edittext, (), input, "100"): Enter "100" as the amount for the recurring expense.
+
+7. ACTION (FloatingActionButton, R.id.save_expense_fab, (), click, NULL): Click on the save button to add the recurring expense.
+
+8. ASSERT (LinearLayout, R.id.recurring_indicator, (), isDisplayed, NULL): Verify that the recurring indicator is displayed, confirming the expense was added as a recurring item.
+```
+
+This test case checks the process of adding a recurring expense to the EasyBudget app, including interacting with the expense list, opening the add expense interface, inputting expense details, and verifying that the expense is added as a recurring item.

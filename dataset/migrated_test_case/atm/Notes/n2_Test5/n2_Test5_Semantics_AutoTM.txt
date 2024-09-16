@@ -1,0 +1,18 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the search functionality in the SwiftNotes application.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ActionMenuItemView, R.id.action_search, (), click, NULL): Click on the search action menu item to open the search interface.
+
+2. ACTION (SearchAutoComplete, R.id.search_src_text, (), input, "Title1"): Enter the search query "Title1" into the search text field.
+
+3. ASSERT (TextView, R.id.titleView, (), matches(allOf(isDisplayed(), isEnabled()))): Verify that a TextView with the text "Title1" is displayed and enabled in the search results.
+
+4. ACTION (AppCompatImageView, R.id.search_close_btn, (), click, NULL): Click on the clear query button to reset the search.
+
+```
+
+This test case checks the search functionality, verifies the display of search results, and tests the clear query feature in the SwiftNotes application.

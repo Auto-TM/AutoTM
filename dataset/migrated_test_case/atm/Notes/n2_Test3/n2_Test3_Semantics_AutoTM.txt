@@ -1,0 +1,25 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+1. ACTION (ImageButton, R.id.newNote, (), click, NULL): Click on the "New note" button to create a new note.
+
+2. ACTION (EditText, R.id.titleEdit, (), input, "Title3"): Enter "Title3" as the title of the new note.
+
+3. ACTION (EditText, R.id.bodyEdit, (), input, "Note2"): Enter "Note2" as the body content of the new note.
+
+4. ACTION (ImageButton, R.id.toolbarEdit, (), click, NULL): Click on the back button in the toolbar to save and exit the note editing screen.
+
+5. ACTION (Button, android.R.id.button1, (), click, NULL): Click "Yes" to confirm saving the note.
+
+6. ACTION (TextView, R.id.titleView, (), click, NULL): Click on the note with the title "Title3" to open it for editing.
+
+7. ACTION (EditText, R.id.titleEdit, (), input, "Title2"): Change the title of the note from "Title3" to "Title2".
+
+8. RETURN: Navigate back to the main screen.
+
+9. ASSERT (TextView, R.id.titleView, (), matches(isCompletelyDisplayed())): Verify that the note title "Title2" is completely displayed on the main screen.
+
+10. ASSERT (TextView, R.id.bodyView, (), matches(isCompletelyDisplayed())): Verify that the note body "Note2" is completely displayed on the main screen.
+```
+
+This test case is testing the functionality of creating a new note, editing its title and content, saving the note, and verifying that the changes are reflected correctly in the main note list view.

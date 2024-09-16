@@ -1,0 +1,21 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is verifying the functionality of tab navigation in the weather application.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (TabView, R.id.tabs, (0,1), click, NULL): Click on the second tab in the tab layout.
+2. ASSERT (ActionBar$Tab, R.id.tabs, (0,1), isDisplayed): Verify that the second tab is displayed after clicking.
+3. ACTION (TabView, R.id.tabs, (0,2), click, NULL): Click on the third tab in the tab layout.
+4. ASSERT (ActionBar$Tab, R.id.tabs, (0,2), isDisplayed): Verify that the third tab is displayed after clicking.
+
+~~~
+ACTION (TabView, R.id.tabs, (0,1), click, NULL): Click on the second tab in the tab layout.
+ASSERT (ActionBar$Tab, R.id.tabs, (0,1), isDisplayed): Verify that the second tab is displayed after clicking.
+ACTION (TabView, R.id.tabs, (0,2), click, NULL): Click on the third tab in the tab layout.
+ASSERT (ActionBar$Tab, R.id.tabs, (0,2), isDisplayed): Verify that the third tab is displayed after clicking.
+~~~
+```
+
+This description outlines the steps taken in the test case, including clicking on different tabs and verifying their visibility. The actions and assertions are formatted according to the specified structure, with each step numbered for clarity.

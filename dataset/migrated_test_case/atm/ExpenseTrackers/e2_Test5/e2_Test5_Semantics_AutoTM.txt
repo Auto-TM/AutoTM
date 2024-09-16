@@ -1,0 +1,24 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is verifying the deletion of an expense and checking if the total amount is updated correctly.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (Button, R.id.total_month, (), click, NULL): Click on the total month button displaying "$35.00".
+
+2. ACTION (ListView, R.id.listView, (0), click, NULL): Click on the first item in the list view of expenses record history.
+
+3. ACTION (MenuItem, R.id.action_delete, (), click, NULL): Click on the delete action in the action bar to delete an expense record.
+
+4. ASSERT (TextView, R.id.total_history, (), matches, "$0.00"): Verify that the total history text view displays "$0.00" after deletion.
+
+~~~
+ACTION (Button, R.id.total_month, (), click, NULL): Click on the total month button displaying "$35.00".
+ACTION (ListView, R.id.listView, (0), click, NULL): Click on the first item in the list view of expenses.
+ACTION (MenuItem, R.id.action_delete, (), click, NULL): Click on the delete action in the action bar.
+ASSERT (TextView, R.id.total_history, (), matches, "$0.00"): Verify that the total history text view displays "$0.00" after deletion.
+~~~
+```
+
+This description outlines the steps taken in the test case, including clicking on the total month button, selecting an expense from the list, deleting it, and then verifying that the total amount has been updated to reflect the deletion.

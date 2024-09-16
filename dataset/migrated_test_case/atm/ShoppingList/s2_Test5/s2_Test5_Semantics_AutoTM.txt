@@ -1,0 +1,33 @@
+Based on the provided Android test case, I'll generate a corresponding function description following the specified format:
+
+```
+This test case is testing the shopping list functionality, including adding items, checking items, and deleting checked items.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ListView, R.id.lvShoppingList, (), click, NULL): Click on the first shopping list item.
+
+2. ACTION (MenuItem, R.id.action_done, (), click, NULL): Click on the "done" action menu item to add a new item.
+
+3. ACTION (AutoCompleteTextView, R.id.edDescription, (), input, "Mango"): Enter "Mango" into the description field.
+
+4. ACTION (MenuItem, R.id.action_done, (), click, NULL): Click on the "done" action menu item to confirm adding "Mango".
+
+5. ACTION (MenuItem, R.id.action_done, (), click, NULL): Click on the "done" action menu item again to add another item.
+
+6. ACTION (AutoCompleteTextView, R.id.edDescription, (), input, "Tomato"): Enter "Tomato" into the description field.
+
+7. ACTION (MenuItem, R.id.action_done, (), click, NULL): Click on the "done" action menu item to confirm adding "Tomato".
+
+8. ACTION (CheckBox, R.id.checkedItemShoppingList, (), click, NULL): Check the second item in the shopping list.
+
+9. ACTION (OptionsMenu, , (), click, NULL): Open the options menu.
+
+10. ACTION (MenuItem, , (), click, NULL): Click on the "Delete checked" option.
+
+11. ACTION (Button, android.R.id.button1, (), click, NULL): Click "Yes" to confirm deletion of checked items.
+
+12. ASSERT (ListView, R.id.lvItemShoppingList, (), isDisplayed, NULL): Verify that the updated shopping list is displayed.
+```
+
+This function description outlines the steps to test the shopping list functionality, including adding items, checking items, and deleting checked items. It follows the specified format, using ACTION and ASSERT statements to describe each step of the test case.

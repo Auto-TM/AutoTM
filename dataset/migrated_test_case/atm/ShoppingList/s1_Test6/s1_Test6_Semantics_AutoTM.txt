@@ -1,0 +1,27 @@
+Based on the provided Android test case, I'll generate a corresponding function description following the specified format:
+
+```
+This test case is testing the functionality of editing a shopping list name.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (LinearLayout, R.id.shopping_lists_list_view, (0), long_click, NULL): Long click on the first item in the shopping list view.
+
+2. ACTION (TextView, android.R.id.title, (), click, NULL): Click on the "Edit" option in the context menu.
+
+3. ACTION (EditText, R.id.shoppingListNameEditText, (), input, "grocery list"): Input "grocery list" into the shopping list name edit text field.
+
+4. ACTION (Button, R.id.addShoppingListButton, (), click, NULL): Click on the "Save" button to confirm the changes.
+
+5. ASSERT (TextView, R.id.shoppingListNameTextView, (), matches, "grocery list"): Verify that the shopping list name text view displays "grocery list" and is both visible and enabled.
+
+~~~
+ACTION (LinearLayout, R.id.shopping_lists_list_view, (0), long_click, NULL):Long click on the first item in the shopping list view
+ACTION (TextView, android.R.id.title, (), click, NULL):Click on the "Edit" option in the context menu
+ACTION (EditText, R.id.shoppingListNameEditText, (), input, "grocery list"):Input "grocery list" into the shopping list name edit text field
+ACTION (Button, R.id.addShoppingListButton, (), click, NULL):Click on the "Save" button to confirm the changes
+ASSERT (TextView, R.id.shoppingListNameTextView, (), matches, "grocery list"):Verify that the shopping list name text view displays "grocery list" and is both visible and enabled
+~~~
+```
+
+This function description outlines the steps to edit a shopping list name, including opening the edit menu, inputting a new name, saving the changes, and verifying the updated name is displayed correctly.

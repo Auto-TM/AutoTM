@@ -1,0 +1,15 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the expense deletion functionality and verifying the empty state message.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ImageButton, , (), click, NULL): Click on the navigation drawer button to open the side menu to find expenses records.
+2. ACTION (TextView, R.id.navigation_drawer, (), click, NULL): Click on the third item (index 2) in the navigation drawer to find expenses records.
+3. ACTION (TableLayout, R.id.list, (), click, NULL): Click on the first item (index 0) in the list view to appear a edit and delete dialog.
+4. ACTION (Button, R.id.button7, (), click, NULL): Click on the "Delete" button to delete expense.
+5. ASSERT (TextView, R.id.text, (), matches, "Currently no income..."): Verify that the text "Currently no income..." is displayed, indicating the empty state after deletion.
+```
+
+This test case simulates the process of navigating to a specific section of the app, selecting an item, deleting it, and then verifying that the empty state message is displayed correctly after the deletion.

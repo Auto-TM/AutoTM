@@ -1,0 +1,37 @@
+Based on the provided Android test case, I'll generate a corresponding function description following the specified format:
+
+```
+This test case is testing the expense addition functionality and verifying the total month display after each addition.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (FloatingActionButton, R.id.fab, (), click, NULL): Click on the floating action button to add a new expense.
+
+2. ACTION (EditText, R.id.expense_value, (), input, "24"): Enter the value "24" into the expense value field.
+
+3. ACTION (EditText, R.id.expense_description, (), input, "gas"): Enter the description "gas" into the expense description field.
+
+4. ACTION (Spinner, R.id.expense_type, (), click, NULL): Click on the expense type spinner to open the dropdown.
+
+5. ACTION (TextView, , (), click, NULL): Select the 7th item (index 6) from the expense type dropdown.
+
+6. ACTION (Button, R.id.save_expense, (), click, NULL): Click the Save button to add the expense.
+
+7. ASSERT (Button, R.id.total_month, (), isDisplayed, NULL): Verify that the total month button is displayed.
+
+8. ACTION (FloatingActionButton, R.id.fab, (), click, NULL): Click on the floating action button again to add another expense.
+
+9. ACTION (EditText, R.id.expense_value, (), input, "56"): Enter the value "56" into the expense value field.
+
+10. ACTION (EditText, R.id.expense_description, (), input, "dress"): Enter the description "dress" into the expense description field.
+
+11. ACTION (Spinner, R.id.expense_type, (), click, NULL): Click on the expense type spinner to open the dropdown.
+
+12. ACTION (TextView, , (), click, NULL): Select the 6th item (index 5) from the expense type dropdown.
+
+13. ACTION (Button, R.id.save_expense, (), click, NULL): Click the Save button to add the second expense.
+
+14. ASSERT (Button, R.id.total_month, (), isDisplayed, NULL): Verify that the total month button is still displayed after adding the second expense.
+```
+
+This function description outlines the steps to add two expenses with different values, descriptions, and types, and verifies that the total month button is displayed after each addition.

@@ -1,0 +1,23 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the functionality of adding a new item to a shopping list.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (LinearLayout, R.id.shopping_lists_list_view, (0), click, NULL): Click on the first shopping list in the list view.
+
+2. ACTION (FloatingActionButton, R.id.fab, (), click, NULL): Click on the floating action button to add a new item.
+
+3. ACTION (EditText, R.id.item_name_edit_text, (), input, "cheese"): Enter "cheese" as the name of the new item.
+
+4. ACTION (EditText, R.id.item_quantity_edit_text, (), input, "2"): Enter "2" as the quantity of the new item.
+
+5. ACTION (Button, R.id.addShoppingListButton, (), click, NULL): Click on the "Save" button to add the new item.
+
+6. ASSERT (TextView, R.id.itemNameTextView, (), matches, "cheese"): Verify that the name of the newly added item is displayed as "cheese".
+
+7. ASSERT (TextView, R.id.itemQuantityTextView, (), matches, "2"): Verify that the quantity of the newly added item is displayed as "2".
+```
+
+This function description outlines the steps to add a new item to a shopping list and verify its presence in the list view. It includes actions for selecting a list, adding a new item with a name and quantity, and assertions to confirm the item was added correctly.

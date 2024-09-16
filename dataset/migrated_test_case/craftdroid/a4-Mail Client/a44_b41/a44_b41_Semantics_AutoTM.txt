@@ -1,0 +1,9 @@
+This test case is testing the search functionality in a mail application that tests searching for a specific mail subject and verifying the presence of the searched mail.
+
+The detailed process with serial numbers is as follows:
+
+1. ASSERT (TextView, com.my.mail:id/subject, (), wait_until_text_presence, "Another rabbit hole") : Verify that the text 'Another rabbit hole' is present within 10 seconds.
+2. ACTION (TextView, com.my.mail:id/toolbar_action_search, (), click, NULL) : Click on the search icon to activate the search field.
+3. ASSERT (EditText, com.my.mail:id/search_text, (), wait_until_element_presence, "search_text") : Verify that the search text field is present within 10 seconds.
+4. ACTION (EditText, com.my.mail:id/search_text, (), input, "Automated") : Input the text 'Automated' into the search field and press enter.
+5. ASSERT (TextView, com.my.mail:id/subject, (), wait_until_text_presence, "Automated Software Engineering") : Verify that the text 'Automated Software Engineering' is present within 10 seconds after the search.

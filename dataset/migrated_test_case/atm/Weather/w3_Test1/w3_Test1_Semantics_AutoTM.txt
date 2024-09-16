@@ -1,0 +1,19 @@
+Based on the provided Android test case, I'll generate a corresponding function description following the specified format:
+
+```
+This test case is verifying the functionality of adding a new city (Mumbai) to the weather app and confirming its presence in the city list.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ActionMenuItemView, R.id.mi_add_city, (), click, NULL): Click on the "Add city" menu item to open the city search interface.
+
+2. ACTION (EditText, R.id.ac_search_edit_text, (), input, "Mumbai"): Enter "Mumbai" into the search edit text field.
+
+3. ACTION (ImageButton, R.id.ac_search_button, (), click, NULL): Click on the search button to initiate the search for Mumbai.
+
+4. ACTION (RecyclerView, R.id.general_recycler_view, (), click, NULL): Click on the first item (position 0) in the search results list.
+
+5. ASSERT (TextView, R.id.city_name_in_list_row_text_view, (), matches, "Mumbai"): Verify that the city name displayed in the list row matches "Mumbai".
+```
+
+This function description outlines the steps taken in the test case, including user interactions and assertions, following the specified format with action and assertion markers.

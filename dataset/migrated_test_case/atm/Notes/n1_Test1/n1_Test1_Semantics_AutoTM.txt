@@ -1,0 +1,21 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the functionality of creating a new note, inputting title and text, saving the note, and verifying its display in the list.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ActionMenuItemView, R.id.action_add, (), click, NULL): Click on the "New note" action menu item to create a new note.
+
+2. ACTION (EditText, R.id.note_title, (), input, "Title"): Input "Title" into the note title field.
+
+3. ACTION (EditText, R.id.note_body, (), input, "Text"): Input "Text" into the note body field.
+
+4. ACTION (ActionMenuItemView, R.id.action_save_changes, (), click, NULL): Click on the "Done" action menu item to save the note.
+
+5. ASSERT (TextView, R.id.title, (), isCompletelyDisplayed && isEnabled): Verify that the note title "Title" is completely displayed and enabled in the list.
+
+6. ASSERT (TextView, R.id.subtitle, (), isCompletelyDisplayed && isEnabled): Verify that the note subtitle "Text" is completely displayed and enabled in the list.
+```
+
+This function description captures the main steps and assertions of the provided Android test case, following the specified format with ACTION and ASSERT statements.

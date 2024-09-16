@@ -1,0 +1,23 @@
+Based on the provided Android test case, I'll generate a corresponding function description following the specified format:
+
+```
+This test case is testing the deletion functionality of notes in the SwiftNotes application.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (TextView, R.id.titleView, (), long_click, NULL): Long click on the note with title "Title1" to select it.
+
+2. ACTION (MenuItem, R.id.action_delete, (), click, NULL): Click on the delete action in the action bar.
+
+3. ACTION (Button, android.R.id.button1, (), click, NULL): Click on the "OK" button in the confirmation dialog to confirm deletion.
+
+4. ASSERT (TextView, R.id.titleView, (), matches, "Title2"): Verify that the first visible note now has the title "Title2".
+
+5. ACTION (TextView, R.id.titleView, (), long_click, NULL): Long click on the note with title "Title2" to select it.
+
+6. ACTION (MenuItem, R.id.action_delete, (), click, NULL): Click on the delete action in the action bar.
+
+7. ACTION (Button, android.R.id.button1, (), click, NULL): Click on the "OK" button in the confirmation dialog to confirm deletion.
+```
+
+This test case focuses on deleting notes and verifying the results after deletion. It demonstrates the process of selecting a note, initiating the delete action, confirming the deletion, and then verifying the updated state of the notes list.

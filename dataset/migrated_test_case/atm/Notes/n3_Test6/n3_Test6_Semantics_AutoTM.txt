@@ -1,0 +1,17 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the functionality of moving a note to a different folder.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (TextView, R.id.note_title, (), long_click, NULL): Long click on the note titled "note1" to select it.
+
+2. ACTION (MenuItem, R.id.context_menu_move, (), click, NULL): Click on the "Move" option in the context menu.
+
+3. ACTION (ListView, R.id.notes_listview, (), click, NULL): Click on the first item (position 0) in the folder list.
+
+4. ACTION (Button, android.R.id.button1, (), click, NULL): Click on the "Move here" button to confirm the move action.
+
+5. ASSERT (TextView, R.id.note_title, (), isDisplayed, "folder1"): Verify that the folder titled "folder1" is displayed, indicating that the note has been successfully moved to this folder.
+```

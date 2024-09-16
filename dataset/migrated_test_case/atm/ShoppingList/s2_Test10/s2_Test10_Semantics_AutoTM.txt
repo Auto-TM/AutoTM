@@ -1,0 +1,17 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the creation of a new shopping list and verifying its name.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ActionMenuItemView, R.id.action_add, (), click, NULL): Click on the "New list" action menu item to create a new list.
+
+2. ACTION (EditText, android.R.id.custom, (), input, "list"): Enter the text "list" into the input field of the dialog.
+
+3. ACTION (Button, android.R.id.button1, (), click, NULL): Click the "OK" button to confirm the creation of the new list.
+
+4. ASSERT (TextView, , (), matches, "list"): Verify that a TextView with the text "list" is displayed, confirming the new list has been created with the correct name.
+```
+
+This description captures the main steps of the test case, including creating a new list, inputting its name, confirming the creation, and verifying the result. The format uses ACTION for user interactions and ASSERT for verification steps, as specified in the instructions.

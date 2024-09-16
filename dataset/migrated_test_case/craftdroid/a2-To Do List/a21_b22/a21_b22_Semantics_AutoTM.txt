@@ -1,0 +1,10 @@
+This test case is testing the functionality of adding a new to-do item and then removing it by swiping right. It verifies the presence of the added item and the absence of the item after removal.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ImageButton, com.rubenroy.minimaltodo:id/addToDoItemFAB, (), click, NULL) : Click on the 'Add To-Do Item' button to open the add item screen.
+2. ACTION (EditText, com.rubenroy.minimaltodo:id/userToDoEditText, (), input, "Sample Todo") : Input the text 'Sample Todo' into the to-do item text field and hide the keyboard.
+3. ACTION (ImageButton, com.rubenroy.minimaltodo:id/makeToDoFloatingActionButton, (), click, NULL) : Click on the add button to add the new to-do item.
+4. ASSERT (TextView, com.rubenroy.minimaltodo:id/toDoListItemTextview, (), wait_until_text_presence, "Sample Todo") : Verify that the text 'Sample Todo' is present within 10 seconds, indicating that the new to-do item has been added.
+5. ACTION (TextView, com.rubenroy.minimaltodo:id/toDoListItemTextview, (), swipe_right, NULL) : Swipe right on the 'Sample Todo' item to remove it.
+6. ASSERT (, , (), wait_until_text_invisible, "Sample Todo") : Verify that the text 'Sample Todo' is not visible within 10 seconds, indicating that the to-do item has been removed.

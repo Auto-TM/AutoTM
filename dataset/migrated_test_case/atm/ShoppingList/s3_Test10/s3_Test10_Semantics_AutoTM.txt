@@ -1,0 +1,19 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the creation of a new shopping list.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (Button, R.id.btn_skip, (), click, NULL): Click on the "Skip" button to bypass the initial screen.
+
+2. ACTION (FloatingActionButton, R.id.fab_new_list, (), click, NULL): Click on the floating action button to create a new list.
+
+3. ACTION (EditText, R.id.list_name, (), input, "grocery"): Input the text "grocery" into the list name field.
+
+4. ACTION (Button, android.R.id.button1, (), click, NULL): Click on the "Okay" button to confirm the creation of the new list.
+
+5. ASSERT (TextView, , (), matches, "grocery"): Verify that a TextView with the text "grocery" is displayed, confirming the successful creation of the new shopping list.
+```
+
+This description captures the main steps of the test case, including skipping the initial screen, creating a new list, inputting a name for the list, confirming the creation, and verifying the result. Each step is numbered and formatted according to the specified structure.

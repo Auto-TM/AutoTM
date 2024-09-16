@@ -1,0 +1,12 @@
+This test case is testing the email composition and sending functionality, verifying both the presence of the "Inbox" label and the successful sending of an email by checking for the email subject in the sent items.
+
+The detailed process with serial numbers is as follows:
+
+1. ASSERT (TextView, com.appple.app.email:id/actionbar_title_first, (), wait_until_text_presence, "text:Inbox") : Verify that the "Inbox" text is present within 15 seconds.
+2. ACTION (TextView, com.appple.app.email:id/compose, (), click, NULL) : Click on the "Compose" button to start composing a new email.
+3. ASSERT (MultiAutoCompleteTextView, com.appple.app.email:id/to, (), wait_until_element_presence, "id:to") : Verify that the "To" field is present within 15 seconds.
+4. ACTION (MultiAutoCompleteTextView, com.appple.app.email:id/to, (), input, "autotm1234@gmail.com") : Input the recipient email address 'autotm1234@gmail.com' into the "To" field.
+5. ACTION (EditText, com.appple.app.email:id/subject, (), input, "ICSTSuperCool") : Input 'ICSTSuperCool' as the subject of the email.
+6. ACTION (EditText, com.appple.app.email:id/message_content, (), input, "ICSTSuperCoolBody") : Input 'ICSTSuperCoolBody' as the body of the email.
+7. ACTION (TextView, com.appple.app.email:id/send, (), click, NULL) : Click on the "Send" button to send the email.
+8. ASSERT (TextView, com.appple.app.email:id/subject, (), wait_until_text_presence, "text:ICSTSuperCool") : Verify that the email with the subject 'ICSTSuperCool' is present within 20 seconds.

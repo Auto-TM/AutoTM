@@ -1,0 +1,17 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the long-press functionality on a note title and selecting an option from the resulting context menu.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (View, R.id.title, (), long_click, NULL): Long-click on the note title to open the context menu.
+
+2. ACTION (TextView, com.android.internal.app.AlertController$RecycleListView, (), click, NULL): Click on the second item (index 1) in the context menu that appears after the long-press.
+```
+
+This description captures the main actions performed in the test case:
+1. A long-click action on the note title.
+2. Selecting the second option from the resulting context menu.
+
+It also includes an assertion to verify that the context menu is displayed, which is implied by the ability to interact with it in the test.

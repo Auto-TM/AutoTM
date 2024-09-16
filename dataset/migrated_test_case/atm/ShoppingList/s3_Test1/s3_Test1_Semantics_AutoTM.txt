@@ -1,0 +1,27 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the functionality of editing a shopping list name.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (RecyclerView, R.id.recyclerView, (), long_click, NULL): Long click on the first item in the shopping list.
+
+2. ACTION (Button, R.id.edit, (), click, NULL): Click on the "Edit" button in the dialog that appears.
+
+3. ACTION (EditText, R.id.list_name, (), input, "grocery2"): Input the new name "grocery2" into the list name field.
+
+4. ACTION (Button, android.R.id.button1, (), click, NULL): Click on the "Okay" button to confirm the changes.
+
+5. ASSERT (TextView, R.id.textview_list_name, (), matches, "grocery2"): Verify that the list name has been updated to "grocery2" and is displayed correctly.
+
+~~~
+ACTION (RecyclerView, R.id.recyclerView, (), long_click, NULL):Long click on the first item in the shopping list
+ACTION (Button, R.id.edit, (), click, NULL):Click on the "Edit" button
+ACTION (EditText, R.id.list_name, (), input, "grocery2"):Input the new name "grocery2"
+ACTION (Button, android.R.id.button1, (), click, NULL):Click on the "Okay" button
+ASSERT (TextView, R.id.textview_list_name, (), matches, "grocery2"):Verify the updated list name
+~~~
+```
+
+This description captures the main steps of the test case, including the long click to select an item, editing the list name, confirming the changes, and verifying the updated name is displayed correctly.

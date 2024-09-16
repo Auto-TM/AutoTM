@@ -1,0 +1,21 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the functionality of creating a new label for a note.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (View, R.id.title, (), long_click, NULL): Long click on the title of a note to open the context menu.
+
+2. ACTION (TextView, com.android.internal.app.AlertController$RecycleListView, (), click, NULL): Click on the first item in the context menu (presumably "Add Label" or similar).
+
+3. ACTION (Button, android.R.id.button1, (), click, NULL): Click the "Yes" button to confirm the action.
+
+4. ACTION (EditText, R.id.label_name, (), input, "Label"): Enter the text "Label" into the label name input field.
+
+5. ACTION (Button, android.R.id.button1, (), click, NULL): Click the "Save" button to save the new label.
+
+6. ASSERT (TextView, R.id.label_1, (), matches, "L"): Verify that the newly created label is displayed with the text "L" (likely the first letter of "Label").
+```
+
+This test case demonstrates the process of adding a new label to a note, including opening the context menu, confirming the action, entering the label name, saving it, and verifying that the label is correctly displayed.

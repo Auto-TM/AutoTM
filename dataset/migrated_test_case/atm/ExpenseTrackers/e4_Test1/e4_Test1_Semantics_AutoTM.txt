@@ -1,0 +1,29 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the income addition functionality in an expense tracker application, including validation of required fields and successful addition of an income entry.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (Button, R.id.btn_add_income, (), click, NULL): Click on the "Add income" button to open the income addition screen.
+
+2. ACTION (MenuItem, R.id.action_done, (), click, NULL): Click on the "Add" action menu item to attempt adding an income without filling any fields.
+
+3. ASSERT (TextView, R.id.textinput_error, (), matches, "Field can't be empty."): Verify that an error message "Field can't be empty." is displayed for the price field.
+
+4. ACTION (EditText, R.id.et_price, (), input, "1500"): Enter the value "1500" into the price input field.
+
+5. ACTION (MenuItem, R.id.action_done, (), click, NULL): Click on the "Add" action menu item again to attempt adding an income with only the price filled.
+
+6. ASSERT (TextView, R.id.textinput_error, (), matches, "Field can't be empty."): Verify that an error message "Field can't be empty." is displayed for the category field.
+
+7. ACTION (AutoCompleteTextView, R.id.et_title, (), input, "GRA"): Enter the text "GRA" into the title input field.
+
+8. ACTION (AutoCompleteTextView, R.id.et_category, (), input, "General"): Enter the text "General" into the category input field.
+
+9. ACTION (MenuItem, R.id.action_done, (), click, NULL): Click on the "Add" action menu item to add the income entry with all fields filled.
+
+10. ASSERT (TextView, R.id.tv_title, (), matches, "GRA"): Verify that the added income entry is displayed with the title "GRA" in the list.
+```
+
+This function description outlines the steps taken in the test case, including user actions and assertions to verify the behavior of the expense tracker application when adding an income entry.

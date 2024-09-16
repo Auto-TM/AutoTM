@@ -1,0 +1,27 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the settings functionality, specifically changing a custom setting value.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ActionMenuItemView, R.id.mi_main_submenu, (), click, NULL): Click on the "Extras" menu item in the toolbar.
+
+2. ACTION (AppCompatTextView, R.id.title, (), click, NULL): Click on the "Settings" option in the submenu.
+
+3. ACTION (LinearLayout, android.R.id.list, (), click, NULL): Click on the 9th item (index 8) in the settings list.
+
+4. ACTION (EditText, android.R.id.custom, (), input, "none"): Input the text "none" into the custom dialog's edit text field.
+
+5. ACTION (AppCompatButton, android.R.id.button1, (), click, NULL): Click on the "Confirm" button in the dialog.
+
+~~~
+ACTION (ActionMenuItemView, R.id.mi_main_submenu, (), click, NULL): Click on the "Extras" menu item in the toolbar.
+ACTION (AppCompatTextView, R.id.title, (), click, NULL): Click on the "Settings" option in the submenu.
+ACTION (LinearLayout, android.R.id.list, (), click, NULL): Click on the 9th item (index 8) in the settings list.
+ACTION (EditText, android.R.id.custom, (), input, "none"): Input the text "none" into the custom dialog's edit text field.
+ACTION (AppCompatButton, android.R.id.button1, (), click, NULL): Click on the "Confirm" button in the dialog.
+~~~
+```
+
+This description outlines the steps taken in the test case, including navigating to the settings, selecting a specific setting, inputting a custom value, and confirming the change.

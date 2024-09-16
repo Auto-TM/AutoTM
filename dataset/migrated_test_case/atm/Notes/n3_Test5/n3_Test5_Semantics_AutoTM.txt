@@ -1,0 +1,21 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is verifying the functionality of creating a new folder in the application.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (FloatingActionButton, R.id.fab_expand_menu_button, (), click, NULL): Click on the expand menu button to reveal more options.
+
+2. ACTION (FloatingActionButton, R.id.create_folder, (), click, NULL): Click on the create folder button to initiate folder creation.
+
+3. ACTION (EditText, R.id.folder_name, (), input, "folder1"): Enter the folder name "folder1" into the folder name input field.
+
+4. ACTION (Button, android.R.id.button1, (), click, NULL): Click on the "Create" button to confirm folder creation.
+
+5. ASSERT (TextView, R.id.notes_fragment_section_text, (), isCompletelyDisplayed): Verify that the "Folders" section text is completely displayed.
+
+6. ASSERT (TextView, R.id.note_title, (), isCompletelyDisplayed): Verify that the newly created folder "folder1" is completely displayed in the list.
+```
+
+This description outlines the steps taken in the test case, including the actions performed and the assertions made to verify the correct functionality of creating a new folder in the application.

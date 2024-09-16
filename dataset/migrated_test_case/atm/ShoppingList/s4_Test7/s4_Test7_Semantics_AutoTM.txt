@@ -1,0 +1,13 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the functionality of sending a shopping list.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (OptionsMenu, , (), click, NULL): Open the action bar overflow or options menu.
+2. ASSERT (TextView, android.R.id.title, (), isDisplayed): Verify that the "Send list" option is displayed in the menu.
+3. ACTION (TextView, android.R.id.title, (), click, NULL): Click on the "Send list" option in the menu.
+```
+
+This test case focuses on accessing the options menu and selecting the "Send list" option. It doesn't include any verification steps after clicking the "Send list" option, so the test likely continues in another part of the code or is meant to be extended with additional assertions or actions.

@@ -1,0 +1,23 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the expense addition functionality in an expense tracker application.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (Button, R.id.btn_add_expense, (), click, NULL): Click on the "Add expense" button to open the expense addition screen.
+
+2. ACTION (EditText, R.id.et_price, (), input, "69.99"): Enter the price "69.99" in the price input field.
+
+3. ACTION (EditText, R.id.et_title, (), input, "Shoes"): Enter the title "Shoes" in the title input field.
+
+4. ACTION (AutoCompleteTextView, R.id.et_category, (), input, "Clothing"): Enter the category "Clothing" in the category input field.
+
+5. ACTION (MenuItem, R.id.action_done, (), click, NULL): Click on the "Add" action menu item to save the expense.
+
+6. ASSERT (TextView, R.id.tv_title, (), matches(withText("Shoes"))): Verify that the title "Shoes" is displayed correctly in the expense list.
+
+7. ASSERT (TextView, R.id.tv_price, (), matches(withText("- 70"))): Verify that the price "- 70" is displayed correctly in the expense list.
+```
+
+This test case checks the process of adding a new expense to the tracker, including entering details like price, title, and category, and then verifies that the added expense appears correctly in the list with the expected title and price.

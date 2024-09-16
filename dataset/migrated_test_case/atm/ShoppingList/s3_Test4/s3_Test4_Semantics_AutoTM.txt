@@ -1,0 +1,37 @@
+Based on the provided Android test case, I'll generate a corresponding function description following the specified format:
+
+```
+This test case is testing the functionality of adding a new product to a shopping list, verifying its details, and sorting the list in descending order.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (RecyclerView, R.id.recyclerView, (), click, NULL): Click on the first item in the RecyclerView.
+
+2. ACTION (FloatingActionButton, R.id.fab_new_product, (), click, NULL): Click on the floating action button to add a new product.
+
+3. ACTION (AutoCompleteTextView, R.id.product_name, (), input, "tomato"): Enter "tomato" as the product name.
+
+4. ACTION (EditText, R.id.quantity, (), input, "2"): Enter "2" as the quantity.
+
+5. ACTION (EditText, R.id.product_price, (), input, "2.13"): Enter "2.13" as the product price.
+
+6. ACTION (EditText, R.id.product_notes, (), input, "organic"): Enter "organic" as the product notes.
+
+7. ACTION (Button, android.R.id.button1, (), click, NULL): Click the "Okay" button to save the product.
+
+8. ASSERT (TextView, R.id.textview_product_name, (), isDisplayed, "tomato"): Verify that the product name "tomato" is displayed.
+
+9. ASSERT (TextView, R.id.textview_prod_quantity, (), isDisplayed, "2"): Verify that the quantity "2" is displayed.
+
+10. ACTION (MenuItem, R.id.imageview_sort, (), click, NULL): Click on the sort menu item.
+
+11. ACTION (RadioButton, R.id.radiobutton_descending, (), click, NULL): Select the "Descending" sort option.
+
+12. ACTION (Button, android.R.id.button1, (), click, NULL): Click the "Okay" button to apply the sort.
+
+13. ASSERT (TextView, R.id.textview_product_name, (), isDisplayed, "tomato"): Verify that "tomato" is still displayed after sorting.
+
+14. ASSERT (TextView, R.id.textview_product_name, (), isDisplayed, "yogurt"): Verify that "yogurt" is displayed after "tomato" in the sorted list.
+```
+
+This description outlines the main steps of the test case, including actions performed and assertions made to verify the functionality of adding a new product, displaying its details, and sorting the shopping list.

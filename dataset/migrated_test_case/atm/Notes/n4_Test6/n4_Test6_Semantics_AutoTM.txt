@@ -1,0 +1,27 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the note-taking functionality, including adding a new note, sorting notes, and verifying the display order of notes.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ActionMenuItemView, R.id.notes_menu_$_add, (), click, NULL): Click on the "Add" menu item to create a new note.
+
+2. ACTION (EditText, R.id.editor_$_edittext_title, (), input, "CS200"): Enter "CS200" as the title of the new note.
+
+3. ACTION (NoteEditor, R.id.editor_$_note_editor, (), input, "Session1"): Enter "Session1" as the content of the new note.
+
+4. RETURN: Navigate back to the main screen.
+
+5. ACTION (ImageView, R.id.notes_$_imageview_sticky, (), click, NULL): Click on the sticky note icon.
+
+6. ACTION (LinearLayout, android.R.id.tabs, (), click, NULL): Click on the first tab in the tab host.
+
+7. ACTION (LinearLayout, R.id.tab_host_$_listview_sort_by, (), click, NULL): Click on the second item in the sort-by list view.
+
+8. ASSERT (TextView, R.id.note_item_$_textview_title, (), matches, "CS100"): Verify that the first note title displayed is "CS100".
+
+9. ASSERT (TextView, R.id.note_item_$_textview_title, (), matches, "CS200"): Verify that the second note title displayed is "CS200".
+```
+
+This function description outlines the steps taken in the test case, including creating a new note, navigating back to the main screen, sorting the notes, and verifying the order of the displayed notes.

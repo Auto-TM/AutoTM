@@ -1,0 +1,21 @@
+Based on the provided Android test case, I'll generate a corresponding function description following the specified format:
+
+```
+This test case is testing the expense addition functionality in the EasyBudget app.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (FloatingActionButton, R.id.fab_expand_menu_button, (), click, NULL): Click on the expand menu button to reveal expense options.
+
+2. ACTION (FloatingActionButton, R.id.fab_new_expense, (), click, NULL): Click on the new expense button to open the expense creation screen.
+
+3. ACTION (EditText, R.id.amount_edittext, (), input, "45"): Enter the amount "45" into the expense amount field.
+
+4. ACTION (FloatingActionButton, R.id.save_expense_fab, (), click, NULL): Click on the save expense button to confirm the new expense.
+
+5. ASSERT (TextView, , (), matches, "Add expense"): Verify that the "Add expense" text is displayed, confirming the expense addition screen.
+
+6. ASSERT (ImageButton, , (), isDisplayed, NULL): Verify that the navigate up button is displayed, allowing return to the previous screen.
+```
+
+This function description outlines the steps to add a new expense in the EasyBudget app, including opening the expense menu, entering an amount, saving the expense, and verifying the UI elements after the action is completed.

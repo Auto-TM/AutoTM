@@ -1,0 +1,19 @@
+Based on the provided Android test case, I'll generate a corresponding function description following the specified format:
+
+```
+This test case is verifying the currency change functionality in the app's settings.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (OptionsMenu, , (), click, NULL): Open the options menu.
+
+2. ACTION (TextView, R.id.title, (), click, NULL): Click on the "Settings" option in the menu.
+
+3. ACTION (ListView, android.R.id.list, (), click, NULL): Click on the second item (index 1) in the settings list.
+
+4. ACTION (RecyclerView, R.id.select_currency_recycler_view, (), click, NULL): Click on the second item (index 1) in the currency selection list.
+
+5. ASSERT (TextView, android.R.id.title, (), matches, "Change currency (€)"): Verify that the title text of the selected currency option is "Change currency (€)".
+```
+
+Each action and assertion in this description corresponds to a step in the original test case, maintaining the sequence and purpose of the operations performed.

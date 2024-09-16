@@ -1,0 +1,19 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the functionality of filtering and removing items from a shopping list.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (Spinner, R.id.spinner_listfilter, (), click, NULL): Click on the list filter spinner to open the dropdown.
+
+2. ACTION (CheckedTextView, , (), click, NULL): Select the first list (at position 0) from the dropdown list.
+
+3. ACTION (TextView, R.id.name, (), long_click, NULL): Long click on the item with text "item2" in the shopping list.
+
+4. ACTION (TextView, android.R.id.title, (), click, NULL): Click on the "Remove item from list" option in the context menu.
+
+5. ASSERT (TextView, R.id.name, (), element_absence, "item2"): Verify that the item "item2" is no longer present in the shopping list.
+```
+
+Note: The last assertion (step 5) is inferred from the context of the test case, as it's a logical next step to verify the removal action, even though it's not explicitly stated in the original test code.

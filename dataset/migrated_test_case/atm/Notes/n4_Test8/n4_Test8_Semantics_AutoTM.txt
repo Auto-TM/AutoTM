@@ -1,0 +1,17 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the functionality of deleting all items in the trash and verifying the empty state.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (LinearLayout, , (), click, NULL): Click on the "Pocket Note, Open" button in the action bar to open the main view.
+
+2. ACTION (ListView, main_$_listview_items, (), click, NULL): Click on the third item (index 2) in the main list view.
+
+3. ACTION (ActionMenuItemView, trash_menu_$_action_delete_all, (), click, NULL): Click on the "Add" (actually "Delete All") action menu item in the action bar.
+
+4. ACTION (Button, confirm_dialog_$_button_ok, (), click, NULL): Click on the "Delete All" button in the confirmation dialog.
+
+5. ASSERT (TextView, , (), matches, "Empty Trash"): Verify that a TextView with the text "Empty Trash" is displayed, confirming that the trash has been emptied.
+```

@@ -1,0 +1,10 @@
+This test case is designed to validate the functionality of a simple tip calculator application by inputting bill amount, tip percentage, and split count, then verifying the calculated total per person.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (Button, android:id/button1, (), click, NULL) : Click on the 'Accept' button to proceed.
+2. ACTION (EditText, com.tleapps.simpletipcalculator:id/editTextBill, (), input, "56.6") : Clear the bill amount field and input "56.6" as the new bill amount.
+3. ACTION (EditText, com.tleapps.simpletipcalculator:id/editTextTip, (), input, "15") : Clear the tip percentage field and input "15" as the tip percentage.
+4. ACTION (EditText, com.tleapps.simpletipcalculator:id/editTextSplit, (), input, "4") : Clear the split count field, input "4" as the number of splits, and hide the keyboard.
+5. ACTION (Button, com.tleapps.simpletipcalculator:id/buttonCalculate, (), click, NULL) : Click on the 'Calculate' button to perform the calculation.
+6. ASSERT (TextView, com.tleapps.simpletipcalculator:id/textViewTotalPerPerson, (), wait_until_text_presence, "text:16.27") : Verify that the 'Total Per Person' text view displays "$16.27" within 10 seconds, confirming the correct calculation based on the input values.

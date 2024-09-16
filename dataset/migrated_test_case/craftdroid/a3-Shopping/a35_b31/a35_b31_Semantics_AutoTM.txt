@@ -1,0 +1,21 @@
+This test case is testing the user registration process on the Yelp application, including filling out the registration form and verifying the presence of the user profile name after sign-up.
+
+The detailed process with serial numbers is as follows:
+
+```
+1. ASSERT (TextView, com.yelp.android:id/hot_button_profile, (), wait_until_element_presence, "id:com.yelp.android:id/hot_button_profile"): Verify that the 'Me' button is present within 10 seconds.
+2. ACTION (TextView, com.yelp.android:id/hot_button_profile, (), click, NULL): Click on the 'Me' button to navigate to the profile section.
+3. ASSERT (Button, com.yelp.android:id/sign_up_button, (), wait_until_element_presence, "id:com.yelp.android:id/sign_up_button"): Verify that the 'Sign Up' button is present within 10 seconds.
+4. ACTION (Button, com.yelp.android:id/sign_up_button, (), click, NULL): Click on the 'Sign Up' button to navigate to the sign-up form.
+5. ASSERT (Button, com.yelp.android:id/email_sign_up, (), wait_until_element_presence, "id:com.yelp.android:id/email_sign_up"): Verify that the 'Sign up with Email' button is present within 10 seconds.
+6. ACTION (Button, com.yelp.android:id/email_sign_up, (), click, NULL): Click on the 'Sign up with Email' button to choose email registration.
+7. ASSERT (EditText, com.yelp.android:id/email_address, (), wait_until_element_presence, "id:com.yelp.android:id/email_address"): Verify that the email address input field is present within 10 seconds.
+8. ACTION (EditText, com.yelp.android:id/email_address, (), input, "n175773se@nkdjfq.al.net"): Input the email address 'n175773se@nkdjfq.al.net' into the email address field.
+9. ACTION (EditText, com.yelp.android:id/password, (), input, "1qaz2wsX"): Input the password '1qaz2wsX' into the password field.
+10. ACTION (Button, com.yelp.android:id/signup_next_button, (), click, NULL): Click on the 'Next' button to proceed to the next step of the sign-up process.
+11. ACTION (EditText, com.yelp.android:id/last_name, (), input, "Labfellow"): Input the last name 'Labfellow' into the last name field.
+12. ACTION (EditText, com.yelp.android:id/first_name, (), input, "Sealbot"): Input the first name 'Sealbot' into the first name field and hide the keyboard.
+13. ACTION (Button, com.yelp.android:id/signup_next_button_2, (), click, NULL): Click on the 'Next' button to proceed to the next step of the sign-up process.
+14. ACTION (Button, com.yelp.android:id/signup_button, (), click, NULL): Click on the 'Sign Up' button to complete the registration process.
+15. ASSERT (TextView, com.yelp.android:id/user_profile_name, (), wait_until_text_presence, "text:Sealbot"): Verify that the user profile name 'Sealbot L.' is present within 10 seconds.
+```

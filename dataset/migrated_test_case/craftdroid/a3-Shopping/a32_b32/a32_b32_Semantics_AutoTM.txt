@@ -1,0 +1,11 @@
+This test case is testing the login functionality of the application, ensuring the correct input of email and password, successful login, and verification of the user's profile name.
+
+The detailed process with serial numbers is as follows:
+
+1. ASSERT (EditText, com.contextlogic.wish:id/sign_in_fragment_password_text, (), wait_until_element_presence, "id:sign_in_fragment_password_text") : Verify that the password field is present within 15 seconds.
+2. ACTION (EditText, com.contextlogic.wish:id/sign_in_fragment_password_text, (), input, "1qaz2wsX") : Input the password '1qaz2wsX' into the password field.
+3. ACTION (EditText, com.contextlogic.wish:id/sign_in_fragment_email_text, (), input, "uci.seal@gmail.com") : Input the email 'uci.seal@gmail.com' into the email field and hide the keyboard.
+4. ACTION (TextView, com.contextlogic.wish:id/sign_in_fragment_sign_in_button, (), click, NULL) : Click on the 'Sign In' button to submit the login credentials.
+5. ASSERT (ImageButton, , (), wait_until_element_presence, "xpath://*[@content-desc=\"Open Menu\"]") : Verify that the 'Open Menu' button is present within 10 seconds after login.
+6. ACTION (ImageButton, , (), click, NULL) : Click on the 'Open Menu' button to open the user menu.
+7. ASSERT (TextView, com.contextlogic.wish:id/menu_profile_name, (), wait_until_text_presence, "text:Sealbot") : Verify that the user's profile name 'Sealbot' is present within 10 seconds.

@@ -1,0 +1,15 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the search functionality in the Writeily app.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ImageView, R.id.search_button, (), click, NULL): Click on the search button to activate the search functionality.
+
+2. ACTION (AutoCompleteTextView, R.id.search_src_text, (), input, "note"): Input the text "note" into the search field.
+
+3. ASSERT (EditText, R.id.search_src_text, (), matches, "note"): Verify that the search field contains the text "note" and is displayed.
+```
+
+This test case focuses on initiating a search, entering a search term, and verifying that the search term is correctly displayed in the search field.

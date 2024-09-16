@@ -1,0 +1,21 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is verifying the functionality of editing a budget line item in the EasyBudget app.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (RecyclerView, R.id.expensesRecyclerView, (), long_click, NULL): Long click on the first item in the expenses list.
+
+2. ACTION (ListView, R.id.select_dialog_listview, (), click, NULL): Click on the second option in the popup menu (likely an "Edit" option).
+
+3. ASSERT (TextView, R.id.budgetLineAmount, (), matches, "$60.00"): Verify that the budget line amount is displayed as "$60.00" after the edit action.
+
+~~~
+ACTION (RecyclerView, R.id.expensesRecyclerView, (), long_click, NULL):Long click on the first item in the expenses list
+ACTION (ListView, R.id.select_dialog_listview, (), click, NULL):Select the edit option from the popup menu
+ASSERT (TextView, R.id.budgetLineAmount, (), matches, "$60.00"):Verify the budget line amount is correctly updated
+~~~
+```
+
+This test case checks the edit functionality of a budget line item in the EasyBudget app. It performs a long click on the first item in the expenses list, selects an option from the resulting popup menu (presumably to edit the item), and then verifies that the budget line amount is correctly updated to $60.00 after the edit action.

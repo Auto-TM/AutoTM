@@ -1,0 +1,17 @@
+This test case is testing the account creation functionality in the application, which includes entering user details, creating an account, and verifying the successful creation of the account.
+
+The detailed process with serial numbers is as follows:
+
+1. ASSERT (TextView, com.contextlogic.wish:id/sign_in_fragment_create_account_button, (), wait_until_element_presence, "id:com.contextlogic.wish:id/sign_in_fragment_create_account_button") : Verify that the 'Create an Account' button is present within 20 seconds.
+2. ACTION (TextView, com.contextlogic.wish:id/sign_in_fragment_create_account_button, (), click, NULL) : Click on the 'Create an Account' button to navigate to the account creation page.
+3. ASSERT (EditText, com.contextlogic.wish:id/create_account_fragment_email_text, (), wait_until_element_presence, "id:com.contextlogic.wish:id/create_account_fragment_email_text") : Verify that the email input field is present within 20 seconds.
+4. ACTION (EditText, com.contextlogic.wish:id/create_account_fragment_email_text, (), input, "e271266se@ojtmxq.al.net") : Input the email 'e271266se@ojtmxq.al.net' into the email input field.
+5. ACTION (EditText, com.contextlogic.wish:id/create_account_fragment_password_text, (), input, "1qaz2wsX") : Input the password '1qaz2wsX' into the password input field.
+6. ACTION (EditText, com.contextlogic.wish:id/create_account_fragment_last_name_text, (), input, "Labfellow") : Input the last name 'Labfellow' into the last name input field.
+7. ACTION (EditText, com.contextlogic.wish:id/create_account_fragment_first_name_text, (), input, "Sealbot") : Input the first name 'Sealbot' into the first name input field and hide the keyboard.
+8. ACTION (Button, com.contextlogic.wish:id/create_account_fragment_create_account_button, (), click, NULL) : Click on the 'Create an Account' button to submit the account creation form.
+9. ASSERT (TextView, com.contextlogic.wish:id/signup_flow_footer_button, (), wait_until_element_presence, "id:com.contextlogic.wish:id/signup_flow_footer_button") : Verify that the 'Finish' button is present within 20 seconds.
+10. ACTION (TextView, com.contextlogic.wish:id/signup_flow_footer_button, (), click, NULL) : Click on the 'Finish' button to complete the account creation process.
+11. ASSERT (ImageButton, , (), wait_until_element_presence, "xpath://*[@content-desc=\"Open Menu\"]") : Verify that the 'Open Menu' button is present within 10 seconds.
+12. ACTION (ImageButton, , (), click, NULL) : Click on the 'Open Menu' button to open the user menu.
+13. ASSERT (TextView, com.contextlogic.wish:id/menu_profile_name, (), wait_until_text_presence, "text:Sealbot") : Verify that the user name 'Sealbot' is present within 10 seconds, indicating successful account creation.

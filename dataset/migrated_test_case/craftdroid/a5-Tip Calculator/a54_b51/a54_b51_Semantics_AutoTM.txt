@@ -1,0 +1,10 @@
+```
+This test case is testing the functionality of a tip calculator that calculates the total bill amount including a specified tip percentage.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (EditText, com.zaidisoft.teninone:id/billAmountET, (), input, "56.6") : Clear the existing value and input '56.6' as the bill amount.
+2. ACTION (EditText, com.zaidisoft.teninone:id/tipPercentET, (), input, "15") : Clear the existing tip percentage and input '15', then hide the keyboard.
+3. ACTION (Button, com.zaidisoft.teninone:id/calculateBtn, (), click, NULL) : Click on the 'Calculate' button to compute the total bill amount.
+4. ASSERT (TextView, com.zaidisoft.teninone:id/totalBillAmountTV, (), wait_until_text_presence, "text:65.09") : Verify that the total bill amount displayed is '65.09' within 10 seconds.
+```

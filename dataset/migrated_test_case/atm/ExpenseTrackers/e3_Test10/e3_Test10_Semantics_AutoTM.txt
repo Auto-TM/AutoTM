@@ -1,0 +1,21 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the income addition functionality in an expense tracker application.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ImageButton, , (), click, NULL): Click on the navigation drawer icon to open the drawer to find a add income item.
+2. ACTION (TextView, R.id.navigation_drawer, (), click, NULL): Click on the third item in the navigation drawer (at position 2) to click add income item.
+3. ACTION (Button, R.id.button2, (), click, NULL): Click on the "ADD INCOME" button.
+4. ASSERT (TextView, R.id.text, (), matches, "Currently no income..."): Verify that the text "Currently no income..." is displayed.
+5. ACTION (EditText, R.id.editText, (), input, "uber"): Enter "uber" into the income name input field.
+6. ACTION (Button, R.id.button2, (), click, NULL): Click on the "ADD INCOME" button again.
+7. ASSERT (TableRow, , (), isDisplayed, NULL): Verify that a table row is displayed (indicating the income was added).
+8. ACTION (EditText, R.id.editText2, (), input, "500"): Enter "500" into the income amount input field.
+9. ACTION (Button, R.id.button2, (), click, NULL): Click on the "ADD INCOME" button once more.
+10. ASSERT (TableRow, , (), isDisplayed, NULL): Verify that another table row is displayed (indicating the income amount was added).
+11. ASSERT (TextView, R.id.text1, (), matches, "500  MONTHLY"): Verify that the text "500  MONTHLY" is displayed, confirming the correct income amount and frequency.
+```
+
+This test case checks the functionality of adding income to the expense tracker, including verifying the initial empty state, adding an income source, and then adding an amount to that income source.

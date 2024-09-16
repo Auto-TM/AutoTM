@@ -1,0 +1,10 @@
+```
+This test case is testing the functionality of a tip calculator application, specifically inputting a bill total and tip percentage, calculating the total with tip, and verifying the calculated total.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (EditText, com.jpstudiosonline.tipcalculator:id/etBillTotal, (), input, "56.6") : Clear the existing value and input '56.6' as the bill total.
+2. ACTION (EditText, com.jpstudiosonline.tipcalculator:id/etTipAmount, (), input, "15") : Clear the existing tip percentage and input '15' as the new tip percentage, then hide the keyboard.
+3. ACTION (Button, com.jpstudiosonline.tipcalculator:id/btCalculate, (), click, NULL) : Click on the 'Calculate' button to perform the calculation.
+4. ASSERT (TextView, com.jpstudiosonline.tipcalculator:id/tvTotalWithTip, (), wait_until_text_presence, "text:65.09") : Verify that the 'Total with Tip' is correctly calculated and displayed as '$ 65.09' within 10 seconds.
+```

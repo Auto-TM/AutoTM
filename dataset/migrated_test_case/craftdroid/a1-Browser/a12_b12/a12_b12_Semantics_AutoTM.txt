@@ -1,0 +1,11 @@
+This test case is testing the URL navigation functionality of the Android browser. It tests navigation to different websites and verifies the presence of specific elements on the loaded web pages.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (EditText, com.android.browser:id/url, (), click, NULL) : Click on the URL field to activate it for text input.
+2. ACTION (EditText, com.android.browser:id/url, (), input, "https://www.ics.uci.edu") : Input the URL 'https://www.ics.uci.edu' into the URL field and press enter.
+3. ASSERT (View, , (), wait_until_element_presence, "xpath://android.view.View[@content-desc=\"Donald Bren School of Information and Computer Sciences\"]") : Verify that the element with the content description 'Donald Bren School of Information and Computer Sciences' is present within 10 seconds.
+4. ACTION (EditText, com.android.browser:id/url, (), input, "https://uci.edu") : Input the URL 'https://uci.edu' into the URL field and press enter.
+5. ASSERT (View, , (), wait_until_element_presence, "xpath://android.view.View[@content-desc=\"UCI homepage\"]") : Verify that the element with the content description 'UCI homepage' is present within 10 seconds.
+6. RETURN: Press the back button to return to the previous page.
+7. ASSERT (View, , (), wait_until_element_presence, "xpath://android.view.View[@content-desc=\"Donald Bren School of Information and Computer Sciences\"]") : Verify that the element with the content description 'Donald Bren School of Information and Computer Sciences' is present within 10 seconds after returning to the previous page.

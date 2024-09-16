@@ -1,0 +1,15 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the currency change functionality in the expense tracker application.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ImageButton, , (), click, NULL): Click on the navigation drawer icon to open the side menu.
+2. ACTION (TextView, R.id.navigation_drawer, (), click, NULL): Click on the 5th item in the navigation drawer (index 4).
+3. ACTION (Button, R.id.button3, (), click, NULL): Click on the "Change currency" button.
+4. ACTION (CheckedTextView, , (), click, NULL): Select the 3rd currency option from the list (index 2).
+5. ASSERT (TextView, R.id.current_currency_view, (), matches, "Selected currency: €"): Verify that the selected currency text displays "Selected currency: €".
+```
+
+This test case navigates through the app's menu to change the currency setting and then verifies that the change has been applied correctly.

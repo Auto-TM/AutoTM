@@ -1,0 +1,25 @@
+Based on the provided Android test case, I'll generate a corresponding function description following the specified format:
+
+```
+This test case is testing the functionality of adding a new expense in the EasyBudget app.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (FloatingActionButton, R.id.fab_expand_menu_button, (), click, NULL): Click on the expand menu button to reveal expense options.
+
+2. ACTION (FloatingActionButton, R.id.fab_new_expense, (), click, NULL): Click on the new expense button to open the expense creation screen.
+
+3. ACTION (EditText, R.id.description_edittext, (), input, "Entertainment"): Enter "Entertainment" as the description for the new expense.
+
+4. ACTION (EditText, R.id.amount_edittext, (), input, "45"): Enter "45" as the amount for the new expense.
+
+5. ACTION (Button, R.id.date_button, (), click, NULL): Click on the date button to open the date picker.
+
+6. ACTION (Button, android.R.id.button1, (), click, NULL): Click on the "OK" button in the date picker to confirm the selected date.
+
+7. ACTION (FloatingActionButton, R.id.save_expense_fab, (), click, NULL): Click on the save expense button to save the newly created expense.
+
+8. ASSERT (TextView, R.id.grid_cell_tv2, (), matches, "-45"): Verify that the expense amount "-45" is displayed correctly in the grid cell.
+```
+
+This function description outlines the steps to add a new expense in the EasyBudget app, including entering the expense details, selecting a date, and verifying the expense was added correctly.

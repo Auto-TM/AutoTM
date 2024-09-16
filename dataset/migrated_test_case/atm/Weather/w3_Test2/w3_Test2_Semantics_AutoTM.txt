@@ -1,0 +1,24 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the search functionality for a weather application, specifically searching for and verifying the addition of a city (Moscow) to the list.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ImageView, R.id.search_button, (), click, NULL): Click on the search button to initiate the search functionality.
+
+2. ACTION (AutoCompleteTextView, R.id.search_src_text, (), input, "Moscow"): Enter "Moscow" into the search field.
+
+3. ACTION (TextView, , (), click, NULL): Click on the "Moscow" suggestion in the search results dropdown.
+
+4. ASSERT (TextView, R.id.city_name_in_list_row_text_view, (), "Moscow"): Verify that "Moscow" is displayed in the city list.
+
+~~~
+ACTION (ImageView, R.id.search_button, (), click, NULL): Click on the search button to initiate the search functionality.
+ACTION (AutoCompleteTextView, R.id.search_src_text, (), input, "Moscow"): Enter "Moscow" into the search field.
+ACTION (TextView, , (), click, NULL): Click on the "Moscow" suggestion in the search results dropdown.
+ASSERT (TextView, R.id.city_name_in_list_row_text_view, (), "Moscow"): Verify that "Moscow" is displayed in the city list.
+~~~
+```
+
+This description captures the main steps of the test case, including the search initiation, input of the city name, selection from search results, and verification of the added city in the list.

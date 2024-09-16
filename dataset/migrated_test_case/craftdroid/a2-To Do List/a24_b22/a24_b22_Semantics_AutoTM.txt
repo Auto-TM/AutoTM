@@ -1,0 +1,11 @@
+This test case is testing the functionality of adding a new todo list, deleting it, and verifying its deletion in the SimplyDo Android application.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (EditText, kdk.android.simplydo:id/AddListEditText, (), input, "Sample Todo") : Input the text 'Sample Todo' into the 'New List Name' field and hide the keyboard.
+2. ACTION (Button, kdk.android.simplydo:id/AddListButton, (), click, NULL) : Click on the 'Add' button to add the new todo list.
+3. ASSERT (TextView, kdk.android.simplydo:id/text1, (), wait_until_text_presence, "Sample Todo") : Verify that the text 'Sample Todo' is present within 10 seconds, indicating the todo list has been added.
+4. ACTION (TextView, kdk.android.simplydo:id/text1, (), long_press, NULL) : Long press on the 'Sample Todo' list to bring up the options menu.
+5. ACTION (TextView, android:id/title, (), click, NULL) : Click on the 'Delete' option to delete the 'Sample Todo' list.
+6. ACTION (Button, android:id/button1, (), click, NULL) : Confirm the deletion by clicking on the 'Yes' button in the confirmation dialog.
+7. ASSERT (, , (), wait_until_text_invisible, "Sample Todo") : Verify that the text 'Sample Todo' is not visible within 10 seconds, indicating the todo list has been deleted.

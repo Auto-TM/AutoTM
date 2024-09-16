@@ -1,0 +1,14 @@
+```
+This test case is testing the email creation and sending functionality within an email application, verifying both the presence of the "Inbox" label and the successful creation and sending of an email with a specific subject.
+
+The detailed process with serial numbers is as follows:
+
+1. ASSERT (TextView, park.outlook.sign.in.client:id/folder_name, (), wait_until_text_presence, "text:Inbox") : Verify that the 'Inbox' label is present within 15 seconds.
+2. ACTION (TextView, park.outlook.sign.in.client:id/toolbar_action_new, (), click, NULL) : Click on the 'New Message' button to start composing a new email.
+3. ASSERT (EditText, park.outlook.sign.in.client:id/edit_text_to, (), wait_until_element_presence, "id:edit_text_to") : Verify that the recipient input field is present within 15 seconds.
+4. ACTION (EditText, park.outlook.sign.in.client:id/edit_text_to, (), input, "autotm1234@gmail.com") : Input the recipient email 'autotm1234@gmail.com' into the 'To' field.
+5. ACTION (EditText, park.outlook.sign.in.client:id/subject, (), input, "ICSTSuperCool") : Input 'ICSTSuperCool' as the subject of the email.
+6. ACTION (EditText, park.outlook.sign.in.client:id/mailbox_create_new_body, (), input, "ICSTSuperCoolBody") : Input 'ICSTSuperCoolBody' as the body of the email.
+7. ACTION (TextView, park.outlook.sign.in.client:id/toolbar_action_send, (), click, NULL) : Click on the 'Send' button to send the email.
+8. ASSERT (TextView, park.outlook.sign.in.client:id/subject, (), wait_until_text_presence, "text:ICSTSuperCool") : Verify that an email with the subject 'ICSTSuperCool' is present within 20 seconds.
+```

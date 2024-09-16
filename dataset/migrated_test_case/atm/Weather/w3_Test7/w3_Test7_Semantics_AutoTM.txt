@@ -1,0 +1,21 @@
+Based on the provided Android test case, I'll generate a corresponding function description following the specified format:
+
+```
+This test case is verifying the functionality of accessing the "About" section from the main menu.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ActionMenuItemView, R.id.mi_main_submenu, (), click, NULL): Click on the "Extras" menu item in the toolbar.
+
+2. ACTION (AppCompatTextView, R.id.title, (), click, NULL): Click on the "About" option in the submenu.
+
+3. ASSERT (TextView, , (), matches, "About"): Verify that the text "About" is displayed on the screen, confirming that the About page has been opened successfully.
+
+~~~
+ACTION (ActionMenuItemView, R.id.mi_main_submenu, (), click, NULL): Click on the "Extras" menu item in the toolbar.
+ACTION (AppCompatTextView, R.id.title, (), click, NULL): Click on the "About" option in the submenu.
+ASSERT (TextView, , (), matches, "About"): Verify that the text "About" is displayed on the screen, confirming that the About page has been opened successfully.
+~~~
+```
+
+This description outlines the steps taken in the test case, including the actions performed and the assertion made to verify the expected outcome.

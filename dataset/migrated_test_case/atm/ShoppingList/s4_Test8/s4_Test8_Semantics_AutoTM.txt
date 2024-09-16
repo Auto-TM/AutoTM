@@ -1,0 +1,21 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the functionality of deleting a shopping list.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (OptionsMenu, , (), click, NULL): Open the options menu or overflow menu in the action bar.
+
+2. ACTION (TextView, android.R.id.title, (), click, NULL): Click on the "Delete list" option in the opened menu.
+
+3. ACTION (Button, android.R.id.button1, (), click, NULL): Click on the "OK" button in the confirmation dialog to confirm the deletion of the list.
+
+~~~
+ACTION (OptionsMenu, , (), click, NULL): Open the options menu or overflow menu in the action bar.
+ACTION (TextView, android.R.id.title, (), click, NULL): Click on the "Delete list" option in the opened menu.
+ACTION (Button, android.R.id.button1, (), click, NULL): Click on the "OK" button in the confirmation dialog to confirm the deletion of the list.
+~~~
+```
+
+This description outlines the steps taken in the test case to delete a shopping list, including opening the options menu, selecting the delete option, and confirming the deletion. The actions are presented in the requested format, with each step numbered and described in detail.

@@ -1,0 +1,9 @@
+This test case is testing the task creation functionality in the Privacy Friendly To-Do List application. It tests the process of skipping the tutorial, creating a new task, and verifying the presence of the created task.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (Button, org.secuso.privacyfriendlytodolist:id/btn_skip, (), click, NULL) : Click on the 'Skip' button to bypass the tutorial.
+2. ACTION (ImageButton, org.secuso.privacyfriendlytodolist:id/fab_new_task, (), click, NULL) : Click on the 'New Task' button to open the task creation interface.
+3. ACTION (EditText, org.secuso.privacyfriendlytodolist:id/et_new_task_name, (), input, "Sample Todo") : Input the task name 'Sample Todo' into the task name field.
+4. ACTION (Button, org.secuso.privacyfriendlytodolist:id/bt_new_task_ok, (), click, NULL) : Click on the 'Okay' button to create the task.
+5. ASSERT (TextView, org.secuso.privacyfriendlytodolist:id/tv_exlv_task_name, (), wait_until_element_presence, "xpath://android.widget.TextView[@text=\"Sample Todo\"]") : Verify that the task with the name 'Sample Todo' is present within 10 seconds.

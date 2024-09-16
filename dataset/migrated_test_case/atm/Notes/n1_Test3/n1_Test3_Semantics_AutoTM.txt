@@ -1,0 +1,17 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the functionality of editing a note's title and verifying the changes.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (LinearLayout, R.id.notes_list, (), click, NULL): Click on the first note in the list view.
+
+2. ACTION (EditText, R.id.note_title, (), input, "Title-edited"): Replace the text in the note title field with "Title-edited".
+
+3. ACTION (ActionMenuItemView, R.id.action_save_changes, (), click, NULL): Click on the "Done" button to save the changes.
+
+4. ASSERT (TextView, R.id.title, (), matches(isDisplayed())): Verify that the TextView with the edited title "Title-edited" is displayed.
+```
+
+This description captures the main steps of the test case, including clicking on a note, editing its title, saving the changes, and verifying that the edited title is displayed correctly.

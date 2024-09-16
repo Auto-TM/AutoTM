@@ -1,0 +1,35 @@
+This test case is testing the functionality of changing wind speed units in the settings and verifying the changes in the weather display. Here's the detailed process with serial numbers:
+
+```
+1. ACTION (MenuItem, R.id.mi_main_submenu, (), click, NULL): Click on the "Extras" menu item.
+
+2. ACTION (TextView, R.id.title, (), click, NULL): Click on the "Settings" option in the submenu.
+
+3. ACTION (ListView, android.R.id.list, (1), click, NULL): Click on the second item in the settings list (index 1).
+
+4. ACTION (CheckedTextView, , (1), click, NULL): Select the second option in the wind speed unit dialog (likely km/h).
+
+5. ACTION (ImageButton, , (), click, NULL): Click the "Navigate up" button to return to the main screen.
+
+6. ACTION (Button, R.id.city_current_weather_button, (), click, NULL): Click on the current weather button for the city.
+
+7. ASSERT (TextView, R.id.wind_text_view, (), matches, "contains ' kph'"): Verify that the wind speed is displayed in km/h.
+
+8. ACTION (ImageButton, , (), click, NULL): Click the "Navigate up" button to return to the main screen.
+
+9. ACTION (MenuItem, R.id.mi_main_submenu, (), click, NULL): Click on the "Extras" menu item again.
+
+10. ACTION (TextView, R.id.title, (), click, NULL): Click on the "Settings" option in the submenu.
+
+11. ACTION (ListView, android.R.id.list, (1), click, NULL): Click on the second item in the settings list (index 1).
+
+12. ACTION (CheckedTextView, , (2), click, NULL): Select the third option in the wind speed unit dialog (likely mph).
+
+13. ACTION (ImageButton, , (), click, NULL): Click the "Navigate up" button to return to the main screen.
+
+14. ACTION (Button, R.id.city_current_weather_button, (), click, NULL): Click on the current weather button for the city.
+
+15. ASSERT (TextView, R.id.wind_text_view, (), matches, "contains ' mph'"): Verify that the wind speed is now displayed in mph.
+```
+
+This test case checks the ability to switch between different wind speed units (km/h and mph) in the settings and confirms that the changes are reflected correctly in the weather display.

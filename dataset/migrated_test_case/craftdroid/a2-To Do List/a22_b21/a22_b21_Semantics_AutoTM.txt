@@ -1,0 +1,8 @@
+This test case is testing the functionality of adding a new todo item in the application and verifying its presence in the list.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ImageButton, douzifly.list:id/fab_add, (), click, NULL) : Click on the add button to create a new todo item.
+2. ACTION (EditText, douzifly.list:id/edit_text, (), input, "Sample Todo") : Input the text 'Sample Todo' into the title field and hide the keyboard.
+3. ACTION (ImageButton, douzifly.list:id/fab_add, (), click, NULL) : Click on the add button to save the new todo item.
+4. ASSERT (TextView, douzifly.list:id/txt_thing, (), wait_until_element_presence, "xpath://android.widget.TextView[@text=\"Sample Todo\"]") : Verify that the todo item with the text 'Sample Todo' is present within 10 seconds.

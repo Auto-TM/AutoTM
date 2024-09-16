@@ -1,0 +1,21 @@
+Based on the provided Android test case, I'll generate a corresponding function description following the specified format:
+
+```
+This test case is verifying the temperature unit change functionality and its effect on the displayed temperature.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (OptionsMenu, , (), click, NULL): Open the options menu.
+2. ACTION (TextView, R.id.title, (), click, NULL): Click on the "Settings" option in the menu.
+3. ACTION (ListView, android.R.id.list, (), click, NULL): Click on the second item (index 1) in the settings list.
+4. ACTION (CheckedTextView, , (), click, NULL): Select the second option (index 1) in the temperature unit selection dialog.
+5. ACTION (ImageButton, R.id.settings_toolbar, (), click, NULL): Click on the "Navigate up" button to return to the main screen.
+6. ACTION (MenuItem, R.id.action_refresh, (), click, NULL): Click on the refresh button in the toolbar.
+7. ASSERT (TextView, R.id.todayTemperature, (), matches, "°F"): Verify that the temperature displayed contains the Fahrenheit symbol (°F).
+```
+
+This test case checks the following main points:
+1. Navigation to the settings menu
+2. Changing the temperature unit to Fahrenheit
+3. Returning to the main screen and refreshing the weather data
+4. Verifying that the temperature is now displayed in Fahrenheit

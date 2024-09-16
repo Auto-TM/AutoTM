@@ -1,0 +1,8 @@
+This test case is testing the functionality of adding a new item to the shopping list and verifying the presence of the added item.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ImageButton, com.woefe.shoppinglist:id/fab_add, (), click, NULL) : Click on the add button to create a new item in the shopping list.
+2. ACTION (EditText, com.woefe.shoppinglist:id/new_item_description, (), input, "Sample Todo") : Input the description 'Sample Todo' for the new item and hide the keyboard.
+3. ACTION (ImageButton, com.woefe.shoppinglist:id/button_add_new_item, (), click, NULL) : Click on the 'Done' button to add the new item to the shopping list.
+4. ASSERT (TextView, com.woefe.shoppinglist:id/text_description, (), wait_until_element_presence, "xpath://android.widget.TextView[@text=\"Sample Todo\"]") : Verify that the item with the description 'Sample Todo' is present within 10 seconds.

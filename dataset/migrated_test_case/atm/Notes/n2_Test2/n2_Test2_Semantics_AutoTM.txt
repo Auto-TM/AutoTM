@@ -1,0 +1,19 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the note color change functionality in the SwiftNotes application.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (View, R.id.titleView, (), click, NULL): Click on the title view to activate the note editing mode.
+
+2. ACTION (ActionMenuItemView, R.id.action_note_colour, (), click, NULL): Click on the note color action menu item to open the color picker.
+
+3. ACTION (ColorPickerSwatch, R.id.color_picker, (0,0), click, NULL): Click on the first color swatch in the color picker to select a new color for the note.
+
+4. ACTION (ImageButton, R.id.toolbarEdit, (0,0), click, NULL): Click on the back button in the toolbar to return to the main view.
+
+5. RETURN: Return to the main view after changing the note color.
+```
+
+This test case focuses on changing the color of a note in the SwiftNotes application. It navigates through the UI to access the color picker, selects a new color, and then returns to the main view.

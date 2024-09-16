@@ -1,0 +1,9 @@
+This test case is testing the search functionality in an email client that tests the ability to find a specific email by subject and verifying the presence of the searched email.
+
+The detailed process with serial numbers is as follows:
+
+1. ASSERT (TextView, park.outlook.sign.in.client:id/subject, (), wait_until_text_presence, "Another rabbit hole") : Verify that the email with the subject 'Another rabbit hole' is present within 10 seconds.
+2. ACTION (TextView, park.outlook.sign.in.client:id/toolbar_action_search, (), click, NULL) : Click on the search icon to activate the search field.
+3. ASSERT (EditText, park.outlook.sign.in.client:id/search_text, (), wait_until_element_presence, "search_text") : Verify that the search text field is present within 10 seconds.
+4. ACTION (EditText, park.outlook.sign.in.client:id/search_text, (), input, "Automated") : Input the text 'Automated' into the search field and press enter.
+5. ASSERT (TextView, park.outlook.sign.in.client:id/subject, (), wait_until_text_presence, "Automated Software Engineering") : Verify that the email with the subject 'Automated Software Engineering' is present within 10 seconds after the search.

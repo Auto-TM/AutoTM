@@ -1,0 +1,17 @@
+This test case is testing the functionality of moving an item to another shopping list when there are no other lists available. Here's the detailed process with serial numbers:
+
+```
+1. ACTION (ListView, R.id.shopping_lists_list_view, (), click, NULL): Click on the first shopping list in the main list view.
+
+2. ACTION (ListView, R.id.item_list_view, (), longclick, NULL): Long click on the first item in the selected shopping list.
+
+3. ACTION (TextView, android.R.id.title, (), click, NULL): Click on the "Move to another list" option in the context menu.
+
+4. ASSERT (TextView, android.R.id.message, (), matches, "There are no other shopping lists"): Verify that a message is displayed indicating there are no other shopping lists available.
+```
+
+This test case checks the following:
+1. The ability to select a shopping list from the main view.
+2. The long-press functionality to open a context menu for an item.
+3. The presence of a "Move to another list" option in the context menu.
+4. The appropriate error message when trying to move an item with no other lists available.

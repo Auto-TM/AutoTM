@@ -1,0 +1,29 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the onboarding process and the addition of a new expense in the EasyBudget app.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ViewPager, R.id.welcome_view_pager, (), swipe_left, NULL): Swipe left on the welcome view pager to navigate to the next onboarding screen.
+
+2. ACTION (Button, R.id.onboarding_screen2_next_button, (), click, NULL): Click on the "Go with $" button to proceed to the next onboarding step.
+
+3. ACTION (Button, R.id.onboarding_screen3_next_button, (), click, NULL): Click on the next button in the third onboarding screen.
+
+4. ACTION (Button, R.id.onboarding_screen4_next_button, (), click, NULL): Click on the "Let's go!" button to complete the onboarding process.
+
+5. ACTION (FloatingActionButton, R.id.fab_expand_menu_button, (), click, NULL): Click on the expandable floating action button to reveal more options.
+
+6. ACTION (FloatingActionButton, R.id.fab_new_expense, (), click, NULL): Click on the new expense floating action button to add a new expense.
+
+7. ACTION (EditText, R.id.description_edittext, (), input, "Entertainment"): Enter "Entertainment" as the description for the new expense.
+
+8. ACTION (EditText, R.id.amount_edittext, (), input, "45"): Enter "45" as the amount for the new expense.
+
+9. RETURN: Navigate back to the previous screen.
+
+10. ASSERT (TextView, , (), matches, "No income or expense yet."): Verify that the text "No income or expense yet." is displayed, indicating that the expense was not added successfully.
+```
+
+Note: The test case includes a Thread.sleep(10000) which is not represented in the function description as it's generally not a recommended practice in UI testing. Instead, we assume that the necessary waiting is handled implicitly by the testing framework.

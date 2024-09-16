@@ -1,0 +1,27 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the long-press functionality on an expense item in the expenses list and the subsequent actions available in the context menu.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (RecyclerView, R.id.expensesRecyclerView, (), long_click, NULL):Long-click on the first item in the expenses list.
+
+2. ACTION (ListView, R.id.select_dialog_listview, (), click, NULL):Click on the third option in the context menu that appears.
+
+3. ACTION (RecyclerView, R.id.expensesRecyclerView, (), long_click, NULL):Long-click on the first item in the expenses list again.
+
+4. ACTION (ListView, R.id.select_dialog_listview, (), click, NULL):Click on the fourth option in the context menu that appears.
+
+5. ACTION (Button, android.R.id.button2, (), click, NULL):Click the "OK" button in the confirmation dialog.
+
+6. ACTION (RecyclerView, R.id.expensesRecyclerView, (), long_click, NULL):Long-click on the first item in the expenses list once more.
+
+7. ACTION (ListView, R.id.select_dialog_listview, (), click, NULL):Click on the fifth option in the context menu that appears.
+
+~~~
+ASSERT (RecyclerView, R.id.expensesRecyclerView, (), is_displayed):Verify that the expenses list is displayed.
+~~~
+```
+
+This test case focuses on interacting with the expenses list through long-press actions and selecting different options from the resulting context menu. It tests the functionality of various operations that can be performed on an expense item, such as editing, deleting, or possibly viewing details.

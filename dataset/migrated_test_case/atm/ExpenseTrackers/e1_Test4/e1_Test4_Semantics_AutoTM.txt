@@ -1,0 +1,23 @@
+Based on the provided Android test case, I'll generate a corresponding function description following the specified format:
+
+```
+This test case is verifying the functionality of adding a new income entry and checking if it's displayed correctly.
+
+1. ACTION (FloatingActionButton, R.id.fab_expand_menu_button, (), click, NULL): Click on the expand menu button to reveal additional options.
+
+2. ACTION (FloatingActionButton, R.id.fab_new_expense, (), click, NULL): Click on the new expense button to open the expense entry form.
+
+3. ACTION (EditText, R.id.description_edittext, (), input, "income"): Enter "income" as the description for the new entry.
+
+4. ACTION (EditText, R.id.amount_edittext, (), input, "60"): Enter "60" as the amount for the new entry.
+
+5. ACTION (Switch, R.id.expense_type_switch, (), click, NULL): Click on the expense type switch to change it from expense to income.
+
+6. ACTION (FloatingActionButton, R.id.save_expense_fab, (), click, NULL): Click on the save button to add the new income entry.
+
+7. ASSERT (TextView, R.id.expense_title, (), matches, "income"): Verify that the title of the newly added entry is displayed as "income".
+
+8. ASSERT (TextView, R.id.expense_amount, (), matches, "$60.00"): Verify that the amount of the newly added entry is displayed as "$60.00".
+```
+
+This function description outlines the steps to add a new income entry and verify its correct display in the app's interface.

@@ -1,0 +1,9 @@
+```
+This test case is testing the functionality of a tip calculator application that involves entering a bill amount, setting a tip percentage, and verifying the calculated total.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (EditText, com.appsbyvir.tipcalculator:id/billEditText, (), input, "56.6") : Clear the bill amount field and input '56.6' as the bill amount.
+2. ACTION (EditText, com.appsbyvir.tipcalculator:id/tipEditText, (), input, "15") : Clear the tip percentage field, input '15' as the tip percentage, and hide the keyboard.
+3. ASSERT (EditText, com.appsbyvir.tipcalculator:id/finalBillEditText, (), wait_until_text_presence, "text:65.09") : Verify that the calculated total amount '65.09' is correctly displayed within 10 seconds.
+```

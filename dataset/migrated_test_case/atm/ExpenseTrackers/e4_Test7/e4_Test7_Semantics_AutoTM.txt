@@ -1,0 +1,21 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the deletion of expense entries and verifying the updated totals.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (FrameLayout, R.id.list_view, (1), click, NULL): Click on the second item in the list view to find record history.
+
+2. ACTION (ActionMenuItemView, R.id.action_delete, (), click, NULL): Click on the delete action in the toolbar.
+
+3. ASSERT (TextView, R.id.tv_total_income, (), matches, "+ 1700 NON"): Verify that the total income text displays "+ 1700 NON".
+
+4. ACTION (FrameLayout, R.id.list_view, (1), click, NULL): Click on the second item in the list view again to find record history.
+
+5. ACTION (ActionMenuItemView, R.id.action_delete, (), click, NULL): Click on the delete action in the toolbar again.
+
+6. ASSERT (TextView, R.id.tv_total_expense, (), matches, "- 0 NON"): Verify that the total expense text displays "- 0 NON".
+```
+
+This test case focuses on deleting expense entries and checking if the totals are updated correctly after each deletion. It verifies both the income and expense totals after performing delete actions.

@@ -1,0 +1,29 @@
+This test case is testing the functionality of editing an expense entry in an expense tracker application. Here's the detailed process with serial numbers:
+
+```
+1. ACTION (ListView, R.id.list_view, (), click, NULL): Click on the second item in the list view.
+
+2. ACTION (EditText, R.id.et_price, (), input, "59.99"): Enter the price "59.99" in the price field.
+
+3. ACTION (EditText, R.id.et_title, (), input, "Dress"): Enter the title "Dress" in the title field.
+
+4. RETURN: Navigate back to the previous screen.
+
+5. ASSERT (TextView, R.id.tv_title, (), "Shoes"): Verify that the title of the first item is still "Shoes".
+
+6. ASSERT (TextView, R.id.tv_price, (), "- 70"): Verify that the price of the first item is still "- 70".
+
+7. ACTION (ListView, R.id.list_view, (), click, NULL): Click on the second item in the list view again.
+
+8. ACTION (EditText, R.id.et_price, (), input, "59.99"): Enter the price "59.99" in the price field.
+
+9. ACTION (EditText, R.id.et_title, (), input, "Dress"): Enter the title "Dress" in the title field.
+
+10. ACTION (MenuItem, R.id.action_done, (), click, NULL): Click on the "Add" action menu item to save the changes.
+
+11. ASSERT (TextView, R.id.tv_title, (), "Dress"): Verify that the title of the edited item is now "Dress".
+
+12. ASSERT (TextView, R.id.tv_price, (), "- 60"): Verify that the price of the edited item is now "- 60".
+```
+
+This test case checks the ability to edit an existing expense entry, verifies that canceling the edit doesn't change the original entry, and then confirms that saving the edit updates the entry correctly.

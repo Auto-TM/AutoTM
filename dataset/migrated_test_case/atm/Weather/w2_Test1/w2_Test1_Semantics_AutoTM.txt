@@ -1,0 +1,19 @@
+Based on the provided Android test case, I'll generate a corresponding function description following the specified format:
+
+```
+This test case is testing the search functionality in the weather application, specifically the ability to input a city name, clear the search, and verify the search field's visibility.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ActionMenuItemView, R.id.main_menu_search_city, (), click, NULL): Click on the search city menu item to open the search interface.
+
+2. ACTION (SearchAutoComplete, R.id.search_src_text, (), input, "Atlanta"): Enter the city name "Atlanta" into the search field.
+
+3. ACTION (AppCompatImageView, R.id.search_close_btn, (), click, NULL): Click on the clear query button to remove the entered text.
+
+4. ASSERT (EditText, R.id.search_src_text, (), isDisplayed): Verify that the search text field is still visible after clearing the query.
+
+5. RETURN: Return to the previous state by pressing the back button multiple times to close all activities.
+```
+
+This function description outlines the main steps of the test case, including the actions performed and the assertion made. It also includes the final step of returning to the previous state, which is implemented in the tearDown method of the original test case.

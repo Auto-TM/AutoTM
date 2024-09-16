@@ -1,0 +1,12 @@
+This test case is testing the email composition and sending functionality in the K-9 Mail app. It verifies the presence of the Inbox, composes a new email, inputs recipient, subject, and body, sends the email, and finally verifies the presence of the sent email in the message list.
+
+The detailed process with serial numbers is as follows:
+
+1. ASSERT (TextView, com.fsck.k9:id/actionbar_title_first, (), wait_until_text_presence, "Inbox") : Verify that the 'Inbox' text is present within 15 seconds.
+2. ACTION (TextView, com.fsck.k9:id/compose, (), click, NULL) : Click on the 'Compose' button to start composing a new email.
+3. ASSERT (MultiAutoCompleteTextView, com.fsck.k9:id/to, (), wait_until_element_presence, "com.fsck.k9:id/to") : Verify that the 'To' field is present within 15 seconds.
+4. ACTION (MultiAutoCompleteTextView, com.fsck.k9:id/to, (), input, "autotm1234@gmail.com") : Input the recipient email 'autotm1234@gmail.com' into the 'To' field and hide the keyboard.
+5. ACTION (EditText, com.fsck.k9:id/subject, (), input, "ICSTSuperCool") : Input the subject 'ICSTSuperCool' into the 'Subject' field.
+6. ACTION (EditText, com.fsck.k9:id/message_content, (), input, "ICSTSuperCoolBody") : Input the body 'ICSTSuperCoolBody' into the 'Message text' field.
+7. ACTION (TextView, com.fsck.k9:id/send, (), click, NULL) : Click on the 'Send' button to send the composed email.
+8. ASSERT (TextView, com.fsck.k9:id/subject, (), wait_until_text_presence, "ICSTSuperCool") : Verify that the sent email with the subject 'ICSTSuperCool' is present in the message list within 20 seconds.

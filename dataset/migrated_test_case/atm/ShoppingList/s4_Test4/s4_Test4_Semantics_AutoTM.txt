@@ -1,0 +1,39 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the functionality of marking all items in a shopping list.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (Spinner, R.id.spinner_listfilter, (), click, NULL): Click on the list filter spinner to open the dropdown.
+
+2. ACTION (CheckedTextView, , (), click, NULL): Select the first list (at position 0) in the spinner dropdown.
+
+3. ACTION (OverflowMenu, , (), click, NULL): Open the overflow menu in the action bar.
+
+4. ACTION (TextView, , (), click, NULL): Click on the "Mark all items" option in the overflow menu.
+
+5. ASSERT (CheckBox, R.id.check, (), isChecked, true): Verify that the checkbox is checked, indicating all items are marked.
+
+~~~
+ACTION (Spinner, R.id.spinner_listfilter, (), click, NULL): Click on the list filter spinner to open the dropdown
+~~~
+
+~~~
+ACTION (CheckedTextView, , (), click, NULL): Select the first item (at position 0) in the spinner dropdown
+~~~
+
+~~~
+ACTION (OverflowMenu, , (), click, NULL): Open the overflow menu in the action bar
+~~~
+
+~~~
+ACTION (TextView, , (), click, NULL): Click on the "Mark all items" option in the overflow menu
+~~~
+
+~~~
+ASSERT (CheckBox, R.id.check, (), isChecked, true): Verify that the checkbox is checked, indicating all items are marked
+~~~
+```
+
+This function description outlines the steps to test the "Mark all items" feature in the shopping list application. It includes actions to navigate through the UI and an assertion to verify the expected outcome.

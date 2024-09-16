@@ -1,0 +1,10 @@
+```
+This test case is testing the functionality of a tip calculator application that calculates the tip amount, total bill, and how the bill is split among a number of people. It also verifies the per-person amount calculation.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (EditText, com.appsbyvir.tipcalculator:id/billEditText, (), input, "56.6") : Clear the bill amount field and input the bill amount as '56.6'.
+2. ACTION (EditText, com.appsbyvir.tipcalculator:id/tipEditText, (), input, "15") : Clear the tip percentage field, input the tip percentage as '15', and hide the keyboard.
+3. ACTION (EditText, com.appsbyvir.tipcalculator:id/splitBillEditText, (), input, "4") : Clear the split bill field, input the number of ways to split the bill as '4', and hide the keyboard.
+4. ASSERT (EditText, com.appsbyvir.tipcalculator:id/perPersonEditText, (), wait_until_text_presence, "text:16.27") : Verify that the per-person amount is correctly calculated and displayed as '16.27' within 10 seconds.
+```

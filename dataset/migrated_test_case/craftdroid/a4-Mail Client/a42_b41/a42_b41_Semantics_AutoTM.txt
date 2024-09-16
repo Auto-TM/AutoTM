@@ -1,0 +1,11 @@
+```
+This test case is designed to validate the search functionality within an email application, ensuring that specific email subjects can be searched for and verified.
+
+The detailed process with serial numbers is as follows:
+
+1. ASSERT (TextView, com.appple.app.email:id/subject, (), wait_until_text_presence, "text:Another rabbit hole") : Verify that the text 'Another rabbit hole' is present within 10 seconds.
+2. ACTION (TextView, com.appple.app.email:id/search, (), click, NULL) : Click on the search icon to activate the search field.
+3. ASSERT (EditText, android:id/search_src_text, (), wait_until_element_presence, "id:search_src_text") : Verify that the search input field is present within 10 seconds.
+4. ACTION (EditText, android:id/search_src_text, (), input, "Automated") : Input the text 'Automated' into the search field and press enter.
+5. ASSERT (TextView, com.appple.app.email:id/subject, (), wait_until_text_presence, "text:Automated Software Engineering") : Verify that the text 'Automated Software Engineering' is present within 10 seconds after the search.
+```

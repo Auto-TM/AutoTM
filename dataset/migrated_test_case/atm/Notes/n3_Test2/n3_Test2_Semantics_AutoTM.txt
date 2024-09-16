@@ -1,0 +1,21 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the note editing and preview functionality of the Writeily app.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ListView, R.id.notes_listview, (), click, NULL): Click on the second item in the notes list.
+
+2. ACTION (EditText, R.id.edit_note_title, (), input, "nothing"): Enter the text "nothing" into the note title field.
+
+3. ACTION (Editor, R.id.note_content, (), input, "nothing"): Enter the text "nothing" into the note content field.
+
+4. ACTION (MenuItem, R.id.action_preview, (), click, NULL): Click on the preview action button.
+
+5. ACTION (ImageButton, , (), click, NULL): Click on the navigate up button (back button) in the toolbar.
+
+6. ASSERT (TextView, R.id.note_title, (), matches, "nothing"): Verify that the note title displayed in the list matches the text "nothing".
+```
+
+This test case covers the basic flow of creating a new note, previewing it, and then verifying that the note title is correctly displayed in the list view after saving.

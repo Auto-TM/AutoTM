@@ -1,0 +1,19 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the functionality of adding income and verifying the updated balance.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ImageButton, R.id.imageButton2, (), click, NULL): Click on the image button to open the income input screen.
+
+2. ACTION (EditText, R.id.input_amount, (), input, "90"): Enter the amount "90" into the amount input field.
+
+3. ACTION (EditText, R.id.input_note, (), input, "income"): Enter the note "income" into the note input field.
+
+4. ACTION (Button, R.id.doneButton, (), click, NULL): Click on the "Done" button to confirm the income entry.
+
+5. ASSERT (TextView, R.id.current_money, (), matches, "$ 90.00"): Verify that the current money display shows the updated balance of "$ 90.00".
+```
+
+This function description outlines the steps taken in the test case, including clicking buttons, entering text, and verifying the updated balance after adding income.

@@ -1,0 +1,27 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is verifying the functionality of adjusting the current balance in the EasyBudget app.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (OptionsMenu, , (), click, NULL): Open the action bar overflow or options menu.
+
+2. ACTION (TextView, R.id.title, (), click, NULL): Click on the "Adjust current balance" option in the menu.
+
+3. ACTION (EditText, R.id.balance_amount, (), input, "0"): Input "0" into the balance amount field.
+
+4. ACTION (Button, android.R.id.button1, (), click, NULL): Click the "OK" button to confirm the balance adjustment.
+
+5. ASSERT (TextView, R.id.budgetLineAmount, (), matches, "$0.00"): Verify that the budget line amount displays "$0.00" after the adjustment.
+
+~~~
+ACTION (OptionsMenu, , (), click, NULL): Open the action bar overflow or options menu.
+ACTION (TextView, R.id.title, (), click, NULL): Click on the "Adjust current balance" option in the menu.
+ACTION (EditText, R.id.balance_amount, (), input, "0"): Input "0" into the balance amount field.
+ACTION (Button, android.R.id.button1, (), click, NULL): Click the "OK" button to confirm the balance adjustment.
+ASSERT (TextView, R.id.budgetLineAmount, (), matches, "$0.00"): Verify that the budget line amount displays "$0.00" after the adjustment.
+~~~
+```
+
+This description outlines the steps taken in the test case, including opening the options menu, selecting the balance adjustment option, inputting a new balance, confirming the change, and verifying the updated balance display.

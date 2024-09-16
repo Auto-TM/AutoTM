@@ -1,0 +1,27 @@
+Based on the provided Android test case, I'll generate a corresponding function description following the specified format:
+
+```
+This test case is verifying the functionality of the weather graphs and their labels in the Good Weather application.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ImageButton, , (), click, NULL): Click on the navigation drawer button to open the side menu.
+2. ACTION (NavigationMenuItemView, , (), click, NULL): Click on the second item in the navigation menu (likely the Graphs section).
+3. ACTION (MenuItemView, R.id.action_refresh, (), click, NULL): Click on the refresh button in the toolbar.
+4. ASSERT (TextView, R.id.graphs_temperature_label, (), matches, "Temperature, °C"): Verify that the temperature graph label displays "Temperature, °C".
+5. ASSERT (TextView, R.id.graphs_wind_label, (), matches, "Wind, m/s"): Verify that the wind graph label displays "Wind, m/s".
+6. ASSERT (TextView, R.id.graphs_rain_label, (), matches, "Rain, mm"): Verify that the rain graph label displays "Rain, mm".
+7. ACTION (OverflowMenu, , (), click, NULL): Open the overflow menu in the action bar.
+8. ACTION (TextView, , (), click, NULL): Click on the "Toggle Values" option in the overflow menu.
+9. ASSERT (TextView, R.id.graphs_temperature_label, (), matches, "Temperature, °C"): Verify that the temperature graph label still displays "Temperature, °C" after toggling values.
+10. ASSERT (TextView, R.id.graphs_wind_label, (), matches, "Wind, m/s"): Verify that the wind graph label still displays "Wind, m/s" after toggling values.
+11. ASSERT (TextView, R.id.graphs_rain_label, (), matches, "Rain, mm"): Verify that the rain graph label still displays "Rain, mm" after toggling values.
+12. ACTION (OverflowMenu, , (), click, NULL): Open the overflow menu in the action bar again.
+13. ACTION (TextView, , (), click, NULL): Click on the "Toggle Y-Axis" option in the overflow menu.
+14. ASSERT (TextView, R.id.graphs_temperature_label, (), matches, "Temperature, °C"): Verify that the temperature graph label still displays "Temperature, °C" after toggling Y-Axis.
+15. ASSERT (TextView, R.id.graphs_wind_label, (), matches, "Wind, m/s"): Verify that the wind graph label still displays "Wind, m/s" after toggling Y-Axis.
+16. ASSERT (TextView, R.id.graphs_rain_label, (), matches, "Rain, mm"): Verify that the rain graph label still displays "Rain, mm" after toggling Y-Axis.
+17. RETURN: Return to the previous state by pressing the back button multiple times.
+```
+
+This function description outlines the steps taken in the test case, including opening the navigation drawer, navigating to the graphs section, refreshing the data, and verifying the graph labels. It also includes actions to toggle values and Y-axis, with assertions to ensure the labels remain correct after these changes.

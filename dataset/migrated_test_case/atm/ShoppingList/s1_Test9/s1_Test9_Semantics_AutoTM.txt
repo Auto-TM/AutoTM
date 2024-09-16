@@ -1,0 +1,31 @@
+Based on the provided Android test case, I'll generate a corresponding function description following the specified format:
+
+```
+This test case is testing the language selection functionality in the app settings.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ImageButton, , (), click, NULL): Click on the navigation drawer icon to open the drawer.
+
+2. ACTION (NavigationMenuItemView, , (), click, NULL): Click on the settings option in the navigation drawer.
+
+3. ACTION (LinearLayout, android.R.id.list, (), click, NULL): Click on the first item in the settings list (language selection).
+
+4. ACTION (Button, android.R.id.button2, (), click, NULL): Click on the "Cancel" button in the language selection dialog.
+
+5. ASSERT (TextView, android.R.id.summary, (), matches, "Default"): Verify that the selected language is still set to "Default".
+
+6. ACTION (LinearLayout, android.R.id.list, (), click, NULL): Click on the language selection item again.
+
+7. ACTION (CheckedTextView, , (), click, NULL): Select the third language option (Polski) in the language selection dialog.
+
+8. ASSERT (TextView, android.R.id.summary, (), matches, "Polski"): Verify that the selected language is now set to "Polski".
+
+9. ACTION (LinearLayout, android.R.id.list, (), click, NULL): Click on the language selection item once more.
+
+10. ACTION (CheckedTextView, , (), click, NULL): Select the second language option (English) in the language selection dialog.
+
+11. ASSERT (TextView, android.R.id.summary, (), matches, "English"): Verify that the selected language is now set to "English".
+```
+
+This function description outlines the steps to test the language selection feature in the app settings, including opening the settings, changing the language, and verifying the changes.

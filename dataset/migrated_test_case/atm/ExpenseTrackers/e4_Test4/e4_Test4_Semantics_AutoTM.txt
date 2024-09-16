@@ -1,0 +1,35 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the expense tracking functionality, focusing on adding a new expense and validating input fields.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (Button, R.id.thanksButton, (), click, NULL): Click on the thanks button to dismiss initial screen.
+
+2. ACTION (Button, R.id.btn_add_expense, (), click, NULL): Click on the add expense button to open the expense entry screen.
+
+3. ACTION (TextView, R.id.tv_date, (), click, NULL): Click on the date field to open the date picker.
+
+4. ACTION (ImageButton, , (), click, NULL): Click on the "Next month" button in the date picker.
+
+5. ACTION (ImageButton, , (), click, NULL): Click on the "Next month" button again to move two months ahead.
+
+6. ACTION (Button, android.R.id.button1, (), click, NULL): Click on the "OK" button to confirm the selected date.
+
+7. ACTION (EditText, R.id.et_price, (), input, "69.99"): Enter the price "69.99" in the price field.
+
+8. ACTION (MenuItem, R.id.action_done, (), click, NULL): Click on the "Add" action menu item to attempt adding the expense.
+
+9. ASSERT (TextView, R.id.textinput_error, (), matches, "Field can't be empty."): Verify that an error message "Field can't be empty." is displayed for the category field.
+
+10. ACTION (EditText, R.id.et_price, (), input, ""): Clear the price field.
+
+11. ACTION (EditText, R.id.et_title, (), input, "Shoes"): Enter "Shoes" in the title field.
+
+12. ACTION (MenuItem, R.id.action_done, (), click, NULL): Click on the "Add" action menu item again to attempt adding the expense.
+
+13. ASSERT (TextView, R.id.textinput_error, (), matches, "Field can't be empty."): Verify that an error message "Field can't be empty." is displayed for the price field.
+```
+
+This function description outlines the steps taken in the test case, including user interactions and assertions to verify the behavior of the expense tracking application.

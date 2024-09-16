@@ -1,0 +1,12 @@
+This test case is testing the email sending functionality that tests navigation to the compose email screen, inputting recipient, subject, and body, sending the email, and verifying the presence of the sent email in the inbox.
+
+The detailed process with serial numbers is as follows:
+
+1. ASSERT (TextView, com.my.mail:id/folder_name, (), wait_until_text_presence, "Inbox") : Verify that the 'Inbox' text is present within 15 seconds.
+2. ACTION (TextView, com.my.mail:id/toolbar_action_new, (), click, NULL) : Click on the 'New Message' button to navigate to the compose email screen.
+3. ASSERT (EditText, com.my.mail:id/edit_text_to, (), wait_until_element_presence, "edit_text_to") : Verify that the recipient input field is present within 15 seconds.
+4. ACTION (EditText, com.my.mail:id/edit_text_to, (), input, "autotm1234@gmail.com") : Input the recipient email 'autotm1234@gmail.com' into the recipient field and hide the keyboard.
+5. ACTION (EditText, com.my.mail:id/subject, (), input, "ICSTSuperCool") : Input the subject 'ICSTSuperCool' into the subject field.
+6. ACTION (EditText, com.my.mail:id/mailbox_create_new_body, (), input, "ICSTSuperCoolBody") : Input the body 'ICSTSuperCoolBody' into the body field.
+7. ACTION (TextView, com.my.mail:id/toolbar_action_send, (), click, NULL) : Click on the 'Send' button to send the email.
+8. ASSERT (TextView, com.my.mail:id/subject, (), wait_until_text_presence, "ICSTSuperCool") : Verify that the sent email with the subject 'ICSTSuperCool' is present within 20 seconds.

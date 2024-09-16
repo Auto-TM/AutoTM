@@ -1,0 +1,23 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the expense addition functionality and verifying the total monthly expense.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (FloatingActionButton, R.id.fab, (), click, NULL): Click on the floating action button to add a new expense.
+
+2. ACTION (EditText, R.id.expense_value, (), input, "45"): Enter the expense value of 45.
+
+3. ACTION (EditText, R.id.expense_description, (), input, "restaurant"): Enter the expense description as "restaurant".
+
+4. ACTION (Button, R.id.date_picker, (), click, NULL): Click on the date picker button to open the date selection dialog.
+
+5. ACTION (Button, android.R.id.button1, (), click, NULL): Click on the "OK" button in the date picker dialog to confirm the date selection.
+
+6. ACTION (Button, R.id.save_expense, (), click, NULL): Click on the "Save" button to save the expense.
+
+7. ASSERT (Button, R.id.total_month, (), matches, "$45.00"): Verify that the total monthly expense displayed is "$45.00".
+```
+
+This function description outlines the steps to add a new expense of $45 for a restaurant visit, select a date, save the expense, and verify that the total monthly expense is updated correctly to $45.00.

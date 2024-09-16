@@ -1,0 +1,25 @@
+Based on the provided Android test case, I'll generate a corresponding function description following the specified format:
+
+```
+This test case is testing the expense tracking functionality, specifically adding a new expense and verifying its display.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ImageButton, , (), click, NULL):Click on the navigation drawer icon to open the side menu.
+
+2. ACTION (TextView, R.id.navigation_drawer, (), click, NULL):Select the fourth item (index 3) from the navigation drawer menu.
+
+3. ACTION (Button, R.id.button2, (), click, NULL):Click on the "ADD EXPENSE" button to initiate adding a new expense.
+
+4. ACTION (EditText, R.id.editText, (), input, "books"):Enter "books" as the expense description.
+
+5. ACTION (EditText, R.id.editText2, (), input, "100"):Enter "100" as the expense amount.
+
+6. ACTION (Button, R.id.button2, (), click, NULL):Click on the "ADD EXPENSE" button to confirm and add the new expense.
+
+7. ASSERT (TableRow, , (), isDisplayed, NULL):Verify that a new table row is displayed, representing the added expense.
+
+8. ASSERT (TextView, R.id.text1, (), matches, "100  MONTHLY"):Verify that the added expense is displayed correctly with the text "100  MONTHLY".
+```
+
+This function description outlines the steps to add a new expense in the expense tracker application and verify its correct display in the expense list.

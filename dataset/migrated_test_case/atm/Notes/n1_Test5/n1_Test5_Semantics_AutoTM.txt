@@ -1,0 +1,7 @@
+This test case is testing the functionality of deleting a note in the Notes application.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (View, com.iliakplv.notes:id/title, (), longClick, NULL) : Long click on the note title to open the context menu.
+2. ACTION (TextView, com.android.internal.app.AlertController$RecycleListView, (3), click, NULL) : Click on the 3rd option in the context menu, which is typically the 'Delete' option.
+3. ACTION (Button, android:id/button1, (), click, NULL) : Click on the 'Yes' button in the confirmation dialog to confirm the deletion of the note.

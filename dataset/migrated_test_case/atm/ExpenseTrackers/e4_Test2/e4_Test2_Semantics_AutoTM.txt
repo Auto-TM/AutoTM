@@ -1,0 +1,21 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the expense tracking functionality, specifically adding a new expense and verifying its display.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (FrameLayout, R.id.list_view, (1), click, NULL): Click on the second item in the list view to open the expense entry screen.
+
+2. ACTION (EditText, R.id.et_price, (), input, "1700"): Enter the price "1700" into the price input field.
+
+3. ACTION (EditText, R.id.et_title, (), input, "GTA"): Enter the title "GTA" into the title input field.
+
+4. ACTION (MenuItem, R.id.action_done, (), click, NULL): Click on the "Add" action menu item to save the expense.
+
+5. ASSERT (TextView, R.id.tv_title, (), matches, "GTA"): Verify that the title "GTA" is displayed and enabled in the expense list.
+
+6. ASSERT (TextView, R.id.tv_price, (), matches, "+ 1700"): Verify that the price "+ 1700" is displayed and enabled in the expense list.
+```
+
+This description captures the main steps of the test case, including the actions performed and the assertions made to verify the correct functionality of the expense tracker application.

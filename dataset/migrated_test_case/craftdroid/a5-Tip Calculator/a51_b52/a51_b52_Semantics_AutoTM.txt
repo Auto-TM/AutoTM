@@ -1,0 +1,8 @@
+This test case is testing the functionality of a tip calculator application that calculates the amount each person needs to pay based on the bill amount, tip percentage, and the number of people.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (EditText, anti.tip:id/bill, (), input, "56.6") : Clear the bill amount field and input "56.6" as the new bill amount.
+2. ACTION (EditText, anti.tip:id/percent, (), input, "15") : Clear the tip percentage field and input "15" as the new tip percentage.
+3. ACTION (EditText, anti.tip:id/people, (), input, "4") : Clear the number of people field, input "4" as the new number of people, and hide the keyboard.
+4. ASSERT (EditText, anti.tip:id/each, (), wait_until_text_presence, "text:16.27") : Verify that the calculated amount each person needs to pay, "16.27", is correctly displayed within 10 seconds.

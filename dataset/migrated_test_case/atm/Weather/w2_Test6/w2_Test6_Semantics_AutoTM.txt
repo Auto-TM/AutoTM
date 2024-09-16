@@ -1,0 +1,25 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the language settings functionality in the Good Weather app.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ImageButton, , (Open navigation drawer), click, NULL): Click on the navigation drawer button to open the side menu.
+
+2. ACTION (NavigationMenuItemView, , (), click, NULL): Click on the 5th item in the navigation menu (presumably the Settings option).
+
+3. ACTION (LinearLayout, android.R.id.list, (), click, NULL): Click on the first item in the settings list.
+
+4. ACTION (LinearLayout, android.R.id.list, (), click, NULL): Click on the 4th item in the sub-settings list (presumably the Language option).
+
+5. ACTION (CheckedTextView, , (), click, NULL): Select the 2nd option in the language selection dialog.
+
+6. ACTION (Button, android.R.id.button1, (), click, NULL): Click the OK button to confirm the language selection.
+
+7. ASSERT (TextView, android.R.id.summary, (), matches, "English"): Verify that the selected language is displayed as "English".
+
+8. RETURN: Perform multiple back button presses to return to the initial state of the app.
+```
+
+This test case navigates through the app's settings to change the language to English and verifies that the change was applied successfully.

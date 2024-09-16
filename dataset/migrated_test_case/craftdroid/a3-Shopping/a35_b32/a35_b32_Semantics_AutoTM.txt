@@ -1,0 +1,13 @@
+This test case is testing the login functionality of the Yelp application, where it verifies the presence of specific elements, interacts with them, and checks if the login is successful.
+
+The detailed process with serial numbers is as follows:
+
+1. ASSERT (TextView, com.yelp.android:id/hot_button_profile, (), wait_until_element_presence, "id:com.yelp.android:id/hot_button_profile") : Verify that the 'Me' button is present within 10 seconds.
+2. ACTION (TextView, com.yelp.android:id/hot_button_profile, (), click, NULL) : Click on the 'Me' button to navigate to the profile page.
+3. ASSERT (Button, com.yelp.android:id/log_in_button, (), wait_until_element_presence, "id:log_in_button") : Verify that the 'Log In' button is present within 15 seconds.
+4. ACTION (Button, com.yelp.android:id/log_in_button, (), click, NULL) : Click on the 'Log In' button to navigate to the login page.
+5. ASSERT (EditText, com.yelp.android:id/activity_login_editPassword, (), wait_until_element_presence, "id:activity_login_editPassword") : Verify that the 'Password' field is present within 15 seconds.
+6. ACTION (EditText, com.yelp.android:id/activity_login_editPassword, (), input, "1qaz2wsX") : Input the password '1qaz2wsX' into the password field.
+7. ACTION (EditText, com.yelp.android:id/activity_login_editUsername, (), input, "autotm7654@gmail.com") : Input the email 'autotm7654@gmail.com' into the email field and hide the keyboard.
+8. ACTION (Button, com.yelp.android:id/activity_login_btnLogin, (), click, NULL) : Click on the 'Log In' button to submit the login credentials.
+9. ASSERT (TextView, com.yelp.android:id/user_profile_name, (), wait_until_text_presence, "text:Sealbot") : Verify that the text 'Sealbot' is present within 10 seconds, indicating successful login.

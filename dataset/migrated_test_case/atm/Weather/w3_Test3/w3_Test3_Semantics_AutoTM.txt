@@ -1,0 +1,19 @@
+Based on the provided Android test case, I'll generate a corresponding function description following the specified format:
+
+```
+This test case is testing the city management functionality, specifically the removal of multiple cities from the list.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ActionMenuItemView, R.id.mi_main_submenu, (), click, NULL): Click on the "Extras" menu item.
+2. ACTION (AppCompatTextView, R.id.title, (), click, NULL): Click on the "City Management" option.
+3. ACTION (Button, R.id.city_remove_button, (), click, NULL): Click on the remove button for the first city in the list.
+4. ACTION (AppCompatButton, android.R.id.button1, (), click, NULL): Click on the "OK" button to confirm city removal.
+5. ACTION (Button, R.id.city_remove_button, (), click, NULL): Repeat steps 3-4 for the next 7 cities in the list (positions 0-7).
+6. ACTION (Button, R.id.city_remove_button, (), click, NULL): Click on the remove button for the second city in the list (now at position 1).
+7. ACTION (AppCompatButton, android.R.id.button1, (), click, NULL): Click on the "OK" button to confirm city removal.
+8. ACTION (Button, R.id.city_remove_button, (), click, NULL): Repeat steps 6-7 two more times for the city at position 1.
+9. ASSERT (TextView, R.id.city_name_in_list_row_text_view, (), matches, "Los Angeles"): Verify that the remaining city in the list is "Los Angeles".
+```
+
+This function description outlines the steps to remove multiple cities from the list in the City Management screen and verifies that "Los Angeles" remains as the last city in the list after the removals.

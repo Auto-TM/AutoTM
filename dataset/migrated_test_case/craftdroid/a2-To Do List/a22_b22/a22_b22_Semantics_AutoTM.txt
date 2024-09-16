@@ -1,0 +1,11 @@
+This test case is testing the functionality of adding a new todo item, verifying its presence, deleting it, and then verifying its deletion in a todo list application.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (ImageButton, douzifly.list:id/fab_add, (), click, NULL) : Click on the add button to create a new todo item.
+2. ACTION (EditText, douzifly.list:id/edit_text, (), input, "Sample Todo") : Input the text 'Sample Todo' into the title field and hide the keyboard.
+3. ACTION (ImageButton, douzifly.list:id/fab_add, (), click, NULL) : Click on the add button to save the new todo item.
+4. ASSERT (TextView, douzifly.list:id/txt_thing, (), wait_until_text_presence, "Sample Todo") : Verify that the text 'Sample Todo' is present within 10 seconds.
+5. ACTION (TextView, douzifly.list:id/txt_thing, (), swipe_right, NULL) : Swipe right on the todo item to reveal the delete option.
+6. ACTION (TextView, douzifly.list:id/btn_delete, (), click, NULL) : Click on the delete button to remove the todo item.
+7. ASSERT (, , (), wait_until_text_invisible, "Sample Todo") : Verify that the text 'Sample Todo' is not visible within 10 seconds.

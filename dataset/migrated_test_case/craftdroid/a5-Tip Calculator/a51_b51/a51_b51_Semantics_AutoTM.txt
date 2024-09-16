@@ -1,0 +1,9 @@
+```
+This test case is testing the functionality of a tip calculator that calculates the total amount including tip based on the bill amount and tip percentage entered by the user, and verifying the calculated total amount.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (EditText, anti.tip:id/bill, (), input, "56.6") : Clear the existing value and input '56.6' as the bill amount.
+2. ACTION (EditText, anti.tip:id/percent, (), input, "15") : Clear the existing tip percentage and input '15', then hide the keyboard.
+3. ASSERT (EditText, anti.tip:id/total, (), wait_until_text_presence, "text:65.09") : Verify that the total amount calculated and displayed is '65.09' within 10 seconds.
+```

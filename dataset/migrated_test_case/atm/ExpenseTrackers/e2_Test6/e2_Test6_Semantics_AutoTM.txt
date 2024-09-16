@@ -1,0 +1,17 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is verifying the functionality of navigating through months in the expense tracking app and checking the total amount displayed.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (Button, R.id.total_month, (), click, NULL): Click on the total month button to open the monthly view.
+
+2. ACTION (ImageButton, R.id.next_button, (), click, NULL): Click on the next button to move to the next month.
+
+3. ACTION (ImageButton, R.id.next_button, (), click, NULL): Click on the next button again to move to the subsequent month.
+
+4. ASSERT (TextView, R.id.total_history, (), matches, "$0.00"): Verify that the total history text view displays "$0.00".
+```
+
+This description captures the main actions and assertion in the test case, following the specified format. Each step is numbered and described using the ACTION or ASSERT format as appropriate.

@@ -1,0 +1,21 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is verifying the functionality of selecting different expense categories and checking the visibility of the total month button for each category.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (OptionsMenu, , (), click, NULL): Open the options menu.
+
+2. ACTION (TextView, R.id.title, (), click, NULL): Click on the "Transportation" option in the menu.
+
+3. ASSERT (Button, R.id.total_month, (), isDisplayed, NULL): Verify that the total month button is displayed for the Transportation category.
+
+4. ACTION (OptionsMenu, , (), click, NULL): Open the options menu again.
+
+5. ACTION (TextView, R.id.title, (), click, NULL): Click on the "Clothes" option in the menu.
+
+6. ASSERT (Button, R.id.total_month, (), isDisplayed, NULL): Verify that the total month button is displayed for the Clothes category.
+```
+
+This description captures the main actions and assertions in the test case, following the specified format with ACTION and ASSERT statements. The test focuses on navigating through different expense categories and ensuring that the total month button is visible for each selected category.

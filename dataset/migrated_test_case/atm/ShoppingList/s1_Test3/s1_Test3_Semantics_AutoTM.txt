@@ -1,0 +1,26 @@
+Based on the provided Android test case, here's the corresponding function description following the specified format:
+
+```
+This test case is testing the functionality of checking and deleting items in a shopping list.
+
+The detailed process with serial numbers is as follows:
+
+1. ACTION (LinearLayout, R.id.shopping_lists_list_view, (0), click, NULL): Click on the first shopping list in the main view.
+
+2. ACTION (CheckBox, R.id.itemCheckedCheckBox, (0), click, NULL): Click on the checkbox of the first item in the shopping list.
+
+3. ASSERT (CheckBox, R.id.itemCheckedCheckBox, (0), isChecked): Verify that the checkbox of the first item is checked.
+
+4. ACTION (OverflowMenu, , (), click, NULL): Open the overflow menu in the action bar.
+
+5. ACTION (TextView, R.id.title, (), click, NULL): Click on the "Delete checked items" option in the overflow menu.
+
+6. ASSERT (TextView, R.id.itemNameTextView, (0), isDisplayed && isEnabled): Verify that the first item's name (expected to be "water") is still displayed and enabled after deleting checked items.
+```
+
+This test case checks the following functionality:
+1. Opening a shopping list
+2. Checking an item in the list
+3. Verifying the item is checked
+4. Deleting checked items
+5. Verifying that unchecked items remain in the list after deletion
